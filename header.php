@@ -19,21 +19,29 @@ $index = "index.php";
 <!-- <link rel="stylesheet" href="style.css"> -->
 <body>
 <div class="w3-container w3-pink">
-  <h1><img src=logo.png height="100" width="100">Matcha</h1> 
+<?php
+  if (isset($_SESSION))
+    echo '<h1><img src=logo.png height="100" width="100">Matcha</h1>';
+?>
+  <!-- <h1><img src=logo.png height="100" width="100">Matcha</h1>  -->
   <a href="index.php" class="w3-bar-item w3-button">Home</a>
 <a href="user_images.php?pg_num=1" class="w3-bar-item w3-button">Your images</a>
   <a href="photo.php" class="w3-bar-item w3-button">Upload Image</a>
   <a href="settings.php" class="w3-bar-item w3-button">Settings</a>
   <a href="create_account.php" class="w3-bar-item w3-button">Login/Register</a>
   <a href="logout.php" style= "float:right" class="w3-bar-item w3-button">Logout</a>
-  <p style="float:right">
+  <!-- <p style="float:right"> -->
     <?php
       if(!isset($_SESSION) || empty($_SESSION['uid']))
         echo "Guest";
       else if (isset($_SESSION['name']))
-        echo $_SESSION['name'];
+      {
+        $name = $_SESSION['name'];
+        $uid = $_SESSION['uid'];
+        echo '<a href="user_profile.php?id='.$uid.'" style="float:right" class="btn">'.$name.'</a>';
+      }
     ?>
-  </p>
+  <!-- </p> -->
   </div>
 </div>
 </body>

@@ -1,0 +1,9 @@
+<?php
+require_once('header.php');
+?>
+<html>
+<h1>Home</h1>
+<?php
+include('footer.php');
+?>
+</html>

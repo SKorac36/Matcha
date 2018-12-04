@@ -25,14 +25,16 @@ $usrs = "CREATE TABLE Matcha.Users (
 //     comm VARCHAR(1000),
 //     img_id INT(6) NOT NULL,
 //     time TIMESTAMP)";
-// $likes = "CREATE TABLE Camagru.Likes (
-//     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-//     liker_id INT(6) NOT NULL,
-//     pic_id INT(6) NOT NULL,
-//     time TIMESTAMP)";
+ $profile = "CREATE TABLE Matcha.Profiles (
+     id INT(6) PRIMARY KEY NOT NULL,
+     age INT(3) NOT NULL,
+    gender VARCHAR(1000) NOT NULL,
+    preference VARCHAR(1000) DEFAULT 'bisexual',
+    bio VARCHAR(2000) DEFAULT 'Enter you bio here, you can even use tags to describe yourself. Just prefix them with a hashtag.'
+     )";
 $conn->query($db);
-$conn->query($usrs);
-// $conn->query($pics);
+// $conn->query($usrs);
+ $conn->query($profile);
 // $conn->query($comments);
 // $conn->query($likes);
 echo "<script type='text/javascript'>
