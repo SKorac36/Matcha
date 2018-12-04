@@ -31,7 +31,7 @@ if (isset($_POST['submit']))
 }
 if (isset($_POST['reset']))
 {
-        if (empty($_POST['username']))
+        if (empty($_POST['username']) || !isset($_POST['username']))
             alert("At least enter your username, pleb","login.php");
         else if (isset($_POST['username']))
         {
