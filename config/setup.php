@@ -30,7 +30,7 @@ $usrs = "CREATE TABLE Matcha.Users (
      age INT(3) NOT NULL,
     gender VARCHAR(1000) NOT NULL,
     preference VARCHAR(1000) DEFAULT 'bisexual',
-    bio VARCHAR(2000) DEFAULT 'Enter you bio here, you can even use tags to describe yourself. Just prefix them with a hashtag.'
+    bio TEXT DEFAULT 'Enter you bio here, you can even use tags to describe yourself. Just prefix them with a hashtag.'
      )";
 $conn->query($db);
 // $conn->query($usrs);
