@@ -3,6 +3,15 @@
     
     if (isset($_GET) && isset($_GET['id']))
         $id = (int)$_GET['id'];
+    $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$_SESSION['uid']]);
+    $search = $sql->fetch();
+    if ($search)
+    {
+        alert_info("Need to redirect to profile settings page");
+        die();
+    }
     $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference, bio) VALUES(?,?,?,?,?)";   
     if (isset($_SESSION) && !empty($_SESSION['uid']))
     {
@@ -13,7 +22,7 @@
             $bio = $_POST['bio'];
             $sql = $conn->prepare($query);
             $sql->execute([$_SESSION['uid'], 18, $gender, $pref, $bio]);
-            alert("Profile succesfully updated");
+            alert_info("Profile succesfully updated");
         }
     }
     var_dump($_POST);
@@ -41,6 +50,25 @@
         <?php
             echo '<textarea name="bio"></textarea>'
 		 ?>
+         <button onclick="getLocation()">Allow your location?</button>
+         <p id="demo"></p>
+
+<script>
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude + 
+        "<br>Longitude: " + position.coords.longitude;
+    }   
+</script>
         <input type="submit" class="btn" name="submit" value="OK"/>
         </form>
 <?php
