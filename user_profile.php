@@ -7,11 +7,11 @@
     $sql = $conn->prepare($query);
     $sql->execute([$_SESSION['uid']]);
     $search = $sql->fetch();
-    if ($search)
-    {
-        alert_info("Need to redirect to profile settings page");
-        die();
-    }
+    // if ($search)
+    // {
+    //     alert_info("Need to redirect to profile settings page");
+    //     die();
+    // }
     $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference, bio) VALUES(?,?,?,?,?)";   
     if (isset($_SESSION) && !empty($_SESSION['uid']))
     {
@@ -20,8 +20,9 @@
             $gender = $_POST['Gender'];
             $pref = $_POST['Pref'];
             $bio = $_POST['bio'];
+            $year = 2018 - (int)$_POST['year'];
             $sql = $conn->prepare($query);
-            $sql->execute([$_SESSION['uid'], 18, $gender, $pref, $bio]);
+            $sql->execute([$_SESSION['uid'], $year, $gender, $pref, $bio]);
             alert_info("Profile succesfully updated");
         }
     }
@@ -37,6 +38,7 @@
     <?php
         echo '<form class= "form" method="post" action="user_profile.php?id='.$id.'" align="center">'
         ?>
+        <div class="reg_input">Year of birth<input type="text" name="year"/><br/>yyyy</div>
         <select name="Gender">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -53,9 +55,10 @@
          <button onclick="getLocation()">Allow your location?</button>
          <p id="demo"></p>
 
-<script>
-    var x = document.getElementById("demo");
 
+        <input type="submit" class="btn" name="submit" value="OK"/>
+        </form><script>
+    var x = document.getElementById("demo");
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
@@ -69,8 +72,6 @@
         "<br>Longitude: " + position.coords.longitude;
     }   
 </script>
-        <input type="submit" class="btn" name="submit" value="OK"/>
-        </form>
 <?php
     include('footer.php');
 ?>
