@@ -25,4 +25,9 @@ function alert($str, $redirect)
 	</script>";
 	die();
 }
+function get_tags($input)
+{
+    preg_match_all("/(#\w+)/", $input, $matches);
+    return ($matches);
+}
 ?>
