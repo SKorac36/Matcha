@@ -27,7 +27,8 @@ function alert($str, $redirect)
 }
 function get_tags($input)
 {
+    // $matches = array();
     preg_match_all("/(#\w+)/", $input, $matches);
-    return ($matches);
+    return ($matches[0]);
 }
 ?>
