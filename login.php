@@ -21,12 +21,9 @@ if (isset($_POST['submit']))
             {
                 $_SESSION['uid'] = $user['id'];
                 $_SESSION['name'] = $user['username'];
-                alert_info('Welcome to Matcha,'.$_SESSION['name'].' also need to redirect here');
+                alert('Welcome to Matcha,'.$_SESSION['name'],'user_setup.php');
             }
         }
-        unset($query);
-        unset($sql);
-        unset($user);
     }
 }
 if (isset($_POST['reset']))
@@ -45,6 +42,7 @@ if (isset($_POST['reset']))
                 reset_password_email($user['email'], $user['username'], $user['id']);
         }
 }
+
 ?>
 <html>
 <head>
