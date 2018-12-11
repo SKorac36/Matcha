@@ -10,13 +10,21 @@
         echo "<script type='text/javascript'>
             window.location.href = 'user_setup.php'; 
         </script>";
-        $gender = $profile['gender'];
-        $pref = $profile['preference'];
-        $bio = $profile['bio'];
+        if (isset($_POST['submit']))
+        {
+            $gender = $_POST['Gender'];
+            $pref = $_POST['Pref'];
+            $bio = $_POST['bio'];
+            $tags = serialize(get_tags($bio));
+            $age = 2018 - (int)$_POST['year'];
+            $query = "UPDATE Matcha.Profiles SET Gender=?, Preference=?, Age=?, Bio=?, Tags=? WHERE id=?";
+            $sql = $conn->prepare($query);
+            $sql->execute([$gender, $pref, $age,$bio, $tags, $_SESSION['uid']]);
+            alert("Successfully updated profile", "profile.php");
+        }
     }
     else    
         alert("You need to be logged in to change your settings", "index.php");
-    var_dump($profile);
 ?>
 <html>
 <head>
