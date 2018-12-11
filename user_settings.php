@@ -8,7 +8,6 @@
     $old_first = $user['first_name'];
     $old_last = $user['last_name'];
     $old_email = $user['email'];
-
     if (isset($_POST['submit']))
     {
         if (hash('whirlpool',$_POST['password']) == $user['passwd'])
