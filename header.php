@@ -28,7 +28,7 @@ $index = "index.php";
   <!-- <h1><img src=logo.png height="100" width="100">Matcha</h1>  -->
   <a href="index.php" class="w3-bar-item w3-button">Home</a>
 <a href="profile.php" class="w3-bar-item w3-button">Your profile</a>
-  <a href="photo.php" class="w3-bar-item w3-button">Upload Image</a>
+  <a href="upload_images.php" class="w3-bar-item w3-button">Upload Image</a>
   <a href="settings.php" class="w3-bar-item w3-button">Settings</a>
   <a href="create_account.php" class="w3-bar-item w3-button">Login/Register</a>
   <a href="logout.php" style= "float:right" class="w3-bar-item w3-button">Logout</a>
