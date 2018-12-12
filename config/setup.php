@@ -27,7 +27,8 @@ $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
 $images = "CREATE TABLE IF NOT EXISTS Matcha.Images (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     userid INT(6) NOT NULL,
-    path VARCHAR(1000) NOT NULL
+    path VARCHAR(1000) NOT NULL,
+    profile INT (1) DEFAULT 0
     )";
 $tags = "CREATE TABLE IF NOT EXISTS Matcha.Tags (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
