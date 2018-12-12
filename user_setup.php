@@ -43,9 +43,17 @@
             <option value="Asexual">Asexual</option>
         <?php
             echo '<textarea name="bio">Enter a bio! Use hashtags freely!</textarea>'
-		 ?>
+		?>
+        
         <input type="submit" class="btn" name="submit" value="OK"/>
         </form>
+        <div>
+    <form class="form" id="upload" method="POST" action="upload_image.php" enctype="multipart/form-data">
+        Upload your profile picture
+        <input type="file" name="file" id="file"> <br>
+        <input type="submit" value="Click to upload" name="submit">
+    </form>
+</div>
 <?php
     include('footer.php');
 ?>
