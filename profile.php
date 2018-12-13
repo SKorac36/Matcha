@@ -16,8 +16,11 @@
         $bio = $profile['bio'];
         $age = $profile['age'];
         $path = $pic['path'];
+        $query = "SELECT * FROM Matcha.Images WHERE userid=?";
+        $sql = $conn->prepare($query);
+        $sql->execute([$uid]);
+        $images = $sql->fetchAll();
     }
-
     // var_dump($profile);
 ?>
 <html>
@@ -28,6 +31,20 @@
     </p>';
   ?>
   </div>
+< <div class="items" align="right">
+        <table padding="15px">
+                <?php
+                if (!$images)
+                    echo "<h1>Whoops nothing here, try uploading an image</h1>";
+                else foreach($images as $row)
+                {
+                    $img_loc = $row['path'];
+                    $img_id = $row['id'];
+                    if (file_exists($img_loc))
+                        echo '<tr<td><a href="image.php?img_id='.$img_id.'"><img src="'.$img_loc.'" height="100" width="90"/></a></td></tr>';
+                }
+                ?>
+        </table>
 </div>
 <?php
     include('footer.php');
