@@ -1,7 +1,7 @@
 <?php
     require_once('header.php');
     
-    $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference,tags, bio) VALUES(?,?,?,?,?,?)";   
+    $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference,tags,latitude,longitude, bio) VALUES(?,?,?,?,?,?,?,?)";   
     if (isset($_SESSION) && !empty($_SESSION['uid']))
     {
         if (isset($_POST['submit']))
@@ -14,7 +14,7 @@
             $tags = serialize(get_tags($bio));
             $age = 2018 - (int)$_POST['year'];
             $sql = $conn->prepare($query);
-            $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags, $bio]);
+            $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,$_POST['latitude'],$_POST['longitude'], $bio]);
             alert("Profile succesfully created, if you would like to change anything go to the settings bro", "index.php");
         }
     }
@@ -44,16 +44,50 @@
         <?php
             echo '<textarea name="bio">Enter a bio! Use hashtags freely!</textarea>'
 		?>
-        
+        <br>
+        <div class="reg_input">Latitude<input id="lat" type="text" name="latitude"></div>
+        <div class="reg_input">Longitude<input id="long" type="text" name="longitude"></div>
         <input type="submit" class="btn" name="submit" value="OK"/>
         </form>
         <div>
+        <p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Try It</button>
     <form class="form" id="upload" method="POST" action="upload_image.php" enctype="multipart/form-data">
-        Upload your profile picture
+         Upload your profile picture
         <input type="file" name="file" id="file"> <br>
         <input type="submit" value="Click to upload" name="submit">
     </form>
 </div>
+<script>
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function showPosition(position) {
+	document.getElementById("lat").value = (position.coords.latitude);
+	document.getElementById("long").value = (position.coords.longitude);
+}
+function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      alert("User denied the request for Geolocation.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+      alert("The request to get user location timed out.");
+      break;
+    case error.UNKNOWN_ERROR:
+      alert("An unknown error occurred.");
+      break;
+  }
+}
+</script>
 <?php
     include('footer.php');
 ?>
