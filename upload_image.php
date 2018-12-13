@@ -11,6 +11,6 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     move_uploaded_file($_FILES['file']['tmp_name'], $target);
     $query = $conn->prepare("INSERT INTO Matcha.images (userid, path) VALUES (?,?)");
     $query->execute([$_SESSION['uid'],$target]);
-    // header("location: user_setup.php");
+    header("location: upload_images.php");
 }
 ?>
