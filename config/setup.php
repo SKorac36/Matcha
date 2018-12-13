@@ -18,8 +18,8 @@ $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
     preference VARCHAR(1000) DEFAULT 'bisexual',
     bio VARCHAR(1000),
     tags VARCHAR(1000),
-    -- latitude TEXT NOT NULL,
-    -- longitude TEXT NOT NULL,
+    latitude TEXT NOT NULL,
+    longitude TEXT NOT NULL,
     views INT(255) DEFAULT 0,
     likes INT(255) DEFAULT 0,
     regdate TIMESTAMP
