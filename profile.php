@@ -15,7 +15,8 @@
         $last_name = $profile['last_name'];
         $bio = $profile['bio'];
         $age = $profile['age'];
-        $path = $pic['path'];
+        $path = $profile['profile_pic'];
+        // $path = $pic['path'];
         $query = "SELECT * FROM Matcha.Images WHERE userid=?";
         $sql = $conn->prepare($query);
         $sql->execute([$uid]);
@@ -31,7 +32,7 @@
     </p>';
   ?>
   </div>
-< <div class="items" align="right">
+   <div class="items" align="right">
         <table padding="15px">
                 <?php
                 if (!$images)
