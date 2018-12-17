@@ -1,6 +1,7 @@
 <?php
 
     require_once('config/connect.php');
+    session_start();
     if(isset($_GET['img_id']))
     {
         
@@ -13,8 +14,8 @@
         $sql = $conn->prepare($query);
         $sql->execute([$path]);
         echo "<script type='text/javascript'>
-	    alert('Profile picture updated');
-	    window.location.href = 'profile.php'; 
+	    alert('Profile picture updates');
+	    window.location.href = 'profile.php?=profile_id=".$_SESSION['uid']."'; 
 	    </script>";
 	    die();
     }
