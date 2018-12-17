@@ -14,7 +14,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
 ?>
 <html>
 <form class="form" id="upload" method="POST" action="upload_image.php" enctype="multipart/form-data">
-    Upload your profile picture
+    Upload images. Maximum 5!
 <input type="file" name="file" id="file"> <br>
 <input type="submit" value="Click to upload" name="submit">
 </form>
