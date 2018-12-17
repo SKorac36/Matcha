@@ -22,6 +22,7 @@ $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
     longitude TEXT NOT NULL,
     views INT(255) DEFAULT 0,
     likes INT(255) DEFAULT 0,
+    profile_pic VARCHAR(1000) DEFAULT 'stock.png', 
     regdate TIMESTAMP
      )";
 $images = "CREATE TABLE IF NOT EXISTS Matcha.Images (
