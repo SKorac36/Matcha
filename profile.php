@@ -2,15 +2,13 @@
     require_once('header.php');
     if (isset($_SESSION) || isset($_SESSION['uid']))
     {
-        $uid = $_SESSION['uid'];
+        if (isset($_GET['profile_id']))
+            $uid = $_GET['profile_id'];
+        view($_SESSION['uid'], $uid);
         $query = "SELECT * FROM Matcha.Profiles JOIN Matcha.users ON Matcha.profiles.id=Matcha.users.id WHERE Matcha.profiles.id=?";
         $sql = $conn->prepare($query);
         $sql->execute([$uid]);
         $profile = $sql->fetch();
-        $query = "SELECT *FROM Matcha.Images WHERE id=?";
-        $sql = $conn->prepare($query);
-        $sql->execute([$uid]);
-        $pic = $sql->fetch();
         $first_name = $profile['first_name'];
         $last_name = $profile['last_name'];
         $bio = $profile['bio'];
