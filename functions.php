@@ -1,4 +1,5 @@
 <?php
+require_once('./config/connect.php');
 function password_check($pass, $conpass)
 {
     if ($pass != $conpass)
@@ -25,10 +26,22 @@ function alert($str, $redirect)
 	</script>";
 	die();
 }
+
 function get_tags($input)
 {
     // $matches = array();
     preg_match_all("/(#\w+)/", $input, $matches);
     return ($matches[0]);
+}
+
+function view($viewer, $viewee)
+{
+    if ($viewer != $viewee)
+    {
+        $query = "UPDATE Matcha.Profile SET views+1 WHERE id=?";
+        $sql = $conn->prepare($query);
+        $sql->execute([$viewee]);
+        //send notifcation
+    }
 }
 ?>
