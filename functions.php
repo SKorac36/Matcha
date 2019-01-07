@@ -47,12 +47,27 @@ function view($viewer, $viewee, $conn)
 
 function like($liker, $likee, $conn)
 {
-    if ($likee != $likee)
+    if ($liker != $likee)
     {
         $query = "UPDATE Matcha.Profiles SET likes=likes+1 WHERE id=?";
         $sql = $conn->prepare($query);
         $sql->execute([$likee]);
+        $query = "INSERT INTO Matcha.Likes(liker,likee) VALUES(?,?)";
+        $sql = $conn->prepare($query);
+        $sql->execute([$liker, $likee]);
+
         //send notification
     }
 }
+function fame_rating($user, $conn)
+{
+    $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$user]);
+    $user = $sql->fetch();
+    $return = ($user['likes'] + ($user['views'] * 0.5));
+    return $return;
+
+}
+
 ?>
