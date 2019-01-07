@@ -4,7 +4,7 @@
     {
         if (isset($_GET['profile_id']))
             $uid = $_GET['profile_id'];
-        view($_SESSION['uid'], $uid);
+        view($_SESSION['uid'], $uid, $conn);
         $query = "SELECT * FROM Matcha.Profiles JOIN Matcha.users ON Matcha.profiles.id=Matcha.users.id WHERE Matcha.profiles.id=?";
         $sql = $conn->prepare($query);
         $sql->execute([$uid]);
@@ -27,7 +27,9 @@
 <div align="center"><?php  
     echo '<img src="'.$path.'"</img>';
     echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:<br>'.$bio.'
-    </p>';
+    </p> <br>';
+    echo '<a href="like.php?id1='.$_SESSION['uid'].'&id2='.$_GET['profile_id'].'"class="w3-bar-item w3-button">Like</a>';
+
   ?>
   </div>
    <div class="items" align="right">
