@@ -12,7 +12,8 @@
             $pref = $_POST['Pref'];
             $bio = $_POST['bio'];
             $tags = serialize(get_tags($bio));
-            $age = 2018 - (int)$_POST['year'];
+            $time = getdate();
+            $age = $time[year] - $_POST['year'];
             $sql = $conn->prepare($query);
             $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,$_POST['latitude'],$_POST['longitude'], $bio]);
             alert("Profile succesfully created, if you would like to change anything go to the settings bro", "index.php");
@@ -30,7 +31,7 @@
 </head>
 
         <form class= "form" method="post" action="user_setup.php" align="center">
-        <div class="reg_input">Year of birth<input type="text" name="year"></div>
+        <div class="reg_input">Year of birth<input type="date" name="year"></div>
         <select name="Gender">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
