@@ -36,11 +36,17 @@ $tags = "CREATE TABLE IF NOT EXISTS Matcha.Tags (
     tag VARCHAR(30) NOT NULL,
     count INT(60) DEFAULT 0
     )";
+$likes = "CREATE TABLE IF NOT EXISTS Matcha.Likes(
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    likee INT(6) NOT NULL,
+    liker INT(6) NOT NULL,
+    time TIMESTAMP)"; //use for notifications
 $conn->query($db);
 $conn->query($usrs);
 $conn->query($profile);
 $conn->query($images);
 $conn->query($tags);
+$conn->query($likes);
 echo "<script type='text/javascript'>
 	alert('Successfully created database');
 	window.location.href = '../index.php'; 
