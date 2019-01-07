@@ -34,14 +34,25 @@ function get_tags($input)
     return ($matches[0]);
 }
 
-function view($viewer, $viewee)
+function view($viewer, $viewee, $conn)
 {
     if ($viewer != $viewee)
     {
-        $query = "UPDATE Matcha.Profile SET views+1 WHERE id=?";
+        $query = "UPDATE Matcha.Profiles SET views=views+1 WHERE id=?";
         $sql = $conn->prepare($query);
         $sql->execute([$viewee]);
         //send notifcation
+    }
+}
+
+function like($liker, $likee, $conn)
+{
+    if ($likee != $likee)
+    {
+        $query = "UPDATE Matcha.Profiles SET likes=likes+1 WHERE id=?";
+        $sql = $conn->prepare($query);
+        $sql->execute([$likee]);
+        //send notification
     }
 }
 ?>
