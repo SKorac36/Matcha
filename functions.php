@@ -69,5 +69,67 @@ function fame_rating($user, $conn)
     return $return;
 
 }
-
+function matching($pref, $gender, $conn)
+{
+    if ($pref == 'Straight')
+    {
+        if ($gender == 'Male')
+        {
+            // echo "Display straight and bisexual women";
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=?";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Female', 'Straight', 'Bisexual']);
+            $users = $sql->fetchAll();
+            return $users;
+        }
+        else if ($gender == 'Female')
+        {
+        // echo "Display straight and bisexual men";
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=?";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Male','Straight', 'Bisexual']);
+            $users = $sql->fetchAll();
+            return $users;
+        }
+    }
+    if ($pref == 'Gay')
+    {   
+        if ($gender == 'Male')
+        {   
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=?";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Male','Gay', 'Bisexual']);
+            $users = $sql->fetchAll();
+            return $users;
+        }
+        else if ($gender == 'Female')
+        {
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=?";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Female','Gay', 'Bisexual']);
+            $users = $sql->fetchAll();
+            return $users;
+        }
+    }
+    if ($pref == 'Bisexual')
+    {
+        if ($gender == 'Male')
+        {   
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? OR Gender=? AND Preference=? OR Preference=? OR Preference=?";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
+            $users = $sql->fetchAll();
+            return $users;
+        }
+        
+        else if ($gender == 'Female')
+        {   
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? OR Gender=? AND Preference=? OR Preference=? OR Preference=?";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
+            $users = $sql->fetchAll();
+            return $users;
+        }
+    }
+}
 ?>
