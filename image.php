@@ -15,7 +15,7 @@
         $sql->execute([$path]);
         echo "<script type='text/javascript'>
 	    alert('Profile picture updates');
-	    window.location.href = 'profile.php?=profile_id=".$_SESSION['uid']."'; 
+	    window.location.href = 'profile.php?profile_id=".$_SESSION['uid']."'; 
 	    </script>";
 	    die();
     }
