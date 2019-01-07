@@ -28,7 +28,7 @@
     echo '<img src="'.$path.'"</img>';
     echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:<br>'.$bio.'
     </p> <br>';
-    echo '<a href="like.php?id1='.$_SESSION['uid'].'&id2='.$_GET['profile_id'].'"class="w3-bar-item w3-button">Like</a>';
+    echo '<a href="like.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>';
 
   ?>
   </div>

@@ -7,7 +7,7 @@ if (isset($_GET['id1']) && isset($_GET['id2']))
     $liker = (int)$_GET['id1'];
     $likee = (int)$_GET['id2'];
     like($liker, $likee, $conn);
-    alert('Nice you like them', 'profile.php?profile_id='.$likee);
+    alert('Nice you like them', 'profile.php?id='.$likee);
 }
 
 ?>
