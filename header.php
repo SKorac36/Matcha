@@ -41,7 +41,7 @@ $index = "index.php";
       {
         $name = $_SESSION['name'];
         $uid = $_SESSION['uid'];
-        echo '<a href="user_profile.php?id='.$uid.'" style="float:right" class="btn">'.$name.'</a>';
+        echo '<a href="profile.php?id='.$uid.'" style="float:right" class="btn">'.$name.'</a>';
       }
     ?>
   </div>
