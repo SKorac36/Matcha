@@ -2,8 +2,8 @@
     require_once('header.php');
     if (isset($_SESSION) || isset($_SESSION['uid']))
     {
-        if (isset($_GET['profile_id']))
-            $uid = $_GET['profile_id'];
+        if (isset($_GET['id']))
+            $uid = $_GET['id'];
         view($_SESSION['uid'], $uid, $conn);
         $query = "SELECT * FROM Matcha.Profiles JOIN Matcha.users ON Matcha.profiles.id=Matcha.users.id WHERE Matcha.profiles.id=?";
         $sql = $conn->prepare($query);
