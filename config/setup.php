@@ -23,6 +23,7 @@ $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
     views INT(255) DEFAULT 0,
     likes INT(255) DEFAULT 0,
     profile_pic VARCHAR(1000) DEFAULT 'stock.png', 
+    reports INT(10) DEFAULT 10,
     regdate TIMESTAMP
      )";
 $images = "CREATE TABLE IF NOT EXISTS Matcha.Images (
@@ -47,6 +48,7 @@ $conn->query($profile);
 $conn->query($images);
 $conn->query($tags);
 $conn->query($likes);
+include('prep.php');
 echo "<script type='text/javascript'>
 	alert('Successfully created database');
 	window.location.href = '../index.php'; 

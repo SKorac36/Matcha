@@ -2,5 +2,5 @@
 $DB_DSN = "localhost";
 $DB_USER = "new";
 $DB_PASSWORD = "new";
-$DB_NAME = "matcha";
+$DB_NAME = "Matcha";
 ?>
