@@ -29,14 +29,15 @@
     echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:<br>'.$bio.'
     </p> <br>';
     echo '<a href="like.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>';
-
+    echo '<br><a href="report.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>
+    <a href="block.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>';
   ?>
   </div>
    <div class="items" align="right">
         <table padding="15px">
                 <?php
-                if (!$images)
-                    echo "<h1>Whoops nothing here, try uploading an image</h1>";
+                if (!$images || $_SESSION['uid'] != $uid)
+                    echo "<h2>Blank</h2>";
                 else foreach($images as $row)
                 {
                     $img_loc = $row['path'];
