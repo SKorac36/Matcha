@@ -13,9 +13,9 @@
             $bio = $_POST['bio'];
             $tags = serialize(get_tags($bio));
             $time = getdate();
-            $age = $time[year] - $_POST['year'];
+            $age = $time - $_POST['year'];
             $sql = $conn->prepare($query);
-            $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,$_POST['latitude'],$_POST['longitude'], $bio]);
+            $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,round((float)$_POST['latitude'],2),round((float)$_POST['longitude'],2), $bio]);
             alert("Profile succesfully created, if you would like to change anything go to the settings bro", "index.php");
         }
     }
