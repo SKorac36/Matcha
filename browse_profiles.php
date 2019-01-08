@@ -11,6 +11,19 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $pref = $user['preference'];
     $gender = $user['gender'];
 }
-matching($pref, $gender, $conn);
+$matches = matching($pref, $gender, $conn);
 
 ?>
+  <table padding="15px">
+                <?php
+                if (!$matches)
+                    echo "<h1>Whoops nothing here, no one here</h1>";
+                else foreach($matches as $row)
+                {
+                    $pic = $row['profile_pic'];
+                    $id = $row['id'];
+                    if (($matches))
+                        echo '<tr<td><a href="profile.php?id='.$id.'"><img src="'.$pic.'" height="300" width="400"/></a></td></tr>';
+                }
+                ?>
+        </table>
