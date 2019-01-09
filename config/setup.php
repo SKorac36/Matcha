@@ -18,8 +18,8 @@ $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
     preference VARCHAR(1000) DEFAULT 'bisexual',
     bio VARCHAR(1000),
     tags VARCHAR(1000),
-    latitude TEXT NOT NULL,
-    longitude TEXT NOT NULL,
+    latitude INT (255),
+    longitude INT (255),
     views INT(255) DEFAULT 0,
     likes INT(255) DEFAULT 0,
     profile_pic VARCHAR(1000) DEFAULT 'stock.png', 
@@ -42,13 +42,17 @@ $likes = "CREATE TABLE IF NOT EXISTS Matcha.Likes(
     likee INT(6) NOT NULL,
     liker INT(6) NOT NULL,
     time TIMESTAMP)"; //use for notifications
+$blocks = "CREATE TABLE IF NOT EXISTS Matcha.Blocks(
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    blocker INT(6) NOT NULL,
+    blockee INT(6) NOT NULL)";
 $conn->query($db);
 $conn->query($usrs);
 $conn->query($profile);
 $conn->query($images);
 $conn->query($tags);
 $conn->query($likes);
-include('prep.php');
+// include('prep.php');
 echo "<script type='text/javascript'>
 	alert('Successfully created database');
 	window.location.href = '../index.php'; 
