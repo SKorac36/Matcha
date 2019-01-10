@@ -20,7 +20,6 @@
         $sql->execute([$uid]);
         $images = $sql->fetchAll();
     }
-    // var_dump($profile);
 ?>
 <html>
 <div class="container-fluid w3-light-grey">
@@ -28,9 +27,12 @@
     echo '<img src="'.$path.'"</img>';
     echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:<br>'.$bio.'
     </p> <br>';
-    echo '<a href="like.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>';
-    echo '<br><a href="report.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>
-    <a href="block.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>';
+    if ($_SESSION['uid'] != $_GET['id'])
+    {
+        echo '<a href="like.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>';
+        echo '<br><a href="report.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Report</a>
+        <a href="block.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Block</a>';
+    }
   ?>
   </div>
    <div class="items" align="right">
