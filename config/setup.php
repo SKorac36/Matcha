@@ -52,6 +52,7 @@ $conn->query($profile);
 $conn->query($images);
 $conn->query($tags);
 $conn->query($likes);
+$conn->query($blocks);
  include('prep.php');
 echo "<script type='text/javascript'>
 	alert('Successfully created database');
