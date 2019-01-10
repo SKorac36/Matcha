@@ -10,12 +10,12 @@
         $sql->execute([$_GET['img_id']]);
         $img = $sql->fetch();
         $path = $img['path'];
-        $query = "UPDATE Matcha.Profiles SET profile_pic=?";
+        $query = "UPDATE Matcha.Profiles SET profile_pic=? WHERE id=?";
         $sql = $conn->prepare($query);
-        $sql->execute([$path]);
+        $sql->execute([$path, $_SESSION['uid']]);
         echo "<script type='text/javascript'>
 	    alert('Profile picture updates');
-	    window.location.href = 'profile.php?profile_id=".$_SESSION['uid']."'; 
+	    window.location.href = 'profile.php?id=".$_SESSION['uid']."'; 
 	    </script>";
 	    die();
     }
