@@ -12,19 +12,19 @@ $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
     regdate TIMESTAMP 
     )";
  $profile = "CREATE TABLE IF NOT EXISTS Matcha.Profiles (
-     id INT(6) PRIMARY KEY NOT NULL,
-     age INT(3) NOT NULL,
+     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+     age INT(3) NOT NULL DEFAULT 0,
     gender VARCHAR(1000) NOT NULL,
-    preference VARCHAR(1000) DEFAULT 'bisexual',
+    preference VARCHAR(1000) DEFAULT 'Bisexual',
     bio VARCHAR(1000),
-    tags VARCHAR(1000),
-    latitude INT (255),
-    longitude INT (255),
+    -- tags VARCHAR(1000),
+    latitude Decimal(9,6),
+    longitude Decimal(9,6),
     views INT(255) DEFAULT 0,
     likes INT(255) DEFAULT 0,
     profile_pic VARCHAR(1000) DEFAULT 'stock.png', 
-    reports INT(10) DEFAULT 10,
-    regdate TIMESTAMP
+    reports INT(10) DEFAULT 10
+    -- fame_rating INT(255) DEFAULT 0
      )";
 $images = "CREATE TABLE IF NOT EXISTS Matcha.Images (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -52,7 +52,7 @@ $conn->query($profile);
 $conn->query($images);
 $conn->query($tags);
 $conn->query($likes);
-// include('prep.php');
+ include('prep.php');
 echo "<script type='text/javascript'>
 	alert('Successfully created database');
 	window.location.href = '../index.php'; 
