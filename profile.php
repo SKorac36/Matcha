@@ -19,13 +19,25 @@
         $sql = $conn->prepare($query);
         $sql->execute([$uid]);
         $images = $sql->fetchAll();
+        $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
+        $sql = $conn->prepare($query);
+        $sql->execute([$_SESSION['uid']]);
+        $user = $sql->fetch();
+        $lat_me = $user['latitude'];
+        $long_me = $user['longitude'];
+        $query  = "SELECT * FROM Matcha.Profiles WHERE id=?";
+        $sql = $conn->prepare($query);
+        $sql->execute([$uid]);
+        $lat_you = $user['latitude'];
+        $long_you = $user['longitude'];
+        $distance = round(getDistance($lat_me, $long_me, $lat_you, $lat_you));
     }
 ?>
 <html>
 <div class="container-fluid w3-light-grey">
 <div align="center"><?php  
     echo '<img src="'.$path.'"</img>';
-    echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:<br>'.$bio.'
+    echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:'.$distance.' kms away<br>'.$bio.'
     </p> <br>';
     if ($_SESSION['uid'] != $_GET['id'])
     {

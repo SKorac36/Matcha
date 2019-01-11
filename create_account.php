@@ -27,8 +27,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel= "stylesheet" href="style.css"> -->
     <link rel= "stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel= "stylesheet" href="stylesheet.css">
 </head>
-        <form class= "form" method="post" action="create_account.php" align="center">
+        <form class="form" method="post" action="create_account.php" align="center">
         <div class="reg_input">Enter email: <input type="email" name="email"/><br/></div>
         <div class="reg_input">Username: <input type="text" name="username"/><br/></div>
         <div class="reg_input">First name: <input type="text" name="first"/><br/></div>

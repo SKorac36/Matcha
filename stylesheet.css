@@ -3,3 +3,17 @@
     width:85%;
     color: lightgray;
 }
+#wrapper {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+
+}
+
+.form {
+    width: 30%;
+    margin: 0px auto;
+    padding: 20px;
+    background: lightgray;
+    border-radius: 0px 0px 10px 10px;
+}
