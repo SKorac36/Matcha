@@ -28,9 +28,10 @@
         $query  = "SELECT * FROM Matcha.Profiles WHERE id=?";
         $sql = $conn->prepare($query);
         $sql->execute([$uid]);
+        $user = $sql->fetch();
         $lat_you = $user['latitude'];
         $long_you = $user['longitude'];
-        $distance = round(getDistance($lat_me, $long_me, $lat_you, $lat_you));
+        $distance = round(getDistance($lat_me, $long_me, $lat_you, $long_you));
     }
 ?>
 <html>
@@ -38,7 +39,9 @@
 <div align="center"><?php  
     echo '<img src="'.$path.'"</img>';
     echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:'.$distance.' kms away<br>'.$bio.'
+    
     </p> <br>';
+  
     if ($_SESSION['uid'] != $_GET['id'])
     {
         echo '<a href="like.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>';
