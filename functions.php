@@ -71,11 +71,15 @@ function fame_rating($user, $conn)
 }
 function matching($pref, $gender, $conn)
 {
+    
+    
+    
     if ($pref == 'Straight')
     {
         if ($gender == 'Male')
         {
             // echo "Display straight and bisexual women";
+
             $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=?";
             $sql = $conn->prepare($query);
             $sql->execute(['Female', 'Straight', 'Bisexual']);
@@ -144,5 +148,25 @@ function getDistance($latitude1, $longitude1, $latitude2, $longitude2 ) {
     $d = $earth_radius * $c;  
 
     return $d;  
+}
+function getBlocks($conn, $id)
+{
+    $query = "SELECT blockee FROM Matcha.Blocks WHERE blocker=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$id]);
+    $list = $sql->fetchAll(PDO::FETCH_COLUMN, 0); 
+    return $list; 
+}
+function checkBlocks($conn, $viewer, $viewee)
+{
+    $query = "SELECT * FROM Matcha.Blocks WHERE blocker=? AND blockee=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$viewer, $viewee]);
+    $block = $sql->fetch();
+    // var_dump($block);
+    if ($block)
+        return true;
+     else
+        return false;
 }
 ?>
