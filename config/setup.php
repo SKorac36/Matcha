@@ -24,7 +24,7 @@ $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
     likes INT(255) DEFAULT 0,
     profile_pic VARCHAR(1000) DEFAULT 'stock.png', 
     reports INT(10) DEFAULT 10
-    -- fame_rating INT(255) DEFAULT 0
+    fame_rating INT(255) DEFAULT 0
      )";
 $images = "CREATE TABLE IF NOT EXISTS Matcha.Images (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -53,7 +53,7 @@ $conn->query($images);
 $conn->query($tags);
 $conn->query($likes);
 $conn->query($blocks);
-//  include('prep.php');
+ include('prep.php');
 echo "<script type='text/javascript'>
 	alert('Successfully created database');
 	window.location.href = '../index.php'; 
