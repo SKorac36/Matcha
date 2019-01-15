@@ -29,6 +29,7 @@
         $sql = $conn->prepare($query);
         $sql->execute([$uid]);
         $user = $sql->fetch();
+        $fame_rating = fameRating($user['likes'], $user['views']);
         $lat_you = $user['latitude'];
         $long_you = $user['longitude'];
         $distance = round(getDistance($lat_me, $long_me, $lat_you, $long_you));
@@ -38,9 +39,7 @@
 <div class="container-fluid w3-light-grey">
 <div align="center"><?php  
     echo '<img src="'.$path.'"</img>';
-    echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:'.$distance.' kms away<br>'.$bio.'
-    
-    </p> <br>';
+    echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:'.$distance.' kms away<br>'.$bio.'<br>Fame rating:'.$fame_rating.'</p> <br>';
   
     if ($_SESSION['uid'] != $_GET['id'])
     {
