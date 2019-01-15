@@ -179,7 +179,7 @@ function checkBlocks($conn, $viewer, $viewee)
 }
 function fameRating($likes, $views)
 {
-    return ($likes + round($views * 0.5));
+    return ($likes + ceil($views * 0.5));
 
 }
 ?>
