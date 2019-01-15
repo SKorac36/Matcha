@@ -41,7 +41,11 @@ function view($viewer, $viewee, $conn)
         $query = "UPDATE Matcha.Profiles SET views=views+1 WHERE id=?";
         $sql = $conn->prepare($query);
         $sql->execute([$viewee]);
-        //send notifcation
+        $updated_fr = fame_rating($viewee, $conn);
+        $query = "UPDATE Matcha.Profiles SET fame_rating=? WHERE id=?";
+        $sql = $conn->prepare($query);
+        $sql->execute([$updated_fr, $viewee]);
+
     }
 }
 
@@ -55,6 +59,10 @@ function like($liker, $likee, $conn)
         $query = "INSERT INTO Matcha.Likes(liker,likee) VALUES(?,?)";
         $sql = $conn->prepare($query);
         $sql->execute([$liker, $likee]);
+        $updated_fr = fame_rating($likee, $conn);
+        $query = "UPDATE Matcha.Profiles SET fame_rating=? WHERE id=?";
+        $sql = $conn->prepare($query);
+        $sql->execute([$updated_fr, $likee]);
 
         //send notification
     }
@@ -69,7 +77,7 @@ function fame_rating($user, $conn)
     return $return;
 
 }
-function matching($pref, $gender, $conn)
+function matching($pref, $gender, $conn, $option)
 {
     
     
@@ -79,8 +87,8 @@ function matching($pref, $gender, $conn)
         if ($gender == 'Male')
         {
             // echo "Display straight and bisexual women";
-
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=?";
+            $age = 'age';
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=? ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Female', 'Straight', 'Bisexual']);
             $users = $sql->fetchAll();
@@ -168,5 +176,10 @@ function checkBlocks($conn, $viewer, $viewee)
         return true;
      else
         return false;
+}
+function fameRating($likes, $views)
+{
+    return ($likes + round($views * 0.5));
+
 }
 ?>
