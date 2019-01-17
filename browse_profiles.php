@@ -11,6 +11,8 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $user = $sql->fetch();
     $pref = $user['preference'];
     $gender = $user['gender'];
+    $latitude = $user['latitude'];
+    $longitude = $user['longitude'];
 }
 $option = 'id';
 if (isset($_POST['submit']))
@@ -19,12 +21,10 @@ if (isset($_POST['submit']))
 
     if (isset($_POST['option']))
         $option = $_POST['option'];
-    var_dump($_POST['submit']);
 }
 // $blocks = getBlocks($conn, $_SESSION['uid']);
-$matches = matching($pref, $gender, $conn, $option);
-// var_dump($blocks);
-var_dump($_POST['submit']);
+$matches = matching($pref, $gender,$latitude,$longitude, $conn, $option);
+//  var_dump($matches);
 ?>
 <form class="form" action="browse_profiles.php" method="post">
   <input type="radio" name="option" value="age" /> Age
@@ -45,7 +45,7 @@ var_dump($_POST['submit']);
                     if ($matches)
                     {
                         if (!(checkBlocks($conn, $_SESSION['uid'], $id)))
-                            echo '<tr<td><a href="profile.php?id='.$id.'"><img src="'.$pic.'" height="300" width="400" hspace="20"/></a></td></tr>';
+                            echo '<tr<td><a href="profile.php?id='.$id.'"><img src="'.$pic.'"hspace="20"/></a></td></tr>';
                     }
                 }
                 ?>

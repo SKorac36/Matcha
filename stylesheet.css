@@ -17,3 +17,8 @@
     background: lightgray;
     border-radius: 0px 0px 10px 10px;
 }
+
+img {
+    border-radius: 50%;
+}
+

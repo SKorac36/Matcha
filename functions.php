@@ -33,7 +33,17 @@ function get_tags($input)
     preg_match_all("/(#\w+)/", $input, $matches);
     return ($matches[0]);
 }
-
+function unique_likes($liker, $likee, $conn)
+{
+    $query = "SELECT * FROM Matcha.Likes WHERE liker=? AND likee=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$liker, $likee]);
+    $like = $sql->fetch();
+    if (isset($like))
+        return false;
+    else
+        return true;
+}
 function view($viewer, $viewee, $conn)
 {
     if ($viewer != $viewee)
@@ -51,7 +61,7 @@ function view($viewer, $viewee, $conn)
 
 function like($liker, $likee, $conn)
 {
-    if ($liker != $likee)
+    if (unique_likes($liker, $likee, $conn) == true)
     {
         $query = "UPDATE Matcha.Profiles SET likes=likes+1 WHERE id=?";
         $sql = $conn->prepare($query);
@@ -66,7 +76,30 @@ function like($liker, $likee, $conn)
 
         //send notification
     }
+    else
+        alert("You have already liked them", "profile.php?id=".$likee);
 }
+function unlike($liker, $likee, $conn)
+{
+    if (unique_likes($liker, $likee, $conn) == false)
+        {
+            echo "hi";
+            $query = "DELETE FROM Matcha.Likes WHERE liker=? AND likee=?";
+            $sql = $conn->prepare($query);
+            $sql->execute([$liker, $likee]);
+            $query = "UPDATE Matcha.Profiles SET likes=likes-1 WHERE id=?";
+            $sql = $conn->prepare($query);
+            $sql->execute([$likee]);
+            $updated_fr = fame_rating($likee, $conn);
+            $query = "UPDATE Matcha.Profiles SET fame_rating=? WHERE id=?";
+            $sql = $conn->prepare($query);
+            $sql->execute([$updated_fr, $likee]);
+            // alert("User unliked", "profile.php?id=".$likee);
+        }
+    else
+        alert("You haven't liked them yet", "profile.php?id=".$likee);
+}
+
 function fame_rating($user, $conn)
 {
     $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
@@ -77,72 +110,110 @@ function fame_rating($user, $conn)
     return $return;
 
 }
-function matching($pref, $gender, $conn, $option)
+function matching($pref, $gender, $latitude, $longitude,$conn, $option)
 {
-    
-    
+    $location = 0;
+    if ($option == 'location')
+    {   
+        $location = 1;
+        $option = 'id';
+    } 
+    // {
+    //     //sql query no order
+        
+    //     // own order function--
+    //     // for each
+    //     // get distance diff (add this to sql query, with specific key)  -- also its own function
+    //     // ksort or a sort by that key
+
+    //     $query = "SELECT * FROM Matcha.Profiles";
+    //     $sql->$conn->prepare($query);
+    //     $sql->execute();
+    //     $users = $sql->fetchAll();
+    //     foreach($users as $return)
+    //     {
+    //         $return['distance'] = getDistance($latitude, $longitude, $return['latitude'], $return['longitude']);
+    //     }
+
+
+    //     }   
     
     if ($pref == 'Straight')
     {
         if ($gender == 'Male')
         {
             // echo "Display straight and bisexual women";
-            $age = 'age';
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=? ORDER BY $option";
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Female', 'Straight', 'Bisexual']);
             $users = $sql->fetchAll();
-            return $users;
+            // return $users;
         }
         else if ($gender == 'Female')
         {
         // echo "Display straight and bisexual men";
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=?";
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Male','Straight', 'Bisexual']);
             $users = $sql->fetchAll();
-            return $users;
+            // return $users;
         }
     }
     if ($pref == 'Gay')
     {   
         if ($gender == 'Male')
         {   
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=?";
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Male','Gay', 'Bisexual']);
             $users = $sql->fetchAll();
-            return $users;
+            // return $users;
         }
         else if ($gender == 'Female')
         {
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND Preference=? OR Preference=?";
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Female','Gay', 'Bisexual']);
             $users = $sql->fetchAll();
-            return $users;
+            // return $users;
         }
     }
     if ($pref == 'Bisexual')
     {
         if ($gender == 'Male')
         {   
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? OR Gender=? AND Preference=? OR Preference=? OR Preference=?";
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? OR Gender=? AND Preference=? OR Preference=? OR Preference=? ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
             $users = $sql->fetchAll();
-            return $users;
+            // return $users;
         }
         
         else if ($gender == 'Female')
         {   
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? OR Gender=? AND Preference=? OR Preference=? OR Preference=?";
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? OR Gender=? AND Preference=? OR Preference=? OR Preference=? ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
             $users = $sql->fetchAll();
-            return $users;
+            // return $users;
         }
     }
+    $array = array();
+    // $users[12] = getDistance($latitude, $longitude, $key['latitude'], $key['longitude']);
+    foreach($users as $person)
+    {
+        foreach($person as $key)
+        {
+            $key = 'distance';
+            $array[][$key] = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
+    //    $users['distance'] = $key['distance']; 
+        }
+        // $array[$person][] =
+    }
+     if ($location == 1)
+         ksort($users, 0);
+    print_r($array);
+    return ($users);
 }
 
 function getDistance($latitude1, $longitude1, $latitude2, $longitude2 ) {  
@@ -153,7 +224,7 @@ function getDistance($latitude1, $longitude1, $latitude2, $longitude2 ) {
 
     $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * sin($dLon/2) * sin($dLon/2);  
     $c = 2 * asin(sqrt($a));  
-    $d = $earth_radius * $c;  
+    $d = $earth_radius * $c;
 
     return $d;  
 }

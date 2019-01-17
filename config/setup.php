@@ -23,7 +23,7 @@ $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
     views INT(255) DEFAULT 0,
     likes INT(255) DEFAULT 0,
     profile_pic VARCHAR(1000) DEFAULT 'stock.png', 
-    reports INT(10) DEFAULT 10
+    reports INT(10) DEFAULT 10,
     fame_rating INT(255) DEFAULT 0
      )";
 $images = "CREATE TABLE IF NOT EXISTS Matcha.Images (

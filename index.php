@@ -1,5 +1,7 @@
 <?php
+
 require_once('header.php');
+echo hash('whirlpool', '1234$ABCs');
 ?>
 <html>
 <div id="wrapper">
