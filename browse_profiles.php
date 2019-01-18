@@ -15,22 +15,15 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $longitude = $user['longitude'];
 }
 $option = 'id';
-if (isset($_POST['submit']))
-{ 
-    // var_dump($_POST);
-
-    if (isset($_POST['option']))
+if (isset($_POST['option']))
         $option = $_POST['option'];
-}
-// $blocks = getBlocks($conn, $_SESSION['uid']);
 $matches = matching($pref, $gender,$latitude,$longitude, $conn, $option);
-//  var_dump($matches);
 ?>
 <form class="form" action="browse_profiles.php" method="post">
-  <input type="radio" name="option" value="age" /> Age
-  <input type="radio" name="option" value="location" /> Location
-  <input type="radio" name="option" value="fame_rating" /> Fame Rating<br>
-  <input type="submit" class="btn" name="submit" value="OK"/>
+  <input type="submit" class="btn" name="option" value="Age" /> 
+  <input type="submit" class="btn" name="option" value="Location" /> 
+  <input type="submit" class="btn" name="option" value="Fame Rating"/> 
+  
   
 </form>
   <table>
@@ -48,5 +41,9 @@ $matches = matching($pref, $gender,$latitude,$longitude, $conn, $option);
                             echo '<tr<td><a href="profile.php?id='.$id.'"><img src="'.$pic.'"hspace="20"/></a></td></tr>';
                     }
                 }
+                
                 ?>
         </table>
+        <?php
+        include_once('footer.php');
+        ?>
