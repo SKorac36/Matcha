@@ -198,22 +198,24 @@ function matching($pref, $gender, $latitude, $longitude,$conn, $option)
             // return $users;
         }
     }
-    $array = array();
-    // $users[12] = getDistance($latitude, $longitude, $key['latitude'], $key['longitude']);
+
+    $new_users = [];
     foreach($users as $person)
     {
-        foreach($person as $key)
-        {
-            $key = 'distance';
-            $array[][$key] = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
-    //    $users['distance'] = $key['distance']; 
-        }
-        // $array[$person][] =
+    
+        $person['distance'] = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
+        array_push($new_users, $person);
+        
     }
-     if ($location == 1)
-         ksort($users, 0);
-    print_r($array);
-    return ($users);
+    if ($location == 1)
+         usort($new_users, "sortCmp");
+    return ($new_users);
+}
+function sortCmp($a, $b)
+{
+    if ($a['distance'] == $b['distance'])
+        return 0;
+    return($a['distance'] < $b['distance'] ? -1 : 1);
 }
 
 function getDistance($latitude1, $longitude1, $latitude2, $longitude2 ) {  
