@@ -42,16 +42,13 @@
         <select name="Gender">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
-            <option value="Other">Other</option>
         </select>
         <select name="Pref">
             <option value="Straight">Straight</option>
             <option value="Gay">Gay</option>
             <option value="Bisexual">Bisexual</option>
-            <option value="Asexual">Asexual</option>
-        <?php
-            echo '<textarea name="bio"></textarea>'
-		 ?>
+            <textarea name="bio"></textarea>
+           <textarea name="tags">Enter tags that would describe you prefixed with a '#'</textarea>
          <button onclick="getLocation()">Allow your location?</button>
          <p id="demo"></p>
 
