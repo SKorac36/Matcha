@@ -113,31 +113,13 @@ function fame_rating($user, $conn)
 function matching($pref, $gender, $latitude, $longitude,$conn, $option)
 {
     $location = 0;
-    if ($option == 'location')
+    if ($option == 'Location')
     {   
         $location = 1;
         $option = 'id';
-    } 
-    // {
-    //     //sql query no order
-        
-    //     // own order function--
-    //     // for each
-    //     // get distance diff (add this to sql query, with specific key)  -- also its own function
-    //     // ksort or a sort by that key
-
-    //     $query = "SELECT * FROM Matcha.Profiles";
-    //     $sql->$conn->prepare($query);
-    //     $sql->execute();
-    //     $users = $sql->fetchAll();
-    //     foreach($users as $return)
-    //     {
-    //         $return['distance'] = getDistance($latitude, $longitude, $return['latitude'], $return['longitude']);
-    //     }
-
-
-    //     }   
-    
+    }
+    if ($option == 'Fame Rating')
+        $option = 'fame_rating';
     if ($pref == 'Straight')
     {
         if ($gender == 'Male')
@@ -198,7 +180,6 @@ function matching($pref, $gender, $latitude, $longitude,$conn, $option)
             // return $users;
         }
     }
-
     $new_users = [];
     foreach($users as $person)
     {
@@ -254,5 +235,18 @@ function fameRating($likes, $views)
 {
     return ($likes + ceil($views * 0.5));
 
+}
+
+function picCheck($user, $conn)
+{
+    $query = "SELECT profile_pic FROM Matcha.Profiles WHERE id=?";
+    $sql = $conn->preapre($query);
+    $sql->execute([$user]);
+    $pic = $sql->fetch();
+    if (isset($pic['profile_pic']))
+        if($pic['profile_pic'] == 'stock.png')
+            return false;
+        else
+            return true;
 }
 ?>
