@@ -47,8 +47,12 @@ try{ //need to change this so i have unique users
     (58,"Female","Bisexual","Janis Joplin nicknamed Pearl, was an American rock, soul, and blues singer and songwriter, and one of the most successful and widely known female rock stars of her era.","-26.038","27.8484",61,44,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxT8S6CDPMsLxaXVZR_2vSmDtVuIlHA5YdoE2j_5NDfKdW9Xc3",10),
     (30,"Male","Bisexual","Shane Dawson  known professionally as Shane Dawson, is an American YouTuber, author, sketch comedian, actor, film director, media personality and musician.","-26.0944","28.2293",53,21,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlKfAset9Q-2HqIBLtwWFBCJ8wWmAh_FDw7jadFouZIxrZ74Lq",2),
     (41,"Male","Gay","Ronald Mac McDonald is a co-owner and the bad bouncer/bodyguard of Paddys Pub and generally the pubs most active manager","-26.1586","28.0728",79,7,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtaUl3imbyq44XytAtROsfKFp-WWnVjnv2oaZmFDGpeKLn3HS_",8)');
-    
-      
+    $conn->query('INSERT INTO `tags` (tag) VALUES
+    ("musician"),
+    ("gamer"),
+    ("coder"),
+    ("cook"),
+    ("nerd")');
     }
     catch(PDOException $e){
         echo "Failed to populate: <br>";
