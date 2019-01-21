@@ -1,6 +1,8 @@
 <?php
     require_once('header.php');
-    
+
+    $matches = get_tags($_POST['array']);
+    print_r($matches);
     $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference,tags,latitude,longitude, bio) VALUES(?,?,?,?,?,?,?,?)";   
     if (isset($_SESSION) && !empty($_SESSION['uid']))
     {
@@ -8,15 +10,20 @@
         {
             if ($_POST['bio'] == 'Enter a bio! Use hashtags freely!')
                 alert("Come on enter a bio!", 'User_setup.php');
+            if (isset($_POST['array']))
+                $matches = get_tags($_POST['array']);
+            else
+                $matches = "No tags";
             $gender = $_POST['Gender'];
             $pref = $_POST['Pref'];
             $bio = $_POST['bio'];
-            $tags = serialize(get_tags($bio));
+            $tags = serialize($matches);
             $time = getdate();
             $age = $time - $_POST['year'];
             $sql = $conn->prepare($query);
-            $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,round((float)$_POST['latitude'],2),round((float)$_POST['longitude'],2), $bio]);
+            $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,round((float)$_POST['latitude'],6),round((float)$_POST['longitude'],6), $bio]);
             alert("Profile succesfully created, if you would like to change anything go to the settings bro", "index.php");
+       
         }
     }
     else
@@ -35,25 +42,30 @@
         <select name="Gender">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
-            <option value="Other">Other</option>
         </select>
         <select name="Pref">
             <option value="Straight">Straight</option>
             <option value="Gay">Gay</option>
             <option value="Bisexual">Bisexual</option>
-            <option value="Asexual">Asexual</option>
         <?php
-            echo '<textarea name="bio">Enter a bio! Use hashtags freely!</textarea>'
+            echo '<textarea name="bio">Enter a bio!</textarea>'
 		?>
         <br>
         <div class="reg_input">Latitude<input id="lat" type="text" name="latitude"></div>
-        <div class="reg_input">Longitude<input id="long" type="text" name="longitude"></div>
+        <div class="reg_input">Longitude<input id="long" type="text" name="longitude"></div><br>
         <input type="submit" class="btn" name="submit" value="OK"/>
+        <div hidden class="reg_input"><input id="array" type="text" name="array"></div>
         </form>
         <div>
         <p>Click the button to get your coordinates.</p>
 
 <button onclick="getLocation()">Try It</button>
+
+            <button onclick="addTags('musician')">Musician</button>
+            <button onclick="addTags('gamer')">Gamer</button>
+            <button onclick="addTags('coder')">Coder</button>
+            <button onclick="addTags('cook')">Cook</button>
+            <button onclick="addTags('nerd')">Nerd</button>
     <form class="form" id="upload" method="POST" action="upload_image.php" enctype="multipart/form-data">
          Upload your profile picture
         <input type="file" name="file" id="file"> <br>
@@ -88,6 +100,22 @@ function showError(error) {
       break;
   }
 }
+array = new Array();
+
+function addTags(tag){
+    array.push(tag);
+    console.log((array));
+    showArray(array);
+    return array;
+}
+function showArray(array)
+{
+    array.toString();
+    document.getElementById("array").value = array;
+}
+
+
+
 </script>
 <?php
     include('footer.php');
