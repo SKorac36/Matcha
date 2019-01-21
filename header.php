@@ -35,7 +35,7 @@ $index = "index.php";
   <a href="logout.php" style= "float:right" class="w3-bar-item w3-button">Logout</a>
   <?php
       if(!isset($_SESSION) || empty($_SESSION['uid']))
-        echo "Guest";
+        echo '<p style="float:right">Guest</p>';
       else if (isset($_SESSION['name']))
       {
         $name = $_SESSION['name'];
