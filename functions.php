@@ -29,9 +29,8 @@ function alert($str, $redirect)
 
 function get_tags($input)
 {
-    // $matches = array();
-    preg_match_all("/(#\w+)/", $input, $matches);
-    return ($matches[0]);
+    $matches = preg_split("/[\s,]+/", $input);
+    return ($matches);
 }
 function unique_likes($liker, $likee, $conn)
 {
