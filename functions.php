@@ -248,4 +248,9 @@ function picCheck($user, $conn)
         else
             return true;
 }
+
+function compareTags($user1, $user2)
+{
+    echo 'hello';
+}
 ?>
