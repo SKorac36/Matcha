@@ -1,8 +1,6 @@
 <?php
     require_once('header.php');
 
-    $matches = get_tags($_POST['array']);
-    print_r($matches);
     $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference,tags,latitude,longitude, bio) VALUES(?,?,?,?,?,?,?,?)";   
     if (isset($_SESSION) && !empty($_SESSION['uid']))
     {
@@ -19,7 +17,7 @@
             $bio = $_POST['bio'];
             $tags = serialize($matches);
             $time = getdate();
-            $age = $time - $_POST['year'];
+            $age = $time['year'] - $_POST['year'];
             $sql = $conn->prepare($query);
             $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,round((float)$_POST['latitude'],6),round((float)$_POST['longitude'],6), $bio]);
             alert("Profile succesfully created, if you would like to change anything go to the settings bro", "index.php");
