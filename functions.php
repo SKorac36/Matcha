@@ -38,7 +38,7 @@ function unique_likes($liker, $likee, $conn)
     $sql = $conn->prepare($query);
     $sql->execute([$liker, $likee]);
     $like = $sql->fetch();
-    if (isset($like))
+    if (($like))
         return false;
     else
         return true;
@@ -54,10 +54,12 @@ function view($viewer, $viewee, $conn)
         $query = "UPDATE Matcha.Profiles SET fame_rating=? WHERE id=?";
         $sql = $conn->prepare($query);
         $sql->execute([$updated_fr, $viewee]);
+        $query = "INSERT INTO Matcha.Views(viewer, viewee) VALUES(?,?)";
+        $sql= $conn->prepare($query);
+        $sql->execute([$viewer, $viewee]);
 
     }
 }
-
 function like($liker, $likee, $conn)
 {
     if (unique_likes($liker, $likee, $conn) == true)
@@ -73,7 +75,6 @@ function like($liker, $likee, $conn)
         $sql = $conn->prepare($query);
         $sql->execute([$updated_fr, $likee]);
 
-        //send notification
     }
     else
         alert("You have already liked them", "profile.php?id=".$likee);
@@ -82,7 +83,6 @@ function unlike($liker, $likee, $conn)
 {
     if (unique_likes($liker, $likee, $conn) == false)
         {
-            echo "hi";
             $query = "DELETE FROM Matcha.Likes WHERE liker=? AND likee=?";
             $sql = $conn->prepare($query);
             $sql->execute([$liker, $likee]);
@@ -93,7 +93,7 @@ function unlike($liker, $likee, $conn)
             $query = "UPDATE Matcha.Profiles SET fame_rating=? WHERE id=?";
             $sql = $conn->prepare($query);
             $sql->execute([$updated_fr, $likee]);
-            // alert("User unliked", "profile.php?id=".$likee);
+            alert("User unliked", "profile.php?id=".$likee);
         }
     else
         alert("You haven't liked them yet", "profile.php?id=".$likee);
@@ -109,12 +109,18 @@ function fame_rating($user, $conn)
     return $return;
 
 }
-function matching($pref, $gender, $latitude, $longitude,$conn, $option)
+function matching($pref, $gender, $latitude, $longitude, $tags,$conn, $option)
 {
     $location = 0;
+    $compatibility = 0;
     if ($option == 'Location')
     {   
         $location = 1;
+        $option = 'id';
+    }
+    else if ($option == 'Tags')
+    {
+        $compatibility = 1;
         $option = 'id';
     }
     if ($option == 'Fame Rating')
@@ -184,11 +190,92 @@ function matching($pref, $gender, $latitude, $longitude,$conn, $option)
     {
     
         $person['distance'] = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
+        $person['compatibility'] = compareTags($tags, unserialize($person['tags']));
         array_push($new_users, $person);
         
     }
     if ($location == 1)
          usort($new_users, "sortCmp");
+    else if ($compatibility == 1)
+        usort($new_users, "sortCmp1");
+    return ($new_users);
+}
+function suggestions($pref, $gender, $latitude, $longitude, $tags, $conn, $fr)
+{
+    if ($pref == 'Straight')
+    {
+        if ($gender == 'Male')
+        {
+            // echo "Display straight and bisexual women";
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Female', 'Straight', 'Bisexual']);
+            $users = $sql->fetchAll();
+            // return $users;
+        }
+        else if ($gender == 'Female')
+        {
+        // echo "Display straight and bisexual men";
+        $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Male','Straight', 'Bisexual']);
+            $users = $sql->fetchAll();
+            // return $users;
+        }
+    }
+    if ($pref == 'Gay')
+    {   
+        if ($gender == 'Male')
+        {   
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Male','Gay', 'Bisexual']);
+            $users = $sql->fetchAll();
+            // return $users;
+        }
+        else if ($gender == 'Female')
+        {
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Female','Gay', 'Bisexual']);
+            $users = $sql->fetchAll();
+            // return $users;
+        }
+    }
+    if ($pref == 'Bisexual')
+    {
+        if ($gender == 'Male')
+        {   
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
+            $users = $sql->fetchAll();
+            // return $users;
+        }
+        
+        else if ($gender == 'Female')
+        {   
+            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
+            $sql = $conn->prepare($query);
+            $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
+            $users = $sql->fetchAll();
+            // return $users;
+        }
+    }
+    $new_users = [];
+    foreach($users as $person)
+    {
+    
+
+        $distance = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
+        $compatibility = compareTags($tags, unserialize($person['tags']));
+        if ($distance <= 35 && $compatibility >= 2)
+        {
+            $person['distance'] = $distance;
+            $person['compatibility'] = $compatibility;
+        }
+        array_push($new_users, $person);
+    }
     return ($new_users);
 }
 function sortCmp($a, $b)
@@ -196,6 +283,12 @@ function sortCmp($a, $b)
     if ($a['distance'] == $b['distance'])
         return 0;
     return($a['distance'] < $b['distance'] ? -1 : 1);
+}
+function sortCmp1($a, $b)
+{
+    if ($a['compatibility'] == $b['compatibility'])
+        return 0;
+    return($a['compatibility'] > $b['compatibility'] ? -1 : 1);
 }
 
 function getDistance($latitude1, $longitude1, $latitude2, $longitude2 ) {  
@@ -239,7 +332,7 @@ function fameRating($likes, $views)
 function picCheck($user, $conn)
 {
     $query = "SELECT profile_pic FROM Matcha.Profiles WHERE id=?";
-    $sql = $conn->preapre($query);
+    $sql = $conn->prepare($query);
     $sql->execute([$user]);
     $pic = $sql->fetch();
     if (isset($pic['profile_pic']))
@@ -251,6 +344,30 @@ function picCheck($user, $conn)
 
 function compareTags($user1, $user2)
 {
-    echo 'hello';
+    return count(array_intersect($user1, $user2));
+
+}
+
+function goOnline($user, $conn)
+{
+    $query = "SELECT * FROM Matcha.Online WHERE userid=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$user]);
+    $online = $sql->fetch();
+    if ($online)
+        $query = "UPDATE Matcha.Online SET online=1 WHERE userid=?";
+    else
+        $query = "INSERT INTO Matcha.Online(userid,online) VALUES(?,1)";
+    $sql = $conn->prepare($query);
+    $sql->execute([$user]);
+        
+}
+
+function goOffline($user, $conn)
+{
+    $query = "UPDATE Matcha.Online SET online=0 WHERE userid=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$user]);
+
 }
 ?>
