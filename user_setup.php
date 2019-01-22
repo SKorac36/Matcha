@@ -102,7 +102,6 @@ array = new Array();
 
 function addTags(tag){
     array.push(tag);
-    console.log((array));
     showArray(array);
     return array;
 }
