@@ -15,6 +15,7 @@
         $age = $profile['age'];
         $path = $profile['profile_pic'];
         $tags = array_unique(unserialize($profile['tags']));
+        $username = $profile['username'];
 
         $query = "SELECT * FROM Matcha.Images WHERE userid=?";
         $sql = $conn->prepare($query);
@@ -37,21 +38,48 @@
         $long_you = $user['longitude'];
         $distance = round(getDistance($lat_me, $long_me, $lat_you, $long_you));
 
+        $query = "SELECT * FROM Matcha.Online WHERE userid=?";
+        $sql = $conn->prepare($query);
+        $sql->execute([$uid]);
+        $user = $sql->fetch();
+        $online = $user['online'];
+        $time = $user['last_online'];
+
+        $query = "SELECT * FROM Matcha.Likes WHERE likee=? AND liker=?";
+        $sql = $conn->prepare($query);
+        $sql->execute([$uid, $_SESSION['uid']]);
+        $user = $sql->fetch();
+        if ($user)
+            $liked = 1;
+        else
+            $liked = 0;
     }
 
 ?>
 <html>
 <div class="container-fluid w3-light-grey">
 <div align="center"><?php  
+    echo '<h1>'.$username.'</h1><br>';
+    echo '<p>Last online: </p>';
+    if ($online == 1)
+        echo '<p>Now!</p><br>';
+    else
+        echo '<p>'.$time.'</p>';
+    if ($liked == 1)
+        echo '<p>You have liked them!</p>';
     echo '<img src="'.$path.'"</img>';
-    echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:'.$distance.' kms away<br>'.$bio.'<br>Fame rating:'.$fame_rating.'</p> <br>tags:<br>';
+    echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:'.$distance.' kms away<br>'.$bio.'<br>Fame rating:'.$fame_rating.'</p> <br>Tags:<br><br>';
+    
     foreach ($tags as $tag)
     {
-        echo $tag.'<br>';
+        echo ''.$tag.' '.'';
     }
+    echo '<br>';
     if ($_SESSION['uid'] != $_GET['id'])
     {
         echo '<a href="like.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>';
+        // if ($liked == 1)
+            // echo '<p>You have liked them!</p>';
         echo '<br><a href="report.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Report</a>
         <a href="block.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Block</a>
         <a href="unlike.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Unlike</a>';
