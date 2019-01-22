@@ -19,7 +19,6 @@ if (isset($_POST['submit']))
                 alert_info('Password incorrect, try again');
             else if ($user['passwd'] == $hash)
             {
-                
                 $_SESSION['uid'] = $user['id'];
                 $_SESSION['name'] = $user['username'];
                 goOnline($_SESSION['uid'], $conn);
