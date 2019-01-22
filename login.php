@@ -19,11 +19,15 @@ if (isset($_POST['submit']))
                 alert_info('Password incorrect, try again');
             else if ($user['passwd'] == $hash)
             {
+                
                 $_SESSION['uid'] = $user['id'];
                 $_SESSION['name'] = $user['username'];
-                alert('Welcome to Matcha,'.$_SESSION['name'],'user_setup.php');
+                goOnline($_SESSION['uid'], $conn);
+                alert('Welcome to Matcha, '.$_SESSION['name'].' ','user_setup.php');
             }
         }
+        else
+            alert_info('Username not found');
     }
 }
 if (isset($_POST['reset']))
