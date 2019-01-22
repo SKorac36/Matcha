@@ -9,7 +9,7 @@ $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
     passwd VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,
-    regdate TIMESTAMP 
+    regdate TIMESTAMP
     )";
  $profile = "CREATE TABLE IF NOT EXISTS Matcha.Profiles (
      id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -46,6 +46,17 @@ $blocks = "CREATE TABLE IF NOT EXISTS Matcha.Blocks(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     blocker INT(6) NOT NULL,
     blockee INT(6) NOT NULL)";
+$online = "CREATE TABLE IF NOT EXISTS Matcha.Online(
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    userid INT(6) NOT NULL,
+    online INT(2) NOT NULL DEFAULT 0,
+    last_online TIMESTAMP)";
+$views = "CREATE TABLE IF NOT EXISTS Matcha.Views(
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    viewer INT(3) NOT NULL,
+    viwee INT(3) NOT NULL,
+    time TIMESTAMP
+)";
 $conn->query($db);
 $conn->query($usrs);
 $conn->query($profile);
@@ -53,7 +64,10 @@ $conn->query($images);
 $conn->query($tags);
 $conn->query($likes);
 $conn->query($blocks);
- include('prep.php');
+$conn->query($online);
+$conn->query($views);
+//  include('prep.php');
+
 echo "<script type='text/javascript'>
 	alert('Successfully created database');
 	window.location.href = '../index.php'; 
