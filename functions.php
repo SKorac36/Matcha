@@ -109,7 +109,8 @@ function fame_rating($user, $conn)
     return $return;
 
 }
-function matching($pref, $gender, $latitude, $longitude, $tags,$conn, $option)
+
+function suggestions($pref, $gender, $latitude, $longitude, $tags, $conn, $suggest, $fr, $option)
 {
     $location = 0;
     $compatibility = 0;
@@ -189,90 +190,24 @@ function matching($pref, $gender, $latitude, $longitude, $tags,$conn, $option)
     foreach($users as $person)
     {
     
-        $person['distance'] = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
-        $person['compatibility'] = compareTags($tags, unserialize($person['tags']));
-        array_push($new_users, $person);
-        
-    }
-    if ($location == 1)
-         usort($new_users, "sortCmp");
-    else if ($compatibility == 1)
-        usort($new_users, "sortCmp1");
-    return ($new_users);
-}
-function suggestions($pref, $gender, $latitude, $longitude, $tags, $conn, $fr)
-{
-    if ($pref == 'Straight')
-    {
-        if ($gender == 'Male')
-        {
-            // echo "Display straight and bisexual women";
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
-            $sql = $conn->prepare($query);
-            $sql->execute(['Female', 'Straight', 'Bisexual']);
-            $users = $sql->fetchAll();
-            // return $users;
-        }
-        else if ($gender == 'Female')
-        {
-        // echo "Display straight and bisexual men";
-        $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
-            $sql = $conn->prepare($query);
-            $sql->execute(['Male','Straight', 'Bisexual']);
-            $users = $sql->fetchAll();
-            // return $users;
-        }
-    }
-    if ($pref == 'Gay')
-    {   
-        if ($gender == 'Male')
-        {   
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
-            $sql = $conn->prepare($query);
-            $sql->execute(['Male','Gay', 'Bisexual']);
-            $users = $sql->fetchAll();
-            // return $users;
-        }
-        else if ($gender == 'Female')
-        {
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
-            $sql = $conn->prepare($query);
-            $sql->execute(['Female','Gay', 'Bisexual']);
-            $users = $sql->fetchAll();
-            // return $users;
-        }
-    }
-    if ($pref == 'Bisexual')
-    {
-        if ($gender == 'Male')
-        {   
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
-            $sql = $conn->prepare($query);
-            $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
-            $users = $sql->fetchAll();
-            // return $users;
-        }
-        
-        else if ($gender == 'Female')
-        {   
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) AND (fame_rating <=$fr+10 AND fame_rating >= $fr-10)";
-            $sql = $conn->prepare($query);
-            $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
-            $users = $sql->fetchAll();
-            // return $users;
-        }
-    }
-    $new_users = [];
-    foreach($users as $person)
-    {
-    
 
         $distance = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
         $compatibility = compareTags($tags, unserialize($person['tags']));
-        if ($distance <= 35 && $compatibility >= 2)
+        $fame_rating = $person['fame_rating'];
+        if ($suggest == 1)
         {
-            $person['distance'] = $distance;
-            $person['compatibility'] = $compatibility;
+            if ($distance <= 35 && $compatibility >= 2 && ($fame_rating <= $fr + 10 && $fame_rating >= $fr - 10))
+            {
+                $person['distance'] = $distance;
+                $person['compatibility'] = $compatibility;
+                $person['fame_rating'] = $fame_rating;
+            }
+        }
+        else
+        {
+                $person['distance'] = $distance;
+                $person['compatibility'] = $compatibility;
+                $person['fame_rating'] = $fame_rating;
         }
         array_push($new_users, $person);
     }

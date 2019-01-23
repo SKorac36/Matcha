@@ -13,12 +13,13 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $gender = $user['gender'];
     $latitude = $user['latitude'];
     $longitude = $user['longitude'];
+    $fr = $user['fame_rating'];
     $tags = unserialize($user['tags']);
 }
 $option = 'id';
 if (isset($_POST['option']))
         $option = $_POST['option'];
-$matches = matching($pref, $gender,$latitude,$longitude, $tags, $conn, $option);
+$matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $conn, 0, $fr,$option);
 ?>
 <form class="form" action="browse_profiles.php" method="post">
     Sort by <br>
