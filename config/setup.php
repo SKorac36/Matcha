@@ -57,6 +57,13 @@ $views = "CREATE TABLE IF NOT EXISTS Matcha.Views(
     viwee INT(3) NOT NULL,
     time TIMESTAMP
 )";
+$search = "CREATE TABLE IF NOT EXISTS Matcha.Searches(
+    id = INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    age_gap INT(3) NOT NULL DEFAULT 10,
+    distance INT(3) NOT NULL DEFAULT 10,
+    fame_rating INT(3) NOT NULL DEFAULT 10,
+    com_gap INT(1) NOT NULL DEFAULLT 2
+)";
 $conn->query($db);
 $conn->query($usrs);
 $conn->query($profile);
@@ -66,6 +73,7 @@ $conn->query($likes);
 $conn->query($blocks);
 $conn->query($online);
 $conn->query($views);
+$conn->query($search);
 //  include('prep.php');
 
 echo "<script type='text/javascript'>
