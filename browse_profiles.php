@@ -15,11 +15,17 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $longitude = $user['longitude'];
     $fr = $user['fame_rating'];
     $tags = unserialize($user['tags']);
+    $age = $user['age'];
 }
 $option = 'id';
 if (isset($_POST['option']))
         $option = $_POST['option'];
-$matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $conn, 0, $fr,$option);
+
+$age_gap = $_POST['age'];
+$dis_gap = $_POST['distance'];
+$com_gap = $_POST['com_gap'];
+$fr_gap = $_POST['fame_rating'];
+$matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr, $option, $age_gap ,$dis_gap, $com_gap, $fr_gap);
 ?>
 <form class="form" action="browse_profiles.php" method="post">
     Sort by <br>
