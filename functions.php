@@ -110,18 +110,18 @@ function fame_rating($user, $conn)
 
 }
 
-function suggestions($pref, $gender, $latitude, $longitude, $tags, $conn, $suggest, $fr, $option)
+function suggestions($pref, $gender, $latitude, $longitude, $tags, $age,$conn, $fr, $option, $age_gap,$dis_gap, $com_gap, $fr_gap)
 {
     $location = 0;
-    $compatibility = 0;
+    $compat = 0;
     if ($option == 'Location')
     {   
         $location = 1;
         $option = 'id';
     }
-    else if ($option == 'Tags')
+    if ($option == 'Tags')
     {
-        $compatibility = 1;
+        $compat = 1;
         $option = 'id';
     }
     if ($option == 'Fame Rating')
@@ -130,21 +130,21 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $conn, $sugge
     {
         if ($gender == 'Male')
         {
-            // echo "Display straight and bisexual women";
+    
             $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Female', 'Straight', 'Bisexual']);
             $users = $sql->fetchAll();
-            // return $users;
+   
         }
         else if ($gender == 'Female')
         {
-        // echo "Display straight and bisexual men";
+    
             $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? AND (Preference=? OR Preference=?) ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Male','Straight', 'Bisexual']);
             $users = $sql->fetchAll();
-            // return $users;
+    
         }
     }
     if ($pref == 'Gay')
@@ -155,7 +155,7 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $conn, $sugge
             $sql = $conn->prepare($query);
             $sql->execute(['Male','Gay', 'Bisexual']);
             $users = $sql->fetchAll();
-            // return $users;
+    
         }
         else if ($gender == 'Female')
         {
@@ -163,7 +163,7 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $conn, $sugge
             $sql = $conn->prepare($query);
             $sql->execute(['Female','Gay', 'Bisexual']);
             $users = $sql->fetchAll();
-            // return $users;
+    
         }
     }
     if ($pref == 'Bisexual')
@@ -174,7 +174,7 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $conn, $sugge
             $sql = $conn->prepare($query);
             $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
             $users = $sql->fetchAll();
-            // return $users;
+    
         }
         
         else if ($gender == 'Female')
@@ -183,34 +183,29 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $conn, $sugge
             $sql = $conn->prepare($query);
             $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
             $users = $sql->fetchAll();
-            // return $users;
+    
         }
     }
     $new_users = [];
     foreach($users as $person)
     {
-    
-
         $distance = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
         $compatibility = compareTags($tags, unserialize($person['tags']));
         $fame_rating = $person['fame_rating'];
-        if ($suggest == 1)
-        {
-            if ($distance <= 35 && $compatibility >= 2 && ($fame_rating <= $fr + 10 && $fame_rating >= $fr - 10))
+        $age = $person['age'];
+        if (($distance <= $dis_gap && $compatibility >= $com_gap ) &&($fame_rating <= $fr + $fr_gap && $fame_rating >= $fr - $fr_gap) &&($age <= $age + $age_gap && $age >= $age- $age_gap))
             {
                 $person['distance'] = $distance;
                 $person['compatibility'] = $compatibility;
                 $person['fame_rating'] = $fame_rating;
+                array_push($new_users, $person);
+                var_dump($person['distance']);
             }
-        }
-        else
-        {
-                $person['distance'] = $distance;
-                $person['compatibility'] = $compatibility;
-                $person['fame_rating'] = $fame_rating;
-        }
-        array_push($new_users, $person);
     }
+    if ($location == 1)
+        usort($new_users, 'sortCmp');
+    if ($compat == 1)
+        usort($new_users, 'sortCmp1');
     return ($new_users);
 }
 function sortCmp($a, $b)
@@ -226,7 +221,8 @@ function sortCmp1($a, $b)
     return($a['compatibility'] > $b['compatibility'] ? -1 : 1);
 }
 
-function getDistance($latitude1, $longitude1, $latitude2, $longitude2 ) {  
+function getDistance($latitude1, $longitude1, $latitude2, $longitude2 ) 
+{  
     $earth_radius = 6371;
 
     $dLat = deg2rad( $latitude2 - $latitude1 );  
