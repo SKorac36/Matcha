@@ -15,12 +15,21 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $longitude = $user['longitude'];
     $tags = unserialize($user['tags']);
     $fr = $user['fame_rating'];
+    $age = $user['age'];
 }
 $option = 'id';
 if (isset($_POST['option']))
         $option = $_POST['option'];
-        $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $conn, 1, $fr,$option);
+$matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr,$option, 10, 25, 2, 10);
 ?>
+<form class="form" action="index.php" method="post">
+    Sort by <br>
+  <input type="submit" class="btn" name="option" value="Age" /> 
+  <input type="submit" class="btn" name="option" value="Location" /> 
+  <input type="submit" class="btn" name="option" value="Fame Rating"/> 
+  <input type="submit" class="btn" name="option" value="Tags"/>
+  
+</form>
   <table>
                 <?php
             
