@@ -16,7 +16,7 @@
                 $query = "INSERT INTO Matcha.Users(email, username,passwd,last_name, first_name) VALUES(?,?,?,?,?)";
                 $sql = $conn->prepare($query);
                 $sql->execute([$_POST['email'], $_POST['username'], $hash, $_POST['last'], $_POST['first']]);
-                $query = "INSERT INTO Matcha.Searches(userid)";
+                $query = "INSERT INTO Matcha.Searches";
                 $sql = $conn->prepare($query);
                 $sql->execute();
                 

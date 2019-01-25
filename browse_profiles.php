@@ -16,15 +16,20 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $fr = $user['fame_rating'];
     $tags = unserialize($user['tags']);
     $age = $user['age'];
+    $query = "SELECT * FROM Matcha.Searches WHERE id=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$_SESSION['uid']]);
+    $search = $sql->fetch();
 }
 $option = 'id';
 if (isset($_POST['option']))
         $option = $_POST['option'];
-
-$age_gap = $_POST['age'];
-$dis_gap = $_POST['distance'];
-$com_gap = $_POST['com_gap'];
-$fr_gap = $_POST['fame_rating'];
+$age_gap = $search['age_gap'];
+var_dump($age);
+$dis_gap = $search['distance'];
+$com_gap = $search['com_gap'];
+$fr_gap = $search['fame_rating'];
+var_dump($age_gap);
 $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr, $option, $age_gap ,$dis_gap, $com_gap, $fr_gap);
 ?>
 <form class="form" action="browse_profiles.php" method="post">
@@ -39,7 +44,10 @@ $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $
                 <?php
             
                 if (!$matches)
-                    echo "<h1>Whoops nothing here, no one here</h1>";
+                {
+                    echo "<h1>Whoops nothing here, no one here. Try changing your search parameters.</h1>";
+                    echo  '<a href="search.php">Search</a>';
+                }
                 else foreach($matches as $row)
                 {
                     $pic = $row['profile_pic'];

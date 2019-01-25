@@ -110,7 +110,7 @@ function fame_rating($user, $conn)
 
 }
 
-function suggestions($pref, $gender, $latitude, $longitude, $tags, $age,$conn, $fr, $option, $age_gap,$dis_gap, $com_gap, $fr_gap)
+function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, $fr, $option, $age_gap, $dis_gap, $com_gap, $fr_gap)
 {
     $location = 0;
     $compat = 0;
@@ -192,8 +192,8 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age,$conn, $
         $distance = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
         $compatibility = compareTags($tags, unserialize($person['tags']));
         $fame_rating = $person['fame_rating'];
-        $age = $person['age'];
-        if (($distance <= $dis_gap && $compatibility >= $com_gap ) &&($fame_rating <= $fr + $fr_gap && $fame_rating >= $fr - $fr_gap) &&($age <= $age + $age_gap && $age >= $age- $age_gap))
+        $p_age = $person['age'];
+        if (($distance <= $dis_gap && $compatibility >= $com_gap) && ($fame_rating <= $fr + $fr_gap && $fame_rating >= $fr - $fr_gap) && ($p_age <= ($age + $age_gap)) && ($p_age >= ($age - $age_gap)))
             {
                 $person['distance'] = $distance;
                 $person['compatibility'] = $compatibility;

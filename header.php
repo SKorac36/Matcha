@@ -29,7 +29,9 @@ $index = "index.php";
   <a href="index.php" class="w3-bar-item w3-button">Home</a>
   <a href="upload_images.php" class="w3-bar-item w3-button">Upload Image</a>
   <a href="settings.php" class="w3-bar-item w3-button">Settings</a> 
+  <a href="search.php" class="w3-bar-item w3-button">Search</a>
   <a href="browse_profiles.php" class="w3-bar-item w3-button">Browse Profiles</a>
+  
   <a href="create_account.php" class="w3-bar-item w3-button">Login/Register</a>
  
   <a href="logout.php" style= "float:right" class="w3-bar-item w3-button">Logout</a>

@@ -1,24 +1,31 @@
 <?php
 require_once('header.php');
 
-$userid = $_SESSION['uid'];
-$age_gap = $_POST['age'];
-$distance = $_POST['distance'];
-$fame_rating = $_POST['fame_rating'];
-$com_gap = $_POST['com_gap'];
+if (isset($_SESSION) && !empty($_SESSION['uid']))
 
-$query = "UPDATE Matcha.Searches SET age_gap=?, distance=?, fame_rating=?, com_gap=? WHERE id=?";
-$sql = $conn->prepare($query);
-$sql->execute([$age_gap, $distance, $fame_rating, $com_gap, $userid]);
 
+
+if (isset($_POST['submit']))
+{
+    $userid = $_SESSION['uid'];
+    $age_gap = $_POST['age'];
+    $distance = $_POST['distance'];
+    $fame_rating = $_POST['fame_rating'];
+    $com_gap = $_POST['com_gap'];
+
+    var_dump($_POST);
+    $query = "UPDATE Matcha.Searches SET age_gap=?, distance=?, fame_rating=?, com_gap=? WHERE id=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$age_gap, $distance, $fame_rating, $com_gap, $userid]);
+    alert('Redirecting you to your searches', 'browse_profiles.php');
+}
 ?>
 <form class="form" method="post" action="search.php">
 <div id="slidecontainer">
-
-<input name="age" type="range" min="0" max="25" value="10" class="slider-pic" id="id1"> <br>
-<input name="distance" type="range" min= "0" max="100" value="25" class="slider-pic" id="id2">  <br>
-<input name="fame_rating" type="range" min="0" max="100" value="50" class="silder-pic" id="id3"><br>
-<input name="com_gap" type= "range" min="0" max="5" value="2" class="slider-pic" id="id4"><br>
+<input name="age" type="range" min="0" max="100" value="0" class="slider-pic" id="id1"> <br>
+<input name="distance" type="range" min= "0" max="100" value="0" class="slider-pic" id="id2">  <br>
+<input name="fame_rating" type="range" min="0" max="100" value="0" class="silder-pic" id="id3"><br>
+<input name="com_gap" type= "range" min="0" max="5" value="0" class="slider-pic" id="id4"><br>
 <span>Age gap: </span> <span id="f" style="font-weight:bold;color:red"></span> <br>
 <span>Distance gap: </span> <span id="e" style="font-weight:bold;color: green"></span> <br>
 <span>Fame rating gap: </span> <span id="g" style="font-weight:bold;color: yellow"></span> <br>

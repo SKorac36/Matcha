@@ -5,9 +5,8 @@
 }
 #wrapper {
     width: 500px;
-    height: 500px;
-    margin: 0 auto;
-
+    border: 1px solid black;
+    overflow: hidden;
 }
 
 .form {
@@ -20,5 +19,18 @@
 
 img {
     border-radius: 50%;
+}
+
+#likes{
+    width: 300px;
+    float:left; /* add this */
+    border: 1px solid red;
+}
+
+#views {
+
+    border: 1px solid green;
+    overflow: hidden;
+    float:left;
 }
 
