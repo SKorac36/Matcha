@@ -22,7 +22,14 @@ if (isset($_POST['submit']))
                 $_SESSION['uid'] = $user['id'];
                 $_SESSION['name'] = $user['username'];
                 goOnline($_SESSION['uid'], $conn);
-                alert('Welcome to Matcha, '.$_SESSION['name'].' ','user_setup.php');
+                $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
+                $sql = $conn->prepare($query);
+                $sql->execute([$_SESSION['uid']]);
+                $user= $sql->fetch();
+                if (!$user)
+                    alert('Welcome to Matcha, '.$_SESSION['name'].' ','user_setup.php');
+                else 
+                    alert('Welcome to Matcha, '.$_SESSION['name'].' ','index.php');
             }
         }
         else

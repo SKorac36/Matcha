@@ -1,36 +1,98 @@
 #main {
-    height:85%;
-    width:85%;
-    color: lightgray;
+
+    width:800px;
+    background-color: gray;
+    margin : 10px auto;
+
+    /* overflow: hidden; */
+    border-radius: 10px 10px 10px 10px;
+    padding: 20px;
 }
 #wrapper {
-    width: 500px;
+    width: 85%;
     border: 1px solid black;
     overflow: hidden;
 }
 
 .form {
-    width: 30%;
-    margin: 0px auto;
+    width: 400px;
+    margin: 10px auto;
     padding: 20px;
     background: lightgray;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
 }
 
 img {
     border-radius: 50%;
 }
 
-#likes{
-    width: 300px;
-    float:left; /* add this */
-    border: 1px solid red;
+html{
+    color: grey;
 }
 
-#views {
 
-    border: 1px solid green;
-    overflow: hidden;
-    float:left;
+.reg_input {
+    margin: 10px 0px 10px 0px;
 }
+
+.reg_input label {
+    display: block;
+    text-align: left;
+    margin: 3px;
+}
+
+.reg_input input {
+    height: 30px;
+    width: 90%;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+
+}
+textarea {
+    border-radius:1px 1px 1px 1px;
+}
+#bio {
+    width:300px;
+    text-align:justify;
+}
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+  }
+  
+  /* The slider itself */
+  .slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background:white; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: grey; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: grey; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
 

@@ -16,12 +16,15 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $tags = unserialize($user['tags']);
     $fr = $user['fame_rating'];
     $age = $user['age'];
-}
-$option = 'id';
-if (isset($_POST['option']))
+    $option = 'id';
+    if (isset($_POST['option']))
         $option = $_POST['option'];
-$matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr,$option, 10, 25, 2, 10);
+    $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr,$option, 100, 25, 2, 10);
+}
+else
+    header("location: " . "create_account.php");
 ?>
+<div id="main"><br>
 <form class="form" action="index.php" method="post">
     Sort by <br>
   <input type="submit" class="btn" name="option" value="Age" /> 
@@ -30,6 +33,7 @@ $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $
   <input type="submit" class="btn" name="option" value="Tags"/>
   
 </form>
+
   <table>
                 <?php
             
@@ -48,6 +52,7 @@ $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $
                 
                 ?>
         </table>
+</div>
         <?php
         include_once('footer.php');
         ?>

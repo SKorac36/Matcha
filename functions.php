@@ -199,7 +199,6 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
                 $person['compatibility'] = $compatibility;
                 $person['fame_rating'] = $fame_rating;
                 array_push($new_users, $person);
-                var_dump($person['distance']);
             }
     }
     if ($location == 1)

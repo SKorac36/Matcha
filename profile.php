@@ -68,7 +68,7 @@
     if ($liked == 1)
         echo '<p>You have liked them!</p>';
     echo '<img src="'.$path.'"</img>';
-    echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:'.$distance.' kms away<br>'.$bio.'<br>Fame rating:'.$fame_rating.'</p> <br>Tags:<br><br>';
+    echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:'.$distance.' kms away<br><p id="bio">'.$bio.'</p><br>Fame rating:'.$fame_rating.'</p> <br>Tags:<br><br>';
     
     foreach ($tags as $tag)
     {

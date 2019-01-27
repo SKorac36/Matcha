@@ -5,8 +5,8 @@ require_once('header.php');
 
 ?><html>
 <link rel="stylesheet" href="stylesheet.css">
-<div id="wrapper">
-    <div id="likes">
+<div id="main">
+    <div style="form">
     <?php
         $query = "SELECT * FROM Matcha.Likes JOIN Matcha.Users ON Matcha.Likes.liker=Matcha.users.id WHERE Matcha.Likes.likee=?";
         $sql = $conn->prepare($query);
@@ -18,7 +18,7 @@ require_once('header.php');
         }
 ?>
 </div>
-    <div id="views"> 
+    <div style="form">
     <?php
         $query = "SELECT * FROM Matcha.Views JOIN Matcha.Users ON Matcha.Views.viewer=Matcha.users.id WHERE Matcha.views.viewee=?";
         $sql = $conn->prepare($query);
@@ -31,4 +31,7 @@ require_once('header.php');
 ?>
     </div>
 </div>
+<?php
+    require_once("footer.php");
+?>
 </html>

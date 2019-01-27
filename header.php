@@ -31,7 +31,7 @@ $index = "index.php";
   <a href="settings.php" class="w3-bar-item w3-button">Settings</a> 
   <a href="search.php" class="w3-bar-item w3-button">Search</a>
   <a href="browse_profiles.php" class="w3-bar-item w3-button">Browse Profiles</a>
-  
+  <a href="consultations.php" class="w3-bar=item w3-button">Consultations</a>
   <a href="create_account.php" class="w3-bar-item w3-button">Login/Register</a>
  
   <a href="logout.php" style= "float:right" class="w3-bar-item w3-button">Logout</a>
