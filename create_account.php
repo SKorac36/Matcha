@@ -33,6 +33,7 @@
     <link rel= "stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel= "stylesheet" href="stylesheet.css">
 </head>
+<div id="main">
         <form class="form" method="post" action="create_account.php" align="center">
         <div class="reg_input">Enter email: <input type="email" name="email"/><br/></div>
         <div class="reg_input">Username: <input type="text" name="username"/><br/></div>
@@ -41,9 +42,9 @@
         <div class="reg_input">Enter password: <input type="password" name="passwd"/><br/></div>
         <div class="reg_input">Confirm password: <input type="password" name="conpasswd"/><br/></div>
         <input type="submit" class="btn" name="submit" value="OK"/> 
-        <!-- <a href="create_new_user.php" style="float:right" class="btn">Cancel</a>     -->
          <a href="login.php">Already a user?</a>
 </form>
+</div>
 <?php
     include('footer.php');
 ?>
