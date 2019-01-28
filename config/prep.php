@@ -62,21 +62,6 @@ try{ //need to change this so i have unique users
 //      ('KenanRona@mifelis.org','Kenan_Rona','Kenan,'Rona','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-04-27 07:08:01'),
 //     ('KiyokoHayley@atlibero.org','Kiyokiyo','Hayley','Kiyoko','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2019-12-10 15:27:04')");
 //     ('DahlGreenEva@nulla.org','SwedeWeed','Dahlgren','Eva','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-11-28 07:59:03'),
-//      ('luctus@et.ca','hendrerit consectetuer,','English','Katelyn','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-09-23 05:20:22'),
-//      ('Sed.malesuada.augue@sed.net','elit. Etiam','Bradley','Caesar','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-06-07 11:20:03'),
-//      ('rutrum.eu.ultrices@mifelis.org','libero. Donec','Mcknight','Fuller','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-04-27 07:08:01'),
-//     ('consequat@atlibero.org','Sed','Jacobs','Isabelle','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2019-12-10 15:27:04')");
-//     ('hendrerit.neque@nulla.org','Aliquam tincidunt, nunc','Jackson','Hanae','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-11-28 07:59:03'),
-//      ('luctus@et.ca','hendrerit consectetuer,','English','Katelyn','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-09-23 05:20:22'),
-//      ('Sed.malesuada.augue@sed.net','elit. Etiam','Bradley','Caesar','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-06-07 11:20:03'),
-//      ('rutrum.eu.ultrices@mifelis.org','libero. Donec','Mcknight','Fuller','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-04-27 07:08:01'),
-//     ('consequat@atlibero.org','Sed','Jacobs','Isabelle','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2019-12-10 15:27:04')");
-//     ('hendrerit.neque@nulla.org','Aliquam tincidunt, nunc','Jackson','Hanae','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-11-28 07:59:03'),
-//      ('luctus@et.ca','hendrerit consectetuer,','English','Katelyn','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-09-23 05:20:22'),
-//      ('Sed.malesuada.augue@sed.net','elit. Etiam','Bradley','Caesar','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-06-07 11:20:03'),
-//      ('rutrum.eu.ultrices@mifelis.org','libero. Donec','Mcknight','Fuller','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-04-27 07:08:01'),
-//     ('consequat@atlibero.org','Sed','Jacobs','Isabelle','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2019-12-10 15:27:04')");
-
 
 //     $conn->query('INSERT INTO `profiles` (age,gender,preference,bio,latitude,longitude,views,likes,profile_pic,reports) VALUES 
 //     (72,"Male","Straight","William Jefferson Clinton, better known as Bill Clinton (born August 19, 1946) was the 42nd president of the United States, serving from 1993 to 2001.","-25.74793","24.2293",75,34,"https://thenewswheel.com/wp-content/uploads/2015/07/Bill-Clinton-300x400.jpg",3),
