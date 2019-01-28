@@ -52,16 +52,16 @@ try{ //need to change this so i have unique users
 //      ('Wilde_Oscar@mifelis.org','theWildeOne','Wilde','Oscar','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-04-27 07:08:01'),
 //     ('Turing_Alan@atlibero.org','Code_Breaker','Turing','Alan','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2019-12-10 15:27:04')");
 //     ('Andraka_Jack@nulla.org','Eff_Cancer','Andraka','Jack','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-11-28 07:59:03'),
-//      ('luctus@et.ca','hendrerit consectetuer,','English','Katelyn','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-09-23 05:20:22'),
-//      ('Sed.malesuada.augue@sed.net','elit. Etiam','Bradley','Caesar','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-06-07 11:20:03'),
-//      ('rutrum.eu.ultrices@mifelis.org','libero. Donec','Mcknight','Fuller','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-04-27 07:08:01'),
-//     ('consequat@atlibero.org','Sed','Jacobs','Isabelle','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2019-12-10 15:27:04')");
-//     ('hendrerit.neque@nulla.org','Aliquam tincidunt, nunc','Jackson','Hanae','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-11-28 07:59:03'),
-//      ('luctus@et.ca','hendrerit consectetuer,','English','Katelyn','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-09-23 05:20:22'),
-//      ('Sed.malesuada.augue@sed.net','elit. Etiam','Bradley','Caesar','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-06-07 11:20:03'),
-//      ('rutrum.eu.ultrices@mifelis.org','libero. Donec','Mcknight','Fuller','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-04-27 07:08:01'),
-//     ('consequat@atlibero.org','Sed','Jacobs','Isabelle','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2019-12-10 15:27:04')");
-//     ('hendrerit.neque@nulla.org','Aliquam tincidunt, nunc','Jackson','Hanae','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-11-28 07:59:03'),
+//      ('Minnette_Dylan@et.ca','13 Reasons why to date me','Minnette','Dylan','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-09-23 05:20:22'),
+//      ('LangFord@sed.net','Hannah Baker','Langford','Katherine','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-06-07 11:20:03'),
+//      ('Boe_Elisha@mifelis.org','WuzVikings','Boe','Alisha','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-04-27 07:08:01'),
+//     ('Altice_Summer@atlibero.org','Summer_time','Altice','Summer','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2019-12-10 15:27:04')");
+//     ('BillieJoe@nulla.org','Green_Day_Boi','Armstrong','Billie Joe','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-11-28 07:59:03'),
+//      ('Banks_Azealia@et.ca','MissBank$','Banks','Azealia','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-09-23 05:20:22'),
+//      ('BowerSox@sed.net','American_Idol','Bowersox','Crystal','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-06-07 11:20:03'),
+//      ('KenanRona@mifelis.org','Kenan_Rona','Kenan,'Rona','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-04-27 07:08:01'),
+//     ('KiyokoHayley@atlibero.org','Kiyokiyo','Hayley','Kiyoko','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2019-12-10 15:27:04')");
+//     ('DahlGreenEva@nulla.org','SwedeWeed','Dahlgren','Eva','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-11-28 07:59:03'),
 //      ('luctus@et.ca','hendrerit consectetuer,','English','Katelyn','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-09-23 05:20:22'),
 //      ('Sed.malesuada.augue@sed.net','elit. Etiam','Bradley','Caesar','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2017-06-07 11:20:03'),
 //      ('rutrum.eu.ultrices@mifelis.org','libero. Donec','Mcknight','Fuller','a1c9b2eacea32f688eb2702f399ff0794a48c1725f85d390fec5b76eff713026e1c5aafeaf30992c08791e04f6c692009c5efc1111a83da9835300f891f5907d','2018-04-27 07:08:01'),
@@ -120,6 +120,16 @@ try{ //need to change this so i have unique users
 //     (46,"Male","Gay", "Oscar Wilde was an Irish poet and playwright. After writing in different forms throughout the 1880s, he became one of London's most popular playwrights in the early 1890s.", "-26.087485", "27.566473", "https://www.liberliber.it/online/wp-content/uploads/2018/01/wilde_ritratto.jpg",10),
 //     (41,"Male","Gay", "Alan Turing  was an English mathematician, computer scientist, logician, cryptanalyst, philosopher and theoretical biologist.", "-26.978849", "27.093774", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Alan_Turing_Aged_16.jpg/352px-Alan_Turing_Aged_16.jpg",10),
 //     (22,"Male","Gay", "Jack Andraka is an American inventor, scientist, and cancer researcher. He is known for his award-winning work on a potential method for possibly detecting the early stages of pancreatic and other cancers, which he performed while he was a high school student.", "-26.08588", "27.717395", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Jack_Andraka_2013.jpg/280px-Jack_Andraka_2013.jpg",4),
+//     (22,"Male","Straight", "Dylan Minnette is an American actor and musician. He is known for his role as Clay Jensen in the Netflix drama series 13 Reasons Why.", "--26.98484", "27.099910", "https://en.wikipedia.org/wiki/File:Dylan_Minnette_in_2018.jpg",4),
+//     (22,"Female","Straight", "Katherine Langford  is an Australian actress. She is known for starring as Hannah Baker in the 2017 Netflix series 13 Reasons Why, based on the novel of the same name, for which she received a Golden Globe Award nomination.", "-27.07564", "27.5656747", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Katherine_Langford_in_2018.jpg/363px-Katherine_Langford_in_2018.jpg",9),
+//     (21,"Female","Straight", "Alisha Boe known professionally as Alisha Boe, is a Norwegian actress.", "-26.957738", "27.056483", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Alisha_Boe_in_2018_crop.jpg/387px-Alisha_Boe_in_2018_crop.jpg", 1),
+//     (39,"Female","Bisexual", "Summer Altice is an American fashion model and actress.", "-27.04785", "27.875893", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Summer_Altice_2011.jpg/320px-Summer_Altice_2011.jpg",2),
+//     (46,"Male","Bisexual", "Bily Joe Armstrong  is an American singer, songwriter, musician, record producer, playwright, and actor.", "-27.05893", "28.68409", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/RiP2013_GreenDay_Billie_Joe_Armstrong_0021.jpg/320px-RiP2013_GreenDay_Billie_Joe_Armstrong_0021.jpg",3),
+//     (27,"Female","Bisexual", "Azealia Banks  is an American rapper, singer, songwriter, and actress.", "-26.857483", "26.5847758", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Azealia_Banks_2012_NME_Awards_cropped.jpg/465px-Azealia_Banks_2012_NME_Awards_cropped.jpg",1),
+//     (33,"Female","Bisexual", "Krystal Bowersox  is an American singer, songwriter and actress who was the runner-up on the ninth season of American Idol.", "-27.564738", "28.09198943", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Crystal_Bowersox.jpg/362px-Crystal_Bowersox.jpg",2),
+//     (39,"Female","Gay", "Rona Kenan is an Israeli singer/songwriter.", "-27.384885", "28.4785775", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Rona_Kenan2.jpg/481px-Rona_Kenan2.jpg",2),
+//     (27,"Female","Gay", "Hayley Kiyoko  is an American singer, songwriter and actress.", "-27.54738", "28.575849", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Hayley_Kiyoko_performing_in_Austin%2C_Texas_%282018-05-07%29_%2827249107687%29.jpg/404px-Hayley_Kiyoko_performing_in_Austin%2C_Texas_%282018-05-07%29_%2827249107687%29.jpg",2),
+//     (23,"Female","Gay", "Eva Dahlgren is a Swedish pop musician", "-26.985843", "28.675858", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Eva_Dahlgren_2016-03-10_004.jpg/320px-Eva_Dahlgren_2016-03-10_004.jpg",3),
 //     (age,"Gender","Preference", "bio", "latitude", "longitude", "picture",reports),
 //     (age,"Gender","Preference", "bio", "latitude", "longitude", "picture",reports),
 //     (age,"Gender","Preference", "bio", "latitude", "longitude", "picture",reports),
@@ -132,17 +142,21 @@ try{ //need to change this so i have unique users
 //     ("coder"),
 //     ("cook"),
 //     ("nerd")');
-
-    $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
-    $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
-    $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
-    $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
-    $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
-    $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
-    $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
-    $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
-    $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
-    $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
+    $i = 0;
+    while ($i != 51)
+    {
+        $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
+        $i++;
+    }
+    // $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
+    // $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
+    // $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
+    // $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
+    // $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
+    // $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
+    // $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
+    // $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
+    // $conn->query('INSERT INTO `searches`(age_gap, distance, fame_rating, com_gap) VALUE(10,25,10,2)');
 
     }
     catch(PDOException $e){
