@@ -15,12 +15,11 @@
             $gender = $_POST['Gender'];
             $pref = $_POST['Pref'];
             $bio = $_POST['bio'];
-            $tags = serialize(get_tags($bio));
             $age = 2018 - (int)$_POST['year'];
             $query = "UPDATE Matcha.Profiles SET Gender=?, Preference=?, Age=?, Bio=?, Tags=? WHERE id=?";
             $sql = $conn->prepare($query);
             $sql->execute([$gender, $pref, $age,$bio, $tags, $_SESSION['uid']]);
-            alert("Successfully updated profile", "profile.php");
+            alert("Successfully updated profile", "profile.php?id=".$_SESSION['uid']);
         }
     }
     else    
