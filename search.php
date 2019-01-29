@@ -23,7 +23,7 @@ else
 <form class="form" method="post" action="search.php">
 <div class="slidecontainer">
 <input name="age" type="range" min="0" max="100" value="0" class="slider" id="id1"> <br>
-<input name="distance" type="range" min= "0" max="100" value="0" class="slider" id="id2">  <br>
+<input name="distance" type="range" min= "0" max="300" value="0" class="slider" id="id2">  <br>
 <input name="fame_rating" type="range" min="0" max="100" value="0" class="slider" id="id3"><br>
 <input name="com_gap" type= "range" min="0" max="5" value="0" class="slider" id="id4"><br>
 <span>Age gap: </span> <span id="f" style="font-weight:bold;color:red"></span> <br>

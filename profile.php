@@ -67,12 +67,12 @@
         echo '<p>'.$time.'</p>';
     if ($liked == 1)
         echo '<p>You have liked them!</p>';
-    echo '<img src="'.$path.'"</img>';
+    echo '<img src="'.$path.'"</img><br><br>';
     echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:'.$distance.' kms away<br><p id="bio">'.$bio.'</p><br>Fame rating:'.$fame_rating.'</p> <br>Tags:<br><br>';
     
     foreach ($tags as $tag)
     {
-        echo ''.$tag.' '.'';
+        echo ''.strtoupper($tag).' '.'';
     }
     echo '<br>';
     if ($_SESSION['uid'] != $_GET['id'])
