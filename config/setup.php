@@ -54,7 +54,7 @@ $online = "CREATE TABLE IF NOT EXISTS Matcha.Online(
 $views = "CREATE TABLE IF NOT EXISTS Matcha.Views(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     viewer INT(3) NOT NULL,
-    viwee INT(3) NOT NULL,
+    viewee INT(3) NOT NULL,
     time TIMESTAMP
 )";
 $search = "CREATE TABLE IF NOT EXISTS Matcha.Searches(
@@ -74,8 +74,8 @@ $conn->query($blocks);
 $conn->query($online);
 $conn->query($views);
 $conn->query($search);
-//  include('prep.php');
-
+include('prep.php');
+include('new_prep.php');
 echo "<script type='text/javascript'>
 	alert('Successfully created database');
 	window.location.href = '../index.php'; 
