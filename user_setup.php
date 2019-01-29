@@ -1,7 +1,6 @@
 <?php
     require_once('header.php');
 
-    $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference,tags,latitude,longitude, bio) VALUES(?,?,?,?,?,?,?,?)";   
     if (isset($_SESSION) && !empty($_SESSION['uid']))
     {
         if (isset($_POST['submit']))
@@ -12,6 +11,7 @@
                 $matches = get_tags($_POST['array']);
             else
                 $matches = "No tags";
+            $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference,tags,latitude,longitude, bio) VALUES(?,?,?,?,?,?,?,?)";   
             $gender = $_POST['Gender'];
             $pref = $_POST['Pref'];
             $bio = $_POST['bio'];

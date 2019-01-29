@@ -68,7 +68,7 @@
     if ($liked == 1)
         echo '<p>You have liked them!</p>';
     echo '<img src="'.$path.'"</img><br><br>';
-    echo '<p>'.$first_name.' '.$last_name.' '.$age.' location:'.$distance.' kms away<br><p id="bio">'.$bio.'</p><br>Fame rating:'.$fame_rating.'</p> <br>Tags:<br><br>';
+    echo '<p>'.$first_name.' '.$last_name.'<br>'.$age.'<br>'.$distance.' kms away<br><p id="bio">'.$bio.'</p><br>Fame rating:'.$fame_rating.'</p> <br>Tags:<br><br>';
     
     foreach ($tags as $tag)
     {
@@ -78,11 +78,10 @@
     if ($_SESSION['uid'] != $_GET['id'])
     {
         echo '<a href="like.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Like</a>';
-        // if ($liked == 1)
-            // echo '<p>You have liked them!</p>';
         echo '<br><a href="report.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Report</a>
-        <a href="block.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Block</a>
-        <a href="unlike.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Unlike</a>';
+        <a href="block.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Block</a>';
+        if ($liked == 1)
+            echo '<a href="unlike.php?id1='.$_SESSION['uid'].'&id2='.$_GET['id'].'"class="w3-bar-item w3-button">Unlike</a>';
     }
   ?>
   </div>

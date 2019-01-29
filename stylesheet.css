@@ -8,6 +8,16 @@
     border-radius: 10px 10px 10px 10px;
     padding: 20px;
 }
+#profile {
+
+    width:700px;
+    background-color: gray;
+    margin : 10px auto;
+    align-content: center;
+    /* overflow: hidden; */
+    border-radius: 10px 10px 10px 10px;
+    padding: 20px;
+}
 #wrapper {
     width: 85%;
     border: 1px solid black;
@@ -24,6 +34,7 @@
 
 img {
     border-radius: 50%;
+
 }
 
 html{

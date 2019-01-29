@@ -7,7 +7,6 @@ if (isset($_GET['id1']) && isset($_GET['id2']))
     $liker = (int)$_GET['id1'];
     $likee = (int)$_GET['id2'];
     unlike($liker, $likee, $conn);
-    // alert("User unliked", "profile.php?id=".$likee);
 }
 
 ?>

@@ -81,8 +81,6 @@ function like($liker, $likee, $conn)
 }
 function unlike($liker, $likee, $conn)
 {
-    if (unique_likes($liker, $likee, $conn) == false)
-        {
             $query = "DELETE FROM Matcha.Likes WHERE liker=? AND likee=?";
             $sql = $conn->prepare($query);
             $sql->execute([$liker, $likee]);
@@ -94,10 +92,7 @@ function unlike($liker, $likee, $conn)
             $sql = $conn->prepare($query);
             $sql->execute([$updated_fr, $likee]);
             alert("User unliked", "profile.php?id=".$likee);
-        }
-    else
-        alert("You haven't liked them yet", "profile.php?id=".$likee);
-}
+ }
 
 function fame_rating($user, $conn)
 {
@@ -201,11 +196,19 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
                 array_push($new_users, $person);
             }
     }
+    if ($option == 'fame_rating')
+        usort($new_users, 'sortFR');
     if ($location == 1)
         usort($new_users, 'sortCmp');
     if ($compat == 1)
         usort($new_users, 'sortCmp1');
     return ($new_users);
+}
+function sortFR($a, $b)
+{
+    if ($a['fame_rating'] == $b['fame_rating'])
+        return 0;
+    return($a['fame_rating'] > $b['fame_rating'] ? -1 : 1);
 }
 function sortCmp($a, $b)
 {
@@ -255,7 +258,7 @@ function checkBlocks($conn, $viewer, $viewee)
 }
 function fameRating($likes, $views)
 {
-    return ($likes + ceil($views * 0.5));
+    return ($likes + ($views * 0.5));
 
 }
 

@@ -16,6 +16,8 @@ require_once('header.php');
             foreach($likes as $like)   
                 echo '<p>'.$like['username'].' liked you at '.$like['time'].'</p>';
         }
+        else
+            echo '<p> Nobody has liked you recently :( </p>'
 ?>
 </div>
     <div style="form">
@@ -28,6 +30,8 @@ require_once('header.php');
     foreach($views as $view)
         echo '<p>'.$view['username'].' viewed you at '.$view['time'].'</p>';
     }
+    else
+        echo '<p>Nobody has viewed you recently :( </p>'
 ?>
     </div>
 </div>

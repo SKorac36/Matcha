@@ -1,29 +1,35 @@
 <?php
     require_once('header.php');
 
-    if (isset($_POST['submit']))
+    if (empty($_SESSION))
     {
-        if (empty($_POST['email']) || empty($_POST['username']) || empty($_POST['first']) || empty($_POST['last']) || empty($_POST['passwd']) || empty($_POST['conpasswd']))
-            alert_info("One or more fields left empty");
-        else
+        if (isset($_POST['submit']))
         {
-            $str = password_check($_POST['passwd'], $_POST['conpasswd']);
-            if ($str != "OK")
-                alert_info($str);
+            if (empty($_POST['email']) || empty($_POST['username']) || empty($_POST['first']) || empty($_POST['last']) || empty($_POST['passwd']) || empty($_POST['conpasswd']))
+                alert_info("One or more fields left empty");
             else
             {
-                $hash = hash('whirlpool', $_POST['passwd']);
-                $query = "INSERT INTO Matcha.Users(email, username,passwd,last_name, first_name) VALUES(?,?,?,?,?)";
-                $sql = $conn->prepare($query);
-                $sql->execute([$_POST['email'], $_POST['username'], $hash, $_POST['last'], $_POST['first']]);
-                $query = "INSERT INTO Matcha.Searches";
-                $sql = $conn->prepare($query);
-                $sql->execute();
+                $str = password_check($_POST['passwd'], $_POST['conpasswd']);
+                if ($str != "OK")
+                    alert_info($str);
+                else
+                {
+                    $hash = hash('whirlpool', $_POST['passwd']);
+                    $query = "INSERT INTO Matcha.Users(email, username,passwd,last_name, first_name) VALUES(?,?,?,?,?)";
+                    $sql = $conn->prepare($query);
+                    $sql->execute([$_POST['email'], $_POST['username'], $hash, $_POST['last'], $_POST['first']]);
+                    $query = "INSERT INTO Matcha.Searches";
+                    $sql = $conn->prepare($query);
+                    $sql->execute();
                 
-                alert_info("Successfully created account, check your email. Also you need to redirect here");
-            }
-        }   
+                    alert_info("Successfully created account, check your email. Also you need to redirect here");
+                }
+            }      
+        }
     }
+    else
+        header("location: " . "index.php");
+
 ?>
 <html>
 <head>
