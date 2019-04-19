@@ -21,8 +21,7 @@
                     $query = "INSERT INTO Matcha.Searches";
                     $sql = $conn->prepare($query);
                     $sql->execute();
-                
-                    alert_info("Successfully created account, check your email. Also you need to redirect here");
+                    alert("Successfully created account, check your email. Also you need to redirect here");
                 }
             }      
         }
