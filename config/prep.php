@@ -115,7 +115,7 @@ try{ //need to change this so i have unique users
 
     $conn->query('INSERT INTO `tags` (tag) VALUES
      ("musician"),
-    ("gamer"),
+     ("gamer"),
      ("coder"),
      ("cook"),
      ("nerd")');
