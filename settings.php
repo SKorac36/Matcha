@@ -15,7 +15,7 @@
             $gender = $_POST['Gender'];
             $pref = $_POST['Pref'];
             $bio = $_POST['bio'];
-            $age = 2018 - (int)$_POST['year'];
+            $age = 2019 - (int)$_POST['year'];
             $query = "UPDATE Matcha.Profiles SET Gender=?, Preference=?, Age=?, Bio=?, Tags=? WHERE id=?";
             $sql = $conn->prepare($query);
             $sql->execute([$gender, $pref, $age,$bio, $tags, $_SESSION['uid']]);
