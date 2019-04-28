@@ -36,7 +36,7 @@
 </head>
 
         <form class= "form" method="post" action="user_setup.php" align="center">
-        <div class="reg_input">Year of birth<input type="date" name="year"></div>
+        <div class="reg_input">Date of birth<input type="date" name="year"></div>
         <select name="Gender">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -54,10 +54,13 @@
         <input type="submit" class="btn" name="submit" value="OK"/>
         <div hidden class="reg_input"><input id="array" type="text" name="array"></div>
         </form>
+        <p>Click the button to get your coordinates.</p>
+        
+        <button onclick="getLocation()">Try It</button><br><br><br><br>
         <div>
         <p>Click the button to get your coordinates.</p>
-
-<button onclick="getLocation()">Try It</button>
+        
+    <button onclick="getLocation()">Try It</button><br><br><br><br>
 
             <button onclick="addTags('musician')">Musician</button>
             <button onclick="addTags('gamer')">Gamer</button>
@@ -110,8 +113,6 @@ function showArray(array)
     array.toString();
     document.getElementById("array").value = array;
 }
-
-
 
 </script>
 <?php
