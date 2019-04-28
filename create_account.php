@@ -14,14 +14,16 @@
                     alert_info($str);
                 else
                 {
-                    $hash = hash('whirlpool', $_POST['passwd']);
+                    foreach($_POST as &$html)
+                        $html = htmlentities($html); 
+                    $hash = hash('whirlpool', $html['passwd']);
                     $query = "INSERT INTO Matcha.Users(email, username,passwd,last_name, first_name) VALUES(?,?,?,?,?)";
                     $sql = $conn->prepare($query);
-                    $sql->execute([$_POST['email'], $_POST['username'], $hash, $_POST['last'], $_POST['first']]);
-                    $query = "INSERT INTO Matcha.Searches";
-                    $sql = $conn->prepare($query);
-                    $sql->execute();
-                    alert("Successfully created account, check your email. Also you need to redirect here");
+                    $sql->execute(($html['email']), ($html['username']), $hash, ($html['last']), ($html['first']));
+                    // $query = "INSERT INTO Matcha.Searches";
+                    // $sql = $conn->prepare($query);
+                    // $sql->execute();
+                    alert("Successfully created account, please login", "login.php");
                 }
             }      
         }
