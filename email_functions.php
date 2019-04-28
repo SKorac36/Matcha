@@ -20,7 +20,7 @@
     {
         $to = $email;
 		$subject = "New Password";
-		$header = "From: accounts@camagru.co.za";
+		$header = "From: accounts@matchas.co.za";
 		$txt = "Your new password is: ". $new. "
 		
 				You can change your pass by going to the settings.
