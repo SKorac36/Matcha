@@ -20,7 +20,7 @@
             $gender = $_POST['Gender'];
             $pref = $_POST['Pref'];
             $bio = $_POST['bio'];
-            $year = 2018 - (int)$_POST['year'];
+            $year = 2019 - (int)$_POST['year'];
             $sql = $conn->prepare($query);
             $sql->execute([$_SESSION['uid'], $year, $gender, $pref, $bio]);
             alert_info("Profile succesfully updated");
