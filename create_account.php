@@ -14,12 +14,16 @@
                     alert_info($str);
                 else
                 {
-                    foreach($_POST as &$html)
-                        $html = htmlentities($html); 
-                    $hash = hash('whirlpool', $html['passwd']);
+                    // print_r($_POST);
+                    // var_dump($_POST);
+                    // foreach($_POST as &$html)
+                    //     $html = htmlentities($html); 
+                    // var_dump($html);
+                    $hash = hash('whirlpool', htmlentities($_POST['passwd']));
                     $query = "INSERT INTO Matcha.Users(email, username,passwd,last_name, first_name) VALUES(?,?,?,?,?)";
                     $sql = $conn->prepare($query);
-                    $sql->execute(($html['email']), ($html['username']), $hash, ($html['last']), ($html['first']));
+                    $sql->execute(array(htmlentities($_POST['email']), htmlentities($_POST['username']), $hash, htmlentities($_POST['last']), htmlentities($_POST['first'])));
+                    // print('<p></p>')
                     // $query = "INSERT INTO Matcha.Searches";
                     // $sql = $conn->prepare($query);
                     // $sql->execute();
