@@ -109,6 +109,7 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
 {
     $location = 0;
     $compat = 0;
+    $age = (int)$age;
     if ($option == 'Location')
     {   
         $location = 1;
@@ -181,14 +182,17 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
     
         }
     }
+//    var_dump($users);
     $new_users = [];
     foreach($users as $person)
     {
         $distance = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
         $compatibility = compareTags($tags, unserialize($person['tags']));
         $fame_rating = $person['fame_rating'];
-        $p_age = $person['age'];
-        if (($distance <= $dis_gap && $compatibility >= $com_gap) && ($fame_rating <= $fr + $fr_gap && $fame_rating >= $fr - $fr_gap) && ($p_age <= ($age + $age_gap)) && ($p_age >= ($age - $age_gap)))
+        $p_age = (int)($person['age']);
+//        var_dump($p_age);
+        var_dump($age_gap);
+        if (/*($distance <= $dis_gap && $compatibility >= $com_gap) && /*($fame_rating <= $fr + $fr_gap && $fame_rating >= $fr - $fr_gap)*/ ($p_age <= ($age + $age_gap)) && ($p_age >= ($age - $age_gap)))
             {
                 $person['distance'] = $distance;
                 $person['compatibility'] = $compatibility;
@@ -202,6 +206,7 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
         usort($new_users, 'sortCmp');
     if ($compat == 1)
         usort($new_users, 'sortCmp1');
+//    var_dump($new_users);
     return ($new_users);
 }
 function sortFR($a, $b)
@@ -277,6 +282,7 @@ function picCheck($user, $conn)
 
 function compareTags($user1, $user2)
 {
+//    var_dump($user2);
     return count(array_intersect($user1, $user2));
 
 }
