@@ -5,13 +5,19 @@
     {
         if (isset($_POST['submit']))
         {
-            if ($_POST['bio'] == 'Enter a bio! Use hashtags freely!')
+
+            foreach ($_POST as $value){
+                if ($value == ""){
+                    alert("One or more values left out, please try again.", 'User_setup.php');
+                }
+            }
+            if (!$_POST['bio'] || $_POST['bio'] == "Enter a bio!")
                 alert("Come on enter a bio!", 'User_setup.php');
-            if (isset($_POST['array']))
+            if (($_POST['array']) != "")
                 $matches = get_tags($_POST['array']);
             else
-                $matches = "No tags";
-            $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference,tags,latitude,longitude, bio) VALUES(?,?,?,?,?,?,?,?)";   
+                alert("You need at least one tag!", 'User_setup.php');
+            $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference,tags,latitude,longitude, bio) VALUES(?,?,?,?,?,?,?,?)";
             $gender = $_POST['Gender'];
             $pref = $_POST['Pref'];
             $bio = $_POST['bio'];
@@ -20,7 +26,7 @@
             $age = $time['year'] - $_POST['year'];
             $sql = $conn->prepare($query);
             $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,round((float)$_POST['latitude'],6),round((float)$_POST['longitude'],6), $bio]);
-            alert("Profile succesfully created, if you would like to change anything go to the settings bro", "index.php");
+            alert("Profile successfully created, if you would like to change anything go to the settings bro", "index.php");
        
         }
     }
@@ -34,7 +40,18 @@
     <!-- <link rel= "stylesheet" href="style.css"> -->
     <link rel= "stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
+<div align="center">
+    <p>Click the button to get your coordinates.</p>
 
+    <button onclick="getLocation()">Try It</button><br><br><br><br>
+</div>
+<div align="center">
+    <p>Select one or more tags</p>
+    <button onclick="addTags('musician')">Musician</button>
+    <button onclick="addTags('gamer')">Gamer</button>
+    <button onclick="addTags('coder')">Coder</button>
+    <button onclick="addTags('cook')">Cook</button>
+    <button onclick="addTags('nerd')">Nerd</button>
         <form class= "form" method="post" action="user_setup.php" align="center">
         <div class="reg_input">Date of birth<input type="date" name="year"></div>
         <select name="Gender">
@@ -54,19 +71,17 @@
         <input type="submit" class="btn" name="submit" value="OK"/>
         <div hidden class="reg_input"><input id="array" type="text" name="array"></div>
         </form>
-        <p>Click the button to get your coordinates.</p>
-        
-        <button onclick="getLocation()">Try It</button><br><br><br><br>
-        <div>
-        <p>Click the button to get your coordinates.</p>
-        
-    <button onclick="getLocation()">Try It</button><br><br><br><br>
-
-            <button onclick="addTags('musician')">Musician</button>
-            <button onclick="addTags('gamer')">Gamer</button>
-            <button onclick="addTags('coder')">Coder</button>
-            <button onclick="addTags('cook')">Cook</button>
-            <button onclick="addTags('nerd')">Nerd</button>
+<!--    <div align="center">-->
+<!--        <p>Click the button to get your coordinates.</p>-->
+<!--        -->
+<!--        <button onclick="getLocation()">Try It</button><br><br><br><br>-->
+<!--    </div>-->
+<!--    <div align="center">-->
+<!--            <button onclick="addTags('musician')">Musician</button>-->
+<!--            <button onclick="addTags('gamer')">Gamer</button>-->
+<!--            <button onclick="addTags('coder')">Coder</button>-->
+<!--            <button onclick="addTags('cook')">Cook</button>-->
+<!--            <button onclick="addTags('nerd')">Nerd</button>-->
     <form class="form" id="upload" method="POST" action="upload_image.php" enctype="multipart/form-data">
          Upload your profile picture
         <input type="file" name="file" id="file"> <br>

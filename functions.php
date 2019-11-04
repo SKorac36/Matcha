@@ -190,9 +190,9 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
         $compatibility = compareTags($tags, unserialize($person['tags']));
         $fame_rating = $person['fame_rating'];
         $p_age = (int)($person['age']);
-//        var_dump($p_age);
-        var_dump($age_gap);
-        if (/*($distance <= $dis_gap && $compatibility >= $com_gap) && /*($fame_rating <= $fr + $fr_gap && $fame_rating >= $fr - $fr_gap)*/ ($p_age <= ($age + $age_gap)) && ($p_age >= ($age - $age_gap)))
+////        var_dump($p_age);
+//        var_dump($age_gap);
+        if (($distance <= $dis_gap && $compatibility >= $com_gap) && ($fame_rating <= $fr + $fr_gap && $fame_rating >= $fr - $fr_gap) && ($p_age <= ($age + $age_gap)) && ($p_age >= ($age - $age_gap)))
             {
                 $person['distance'] = $distance;
                 $person['compatibility'] = $compatibility;
