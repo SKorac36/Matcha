@@ -14,19 +14,13 @@
                     alert_info($str);
                 else
                 {
-                    // print_r($_POST);
-                    // var_dump($_POST);
-                    // foreach($_POST as &$html)
-                    //     $html = htmlentities($html); 
-                    // var_dump($html);
                     $hash = hash('whirlpool', htmlentities($_POST['passwd']));
                     $query = "INSERT INTO Matcha.Users(email, username,passwd,last_name, first_name) VALUES(?,?,?,?,?)";
                     $sql = $conn->prepare($query);
                     $sql->execute(array(htmlentities($_POST['email']), htmlentities($_POST['username']), $hash, htmlentities($_POST['last']), htmlentities($_POST['first'])));
-                    // print('<p></p>')
-                    // $query = "INSERT INTO Matcha.Searches";
-                    // $sql = $conn->prepare($query);
-                    // $sql->execute();
+                    $query = 'INSERT INTO Matcha.searches(age_gap, distance, fame_rating, com_gap) VALUES(?,?,?,?)';
+                    $sql = $conn->prepare($query);
+                    $sql->execute(array(10, 25, 10, 2));
                     alert("Successfully created account, please login", "login.php");
                 }
             }      

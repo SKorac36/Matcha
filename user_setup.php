@@ -26,7 +26,7 @@
             $age = $time['year'] - $_POST['year'];
             $sql = $conn->prepare($query);
             $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,round((float)$_POST['latitude'],6),round((float)$_POST['longitude'],6), $bio]);
-            alert("Profile successfully created, if you would like to change anything go to the settings bro", "index.php");
+            alert("Profile successfully created, time to upload some photos", "upload_images.php");
        
         }
     }
@@ -71,17 +71,7 @@
         <input type="submit" class="btn" name="submit" value="OK"/>
         <div hidden class="reg_input"><input id="array" type="text" name="array"></div>
         </form>
-<!--    <div align="center">-->
-<!--        <p>Click the button to get your coordinates.</p>-->
-<!--        -->
-<!--        <button onclick="getLocation()">Try It</button><br><br><br><br>-->
-<!--    </div>-->
-<!--    <div align="center">-->
-<!--            <button onclick="addTags('musician')">Musician</button>-->
-<!--            <button onclick="addTags('gamer')">Gamer</button>-->
-<!--            <button onclick="addTags('coder')">Coder</button>-->
-<!--            <button onclick="addTags('cook')">Cook</button>-->
-<!--            <button onclick="addTags('nerd')">Nerd</button>-->
+
     <form class="form" id="upload" method="POST" action="upload_image.php" enctype="multipart/form-data">
          Upload your profile picture
         <input type="file" name="file" id="file"> <br>
