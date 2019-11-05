@@ -1,55 +1,121 @@
 <?php
-    require_once('header.php');
-    if (isset($_SESSION) && !empty($_SESSION['uid']))
-    {      
-        $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
-        $sql = $conn->prepare($query);
-        $sql->execute([$_SESSION['uid']]);
-        $profile = $sql->fetch();
-        if (!$sql)
-        echo "<script type='text/javascript'>
-            window.location.href = 'user_setup.php'; 
-        </script>";
-        if (isset($_POST['submit']))
-        {
-            $gender = $_POST['Gender'];
-            $pref = $_POST['Pref'];
-            $bio = $_POST['bio'];
-            $age = 2019 - (int)$_POST['year'];
-            $query = "UPDATE Matcha.Profiles SET Gender=?, Preference=?, Age=?, Bio=?, Tags=? WHERE id=?";
-            $sql = $conn->prepare($query);
-            $sql->execute([$gender, $pref, $age,$bio, $tags, $_SESSION['uid']]);
-            alert("Successfully updated profile", "profile.php?id=".$_SESSION['uid']);
+require_once('header.php');
+
+if (isset($_SESSION) && !empty($_SESSION['uid']))
+{
+    if (isset($_POST['submit']))
+    {
+
+        foreach ($_POST as $value){
+            if ($value == ""){
+                alert("One or more values left out, please try again.", 'User_setup.php');
+            }
         }
+        if (!$_POST['bio'] || $_POST['bio'] == "Enter a bio!")
+            alert("Come on enter a bio!", 'User_setup.php');
+        if (($_POST['array']) != "")
+            $matches = get_tags($_POST['array']);
+        else
+            alert("You need at least one tag!", 'User_setup.php');
+        $query = "UPDATE Matcha.Profiles SET age=?, gender=?, preference=?, tags=?, latitude=?, longitude=?, bio=? WHERE id=?";
+        $gender = $_POST['Gender'];
+        $pref = $_POST['Pref'];
+//        var_dump($pref);
+        $bio = $_POST['bio'];
+        $tags = serialize($matches);
+        $time = getdate();
+        $age = $time['year'] - $_POST['year'];
+        $sql = $conn->prepare($query);
+        $sql->execute([$age, $gender, $pref, $tags,round((float)$_POST['latitude'],6),round((float)$_POST['longitude'],6), $bio, $_SESSION['uid']]);
+        alert("Profile successfully updated ", "index.php");
+
     }
-    else    
-        header("location: " . "create_account.php");
+}
+else
+    echo "You are not logged in";
 ?>
 <html>
-
 <head>
-    <title>Settings</title>
+    <title>User Setup</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel= "stylesheet" href="style.css"> -->
     <link rel= "stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<div id="main">
-        <form class= "form" method="post" action="settings.php" align="center">
-        <div class="reg_input">Year of birth<input type="date" name="year"></div><br>
+<div align="center">
+    <p>Click the button to get your coordinates.</p>
+
+    <button onclick="getLocation()">Try It</button><br><br><br><br>
+</div>
+<div align="center">
+    <p>Select one or more tags</p>
+    <button onclick="addTags('musician')">Musician</button>
+    <button onclick="addTags('gamer')">Gamer</button>
+    <button onclick="addTags('coder')">Coder</button>
+    <button onclick="addTags('cook')">Cook</button>
+    <button onclick="addTags('nerd')">Nerd</button>
+    <form class= "form" method="post" action="user_setup.php" align="center">
+        <div class="reg_input">Date of birth<input type="date" name="year"></div>
         <select name="Gender">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
-        </select><br>
+        </select>
         <select name="Pref">
             <option value="Straight">Straight</option>
             <option value="Gay">Gay</option>
             <option value="Bisexual">Bisexual</option>
-        </select><br>
-        <textarea name="bio">Enter your bio</textarea><br>
-        <input type="submit" class="btn" name="submit" value="OK"/>
-        </form>
-        </div>
+            <?php
+            echo '<textarea name="bio">Enter a bio!</textarea>'
+            ?>
+            <br>
+            <div class="reg_input">Latitude<input id="lat" type="text" name="latitude"></div>
+            <div class="reg_input">Longitude<input id="long" type="text" name="longitude"></div><br>
+            <input type="submit" class="btn" name="submit" value="OK"/>
+            <div hidden class="reg_input"><input id="array" type="text" name="array"></div>
+    </form>
+</div>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    function showPosition(position) {
+        document.getElementById("lat").value = (position.coords.latitude);
+        document.getElementById("long").value = (position.coords.longitude);
+    }
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
+    array = new Array();
+
+    function addTags(tag){
+        array.push(tag);
+        showArray(array);
+        return array;
+    }
+    function showArray(array)
+    {
+        array.toString();
+        document.getElementById("array").value = array;
+    }
+
+</script>
 <?php
-    include('footer.php');
+include('footer.php');
 ?>
 </html>
