@@ -9,7 +9,7 @@
         
         You have indicated that you would like to reset your password,
         if you would like to reset your password please follow this link:
-        http://localhost:8081/Matcha/reset.php?id=$id&reset=true
+        http://localhost:8080/Matcha/reset.php?id=$id&reset=true
         
         If you have not indicated that you want to reset your password, please ignore this message.
         ";

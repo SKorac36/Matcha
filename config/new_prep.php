@@ -12,9 +12,9 @@ try {
     $i = 1;
     while ($i < 51) {
         $sql = $conn->prepare('INSERT INTO Matcha.searches(age_gap, distance, fame_rating, com_gap) VALUES(?,?,?,?)');
-        $sql->execute([10, 25, 10, 2]);
-        $sql = $conn->prepare('INSERT INTO Matcha.online(userid) VALUES(?)');
-        $sql->execute([$i]);
+        $sql->execute([10, 25, rand(0, 50), 2]);
+        $sql = $conn->prepare('INSERT INTO Matcha.online(userid,last_online) VALUES(?, ?)');
+        $sql->execute([$i, date("jS F Y", strtotime("last Monday"))]);
         $i++;
     }
 }

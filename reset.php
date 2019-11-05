@@ -21,7 +21,7 @@
             $hash = hash('whirlpool', $new);
             $query = "UPDATE Matcha.users SET passwd=:new WHERE id=:uid";
             $stmt = $conn->prepare($query);
-            $stmt->execute(['new'=>$hash, 'uid'=>$uid]);
+            $stmt->execute(['new'=>$hash, 'uid'=>$id]);
             password_reset_email($email, $new);
             alert("You have successfully reset your password, check your email",'header.php');
         }
