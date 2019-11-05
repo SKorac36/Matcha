@@ -71,12 +71,6 @@
         <input type="submit" class="btn" name="submit" value="OK"/>
         <div hidden class="reg_input"><input id="array" type="text" name="array"></div>
         </form>
-
-    <form class="form" id="upload" method="POST" action="upload_image.php" enctype="multipart/form-data">
-         Upload your profile picture
-        <input type="file" name="file" id="file"> <br>
-        <input type="submit" value="Click to upload" name="submit">
-    </form>
 </div>
 <script>
 function getLocation() {

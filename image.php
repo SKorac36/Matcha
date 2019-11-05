@@ -14,7 +14,7 @@
         $sql = $conn->prepare($query);
         $sql->execute([$path, $_SESSION['uid']]);
         echo "<script type='text/javascript'>
-	    alert('Profile picture updates');
+	    alert('Profile picture updated');
 	    window.location.href = 'profile.php?id=".$_SESSION['uid']."'; 
 	    </script>";
 	    die();
