@@ -10,12 +10,10 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
         $distance = $_POST['distance'];
         $fame_rating = $_POST['fame_rating'];
         $com_gap = $_POST['com_gap'];
-        var_dump($userid);
         $query = "UPDATE Matcha.Searches SET age_gap=?, distance=?, fame_rating=?, com_gap=? WHERE id=?";
         $sql = $conn->prepare($query);
         $sql->execute([$age_gap, $distance, $fame_rating, $com_gap, $userid]);
-        var_dump($sql);
-//        alert('Redirecting you to your searches', 'browse_profiles.php');
+        alert('Redirecting you to your searches', 'browse_profiles.php');
     }
 }
 else

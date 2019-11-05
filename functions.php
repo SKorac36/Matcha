@@ -283,7 +283,6 @@ function picCheck($user, $conn)
 
 function compareTags($user1, $user2)
 {
-//    var_dump($user2);
     return count(array_intersect($user1, $user2));
 
 }
@@ -305,9 +304,14 @@ function goOnline($user, $conn)
 
 function goOffline($user, $conn)
 {
+
     $query = "UPDATE Matcha.Online SET online=0 WHERE userid=?";
     $sql = $conn->prepare($query);
     $sql->execute([$user]);
+    $query = "UPDATE Matcha.Online SET last_online=? WHERE userid=?";
+    $sql = $conn->prepare($query);
+    var_dump(date("jS F Y", strtotime("now")));
+    $sql->execute([date("jS F Y", strtotime("now")), $user]);
 
 }
 ?>
