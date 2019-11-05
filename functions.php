@@ -177,7 +177,7 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
         {   
             $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? OR Gender=? AND Preference=? OR Preference=? OR Preference=? ORDER BY $option";
             $sql = $conn->prepare($query);
-            $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
+            $sql->execute(['Male','Female','Straight','Gay','Bisexual']);
             $users = $sql->fetchAll();
     
         }
