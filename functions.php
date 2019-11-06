@@ -166,18 +166,18 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
     {
         if ($gender == 'Male')
         {   
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? OR Gender=? AND Preference=? OR Preference=? OR Preference=? ORDER BY $option";
+            $query = "SELECT * FROM Matcha.Profiles WHERE (Gender=? AND Preference=? OR Preference=?) OR (Gender=? AND Preference=? OR Preference=?) ORDER BY $option";
             $sql = $conn->prepare($query);
-            $sql->execute(['Male','Female','Straight', 'Gay','Bisexual']);
+            $sql->execute(['Male','Gay','Bisexual', 'Female','Bisexual', 'Straight']);
             $users = $sql->fetchAll();
     
         }
         
         else if ($gender == 'Female')
         {   
-            $query = "SELECT * FROM Matcha.Profiles WHERE Gender=? OR Gender=? AND Preference=? OR Preference=? OR Preference=? ORDER BY $option";
+            $query = "SELECT * FROM Matcha.Profiles WHERE (Gender=? AND Preference=? OR Preference=?) OR (Gender=? AND Preference=? OR Preference=?) ORDER BY $option";
             $sql = $conn->prepare($query);
-            $sql->execute(['Male','Female','Straight','Gay','Bisexual']);
+            $sql->execute(['Male','Straight','Bisexual','Female','Gay','Bisexual']);
             $users = $sql->fetchAll();
     
         }

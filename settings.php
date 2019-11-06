@@ -53,7 +53,7 @@ else
     <button onclick="addTags('coder')">Coder</button>
     <button onclick="addTags('cook')">Cook</button>
     <button onclick="addTags('nerd')">Nerd</button>
-    <form class= "form" method="post" action="user_setup.php" align="center">
+    <form class= "form" method="post" action="settings.php" align="center">
         <div class="reg_input">Date of birth<input type="date" name="year"></div>
         <select name="Gender">
             <option value="Male">Male</option>
