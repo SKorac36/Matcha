@@ -16,7 +16,7 @@ if (empty($_SESSION['uid']))
         $likes = $sql->fetchAll();
         if ($likes){
             foreach($likes as $like)   
-                echo '<p>'.$like['username'].' liked you at '.$like['time'].'</p>';
+                echo '<p>'.$like['username'].' liked you!</p>';
         }
         else
             echo '<p> Nobody has liked you recently :( </p>'
@@ -30,7 +30,7 @@ if (empty($_SESSION['uid']))
         $views = $sql->fetchAll();
     if ($views){
     foreach($views as $view)
-        echo '<p>'.$view['username'].' viewed you at '.$view['time'].'</p>';
+        echo '<p>'.$view['username'].' viewed you!</p>';
     }
     else
         echo '<p>Nobody has viewed you recently :( </p>'

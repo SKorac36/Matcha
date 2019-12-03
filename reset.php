@@ -23,7 +23,7 @@
             $stmt = $conn->prepare($query);
             $stmt->execute(['new'=>$hash, 'uid'=>$id]);
             password_reset_email($email, $new);
-            alert("You have successfully reset your password, check your email",'header.php');
+            alert("You have successfully reset your password, check your email",'index.php');
         }
     }
 ?>

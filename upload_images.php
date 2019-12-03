@@ -9,7 +9,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $sql->execute([$_SESSION['uid']]);
     $count = $sql->fetch();
     if ($count == 5)
-        alert("You can have a maximum of only 5 images", "upload_images.php");
+        alert("You can have a maximum of only 5 images", "index.php");
 }
 else
     header("location: " . "create_account.php");
