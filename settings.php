@@ -8,19 +8,18 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
 
         foreach ($_POST as $value){
             if ($value == ""){
-                alert("One or more values left out, please try again.", 'User_setup.php');
+                alert("One or more values left out, please try again.", 'settings.php');
             }
         }
         if (!$_POST['bio'] || $_POST['bio'] == "Enter a bio!")
-            alert("Come on enter a bio!", 'User_setup.php');
+            alert("Come on enter a bio!", 'settings.php');
         if (($_POST['array']) != "")
             $matches = get_tags($_POST['array']);
         else
-            alert("You need at least one tag!", 'User_setup.php');
+            alert("You need at least one tag!", 'settings.php');
         $query = "UPDATE Matcha.Profiles SET age=?, gender=?, preference=?, tags=?, latitude=?, longitude=?, bio=? WHERE id=?";
         $gender = $_POST['Gender'];
         $pref = $_POST['Pref'];
-//        var_dump($pref);
         $bio = $_POST['bio'];
         $tags = serialize($matches);
         $time = getdate();

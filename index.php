@@ -20,6 +20,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     if (isset($_POST['option']))
         $option = $_POST['option'];
     $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr,$option, 100, 50, 5, 50);
+    // var_dump($user)
 }
 else
     header("location: " . "create_account.php");

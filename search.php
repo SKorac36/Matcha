@@ -13,7 +13,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
         $query = "UPDATE Matcha.Searches SET age_gap=?, distance=?, fame_rating=?, com_gap=? WHERE id=?";
         $sql = $conn->prepare($query);
         $sql->execute([$age_gap, $distance, $fame_rating, $com_gap, $userid]);
-        alert('Redirecting you to your searches', 'browse_profiles.php');
+        // alert('Redirecting you to your searches', 'browse_profiles.php');
     }
 }
 else

@@ -32,6 +32,7 @@ function get_tags($input)
     $matches = preg_split("/[\s,]+/", $input);
     return ($matches);
 }
+
 function unique_likes($liker, $likee, $conn)
 {
     $query = "SELECT * FROM Matcha.Likes WHERE liker=? AND likee=?";
@@ -60,6 +61,7 @@ function view($viewer, $viewee, $conn)
 
     }
 }
+
 function like($liker, $likee, $conn)
 {
     if (unique_likes($liker, $likee, $conn) == true)
