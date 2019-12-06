@@ -2,7 +2,6 @@
 <?php
     include 'config/connect.php';
     include 'header.php';
-    session_start();
 if (isset($_SESSION) && !empty($_SESSION['uid']))
 {
     $img_dir = "imgs/";
