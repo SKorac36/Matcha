@@ -40,8 +40,8 @@ $tags = "CREATE TABLE IF NOT EXISTS Matcha.Tags (
 $likes = "CREATE TABLE IF NOT EXISTS Matcha.Likes(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     likee INT(6) NOT NULL,
-    liker INT(6) NOT NULL,
-    time TIMESTAMP)"; //use for notifications
+    liker INT(6) NOT NULL
+)"; //use for notifications
 $blocks = "CREATE TABLE IF NOT EXISTS Matcha.Blocks(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     blocker INT(6) NOT NULL,
@@ -54,8 +54,7 @@ $online = "CREATE TABLE IF NOT EXISTS Matcha.Online(
 $views = "CREATE TABLE IF NOT EXISTS Matcha.Views(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     viewer INT(3) NOT NULL,
-    viewee INT(3) NOT NULL,
-    time TIMESTAMP
+    viewee INT(3) NOT NULL
 )";
 $search = "CREATE TABLE IF NOT EXISTS Matcha.Searches(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
