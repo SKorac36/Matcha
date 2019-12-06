@@ -19,7 +19,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $option = 'id';
     if (isset($_POST['option']))
         $option = $_POST['option'];
-    $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr,$option, 100, 50, 2, 1);
+    $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr,$option, 10, 50, 2, 50);
     // var_dump($user)
 }
 else

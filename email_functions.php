@@ -23,7 +23,7 @@
 		$header = "From: accounts@matchas.co.za";
 		$txt = "Your new password is: ". $new. "
 		
-				You can change your pass by going to the settings.
+				You can change your password by going to the settings.
 				
 				Regards
 				Matcha";

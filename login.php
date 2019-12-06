@@ -48,8 +48,10 @@ if (isset($_POST['reset']))
             $user = $sql->fetch();
             if (!$user)
                 alert_info("Username not found");
-            else
+            else {
+                alert_info("Check your email");
                 reset_password_email($user['email'], $user['username'], $user['id']);
+            }
         }
 }
 
