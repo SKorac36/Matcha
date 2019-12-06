@@ -54,7 +54,7 @@
 
 
         <input type="submit" class="btn" name="submit" value="OK"/>
-        </form><script>
+        </select><script>
     var x = document.getElementById("demo");
     function getLocation() {
         if (navigator.geolocation) {

@@ -14,9 +14,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $latitude = $user['latitude'];
     $longitude = $user['longitude'];
     $fr = $user['fame_rating'];
-//    var_dump($user['tags']);
     $tags = unserialize($user['tags']);
-//    var_dump($user['tags']);
     $age = $user['age'];
     $query = "SELECT * FROM Matcha.Searches WHERE id=?";
     $sql = $conn->prepare($query);
@@ -30,7 +28,6 @@ $age_gap = $search['age_gap'];
 $dis_gap = $search['distance'];
 $com_gap = $search['com_gap'];
 $fr_gap = $search['fame_rating'];
-//var_dump($tags);
 $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr, $option, $age_gap ,$dis_gap, $com_gap, $fr_gap);
 }
 else

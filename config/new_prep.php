@@ -1,6 +1,5 @@
 <?php
 
-//include('header.php');
 try {
     $array = ['musician', 'gamer', 'coder', 'cook', 'nerd'];
     $insert = serialize($array);

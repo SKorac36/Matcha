@@ -184,7 +184,6 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
     
         }
     }
-//    var_dump($users);
     $new_users = [];
     foreach($users as $person)
     {
@@ -193,8 +192,6 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
         $fame_rating = $person['fame_rating'];
         $user_id = $person['id'];
         $p_age = (int)($person['age']);
-////        var_dump($p_age);
-//        var_dump($age_gap);
         if (($user_id != $_SESSION['uid']) && ($distance <= $dis_gap && $compatibility >= $com_gap) && ($fame_rating <= $fr + $fr_gap && $fame_rating >= $fr - $fr_gap) && ($p_age <= ($age + $age_gap)) && ($p_age >= ($age - $age_gap)))
             {
                 $person['distance'] = $distance;
@@ -209,7 +206,6 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
         usort($new_users, 'sortCmp');
     if ($compat == 1)
         usort($new_users, 'sortCmp1');
-//    var_dump($new_users);
     return ($new_users);
 }
 function sortFR($a, $b)
@@ -244,21 +240,13 @@ function getDistance($latitude1, $longitude1, $latitude2, $longitude2 )
 
     return $d;  
 }
-function getBlocks($conn, $id)
-{
-    $query = "SELECT blockee FROM Matcha.Blocks WHERE blocker=?";
-    $sql = $conn->prepare($query);
-    $sql->execute([$id]);
-    $list = $sql->fetchAll(PDO::FETCH_COLUMN, 0); 
-    return $list; 
-}
+
 function checkBlocks($conn, $viewer, $viewee)
 {
     $query = "SELECT * FROM Matcha.Blocks WHERE blocker=? AND blockee=?";
     $sql = $conn->prepare($query);
     $sql->execute([$viewer, $viewee]);
     $block = $sql->fetch();
-    // var_dump($block);
     if ($block)
         return true;
      else
