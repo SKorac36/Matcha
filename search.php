@@ -29,7 +29,7 @@ else
 <span>Age gap: </span> <span id="f" style="font-weight:bold;color:red"></span> <br>
 <span>Distance gap: </span> <span id="e" style="font-weight:bold;color: green"></span> <br>
 <span>Fame rating gap: </span> <span id="g" style="font-weight:bold;color: yellow"></span> <br>
-<span>Number of common tags: </span> <span id="h" style="font-weight:bold; color:orange"></span>
+<span>Minimum number of common tags: </span> <span id="h" style="font-weight:bold; color:orange"></span>
 <script>
 
 var slidePic = document.getElementById("id1");

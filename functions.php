@@ -188,7 +188,7 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
     foreach($users as $person)
     {
         $distance = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
-        $compatibility = compareTags($tags, unserialize($person['tags']));
+        $compatibility = compareTags($tags, unserialize($person['tags']), $com_gap);
         $fame_rating = $person['fame_rating'];
         $user_id = $person['id'];
         $p_age = (int)($person['age']);
@@ -271,9 +271,18 @@ function picCheck($user, $conn)
             return true;
 }
 
-function compareTags($user1, $user2)
+function compareTags($user1, $user2, $com_gap)
 {
-    return count(array_intersect($user1, $user2));
+//    if (sizeof($user2) < $com_gap)
+//        return -1;
+//    else {
+        $count = count(array_intersect($user1, $user2));
+//        if ($count >= $com_gap)
+//            return $count;
+//        else
+//            return -1;
+//    }
+    return $count;
 
 }
 

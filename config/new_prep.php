@@ -1,15 +1,24 @@
 <?php
 
+function rand_array($array, $number){
+    $new_array = array_fill(0, $number, NULL);
+    $i = 0;
+    while ($i < $number){
+        $new_array[$i] = $array[rand(0, 4)];
+        $new_array = array_unique($new_array);
+        $i++;
+    }
+    return serialize($new_array);
+
+}
 try {
     $array = ['musician', 'gamer', 'coder', 'cook', 'nerd'];
-    $insert = serialize($array);
-
-    $query = "UPDATE Matcha.Profiles SET tags=?";
-    $sql = $conn->prepare($query);
-    $sql->execute([$insert]);
 
     $i = 1;
     while ($i < 51) {
+        $ran = rand_array($array, rand(1,5));
+        $sql = $conn->prepare('UPDATE Matcha.Profiles SET tags=? WHERE (id=?)');
+        $sql->execute([$ran, $i]);
         $views = rand(0,50);
         $likes = round($views / 2);
         $fr = ($views / 2) + $likes;
