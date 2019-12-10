@@ -273,17 +273,15 @@ function picCheck($user, $conn)
 
 function compareTags($user1, $user2, $com_gap)
 {
-//    if (sizeof($user2) < $com_gap)
-//        return -1;
-//    else {
+    if (sizeof($user2) < $com_gap)
+        return 0;
+    else {
         $count = count(array_intersect($user1, $user2));
-//        if ($count >= $com_gap)
-//            return $count;
-//        else
-//            return -1;
-//    }
-    return $count;
-
+        if ($count >= $com_gap)
+            return $count;
+        else
+            return 0;
+    }
 }
 
 function goOnline($user, $conn)

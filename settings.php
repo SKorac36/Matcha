@@ -1,11 +1,23 @@
 <?php
 require_once('header.php');
 
+
 if (isset($_SESSION) && !empty($_SESSION['uid']))
 {
+    $info = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=41.71.114.146'));
+    $latitude = (float)$info['geoplugin_latitude'];
+    $longitude = (float)$info['geoplugin_longitude'];
     if (isset($_POST['submit']))
     {
-
+        if($_POST['latitude'] != "" || $_POST['longitude'] != ""){
+            $latitude = round((float)$_POST['latitude'], 6);
+            $longitude = round((float)$_POST['longitude'],6);
+        }
+        if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180)
+        {
+            $latitude = (float)$info['geoplugin_latitude'];
+            $longitude = (float)$info['geoplugin_longitude'];
+        }
         foreach ($_POST as $value){
             if ($value == ""){
                 alert("One or more values left out, please try again.", 'settings.php');
@@ -25,7 +37,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
         $time = getdate();
         $age = $time['year'] - $_POST['year'];
         $sql = $conn->prepare($query);
-        $sql->execute([$age, $gender, $pref, $tags,round((float)$_POST['latitude'],6),round((float)$_POST['longitude'],6), $bio, $_SESSION['uid']]);
+        $sql->execute([$age, $gender, $pref, $tags, $latitude ,$longitude, $bio, $_SESSION['uid']]);
         alert("Profile successfully updated ", "index.php");
 
     }
@@ -65,8 +77,8 @@ else
             echo '<textarea name="bio">Enter a bio!</textarea>'
             ?>
             <br>
-            <div class="reg_input">Latitude<input id="lat" type="text" name="latitude"></div>
-            <div class="reg_input">Longitude<input id="long" type="text" name="longitude"></div><br>
+            <div class="reg_input">Latitude<input id="lat" type="number" name="latitude"></div>
+            <div class="reg_input">Longitude<input id="long" type="number" name="longitude"></div><br>
             <input type="submit" class="btn" name="submit" value="OK"/>
             <div hidden class="reg_input"><input id="array" type="text" name="array"></div>
     </form>

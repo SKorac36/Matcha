@@ -28,6 +28,7 @@ $age_gap = $search['age_gap'];
 $dis_gap = $search['distance'];
 $com_gap = $search['com_gap'];
 $fr_gap = $search['fame_rating'];
+
 $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr, $option, $age_gap ,$dis_gap, $com_gap, $fr_gap);
 }
 else
@@ -39,7 +40,6 @@ else
   <input type="submit" class="btn" name="option" value="Location" /> 
   <input type="submit" class="btn" name="option" value="Fame Rating"/> 
   <input type="submit" class="btn" name="option" value="Tags"/>
-  
 </form>
   <table>
                 <?php
