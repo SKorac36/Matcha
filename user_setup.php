@@ -5,7 +5,6 @@
     {
         if (isset($_POST['submit']))
         {
-
             foreach ($_POST as $value){
                 if ($value == ""){
                     alert("One or more values left out, please try again.", 'User_setup.php');
