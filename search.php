@@ -3,6 +3,11 @@ require_once('header.php');
 
 if (isset($_SESSION) && !empty($_SESSION['uid']))
 {
+    $query = "SELECT tags FROM Matcha.Profiles WHERE id=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$_SESSION['uid']]);
+    $tags = $sql->fetch();
+    $max = count($tags) + 1;
     if (isset($_POST['submit']))
     {
         $userid = $_SESSION['uid'];
@@ -13,7 +18,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
         $query = "UPDATE Matcha.Searches SET age_gap=?, distance=?, fame_rating=?, com_gap=? WHERE id=?";
         $sql = $conn->prepare($query);
         $sql->execute([$age_gap, $distance, $fame_rating, $com_gap, $userid]);
-         alert('Redirecting you to your searches', 'browse_profiles.php');
+        alert('Redirecting you to your searches', 'browse_profiles.php');
     }
 }
 else
@@ -25,7 +30,9 @@ else
 <input name="age" type="range" min="0" max="100" value="0" class="slider" id="id1"> <br>
 <input name="distance" type="range" min= "0" max="300" value="0" class="slider" id="id2">  <br>
 <input name="fame_rating" type="range" min="0" max="100" value="0" class="slider" id="id3"><br>
-<input name="com_gap" type= "range" min="0" max="5" value="0" class="slider" id="id4"><br>
+
+<?php
+echo '<input name="com_gap" type= "range" min="0" max="'.$max.'" value="0" class="slider" id="id4"><br>'?>
 <span>Age gap: </span> <span id="f" style="font-weight:bold;color:red"></span> <br>
 <span>Distance gap: </span> <span id="e" style="font-weight:bold;color: green"></span> <br>
 <span>Fame rating gap: </span> <span id="g" style="font-weight:bold;color: yellow"></span> <br>
