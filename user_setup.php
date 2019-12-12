@@ -9,7 +9,7 @@
         if (isset($_POST['submit']))
         {
             if (!validateText($_POST['latitude']) || !validateText($_POST['longitude']))
-                alert("Incorrect input for coordinates", "user_setup");
+                alert("Incorrect input for coordinates", "user_setup.php");
             if($_POST['latitude'] != "" || $_POST['longitude'] != ""){
                 $latitude = round((float)$_POST['latitude'], 6);
                 $longitude = round((float)$_POST['longitude'],6);

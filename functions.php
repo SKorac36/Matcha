@@ -313,11 +313,10 @@ function goOffline($user, $conn)
 
 function validateText($string)
 {
-    if (preg_match( '^[1-9]\d*(,\d+)?$', $string))
+    if (preg_match( '/^-?[1-9]\d*(\.\d+)?$/', $string))
         return true;
     else
         return false;
-
 }
 
 ?>
