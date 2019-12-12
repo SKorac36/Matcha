@@ -64,7 +64,7 @@
     if ($online == 1)
         echo '<p>Now!</p><br>';
     else
-        echo '<p>'.$time.'</p>';
+        echo '<p>'.date('l jS \of F Y h:i:s A',$time).'</p>';
     if ($liked == 1)
         echo '<p>You have liked them!</p>';
     echo '<img src="'.$path.'"</img><br><br>';

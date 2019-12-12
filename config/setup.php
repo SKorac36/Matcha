@@ -50,7 +50,7 @@ $online = "CREATE TABLE IF NOT EXISTS Matcha.Online(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     userid INT(6) NOT NULL,
     online INT(2) NOT NULL DEFAULT 0,
-    last_online VARCHAR (255))";
+    last_online INT(255))";
 $views = "CREATE TABLE IF NOT EXISTS Matcha.Views(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     viewer INT(3) NOT NULL,

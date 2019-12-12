@@ -3,11 +3,27 @@
 
     if (isset($_SESSION) && !empty($_SESSION['uid']))
     {
+        $info = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=41.71.114.146'));
+        $latitude = (float)$info['geoplugin_latitude'];
+        $longitude = (float)$info['geoplugin_longitude'];
         if (isset($_POST['submit']))
         {
+            if (!validateText($_POST['latitude']) || !validateText($_POST['longitude']))
+                alert("Incorrect input for coordinates", "user_setup");
+            if($_POST['latitude'] != "" || $_POST['longitude'] != ""){
+                $latitude = round((float)$_POST['latitude'], 6);
+                $longitude = round((float)$_POST['longitude'],6);
+            }
+            if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180)
+            {
+                $latitude = (float)$info['geoplugin_latitude'];
+                $longitude = (float)$info['geoplugin_longitude'];
+            }
+            $_POST['latitude'] = $latitude;
+            $_POST['longitude'] = $longitude;
             foreach ($_POST as $value){
                 if ($value == ""){
-                    alert("One or more values left out, please try again.", 'User_setup.php');
+                    alert("One or more values left out, please try again.", 'settings.php');
                 }
             }
             if (!$_POST['bio'] || $_POST['bio'] == "Enter a bio!")
@@ -22,7 +38,7 @@
             $bio = $_POST['bio'];
             $tags = serialize($matches);
             $time = getdate();
-            $age = $time['year'] - $_POST['year'];
+            $age = $time['year'] - (int)$_POST['year'];
             $sql = $conn->prepare($query);
             $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,round((float)$_POST['latitude'],6),round((float)$_POST['longitude'],6), $bio]);
             alert("Profile successfully created, time to upload some photos", "upload_images.php");

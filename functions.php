@@ -307,8 +307,17 @@ function goOffline($user, $conn)
     $sql->execute([$user]);
     $query = "UPDATE Matcha.Online SET last_online=? WHERE userid=?";
     $sql = $conn->prepare($query);
-    var_dump(date("jS F Y", strtotime("now")));
-    $sql->execute([date("jS F Y", strtotime("now")), $user]);
+    $sql->execute([mktime(0,1,0), $user]);
 
 }
+
+function validateText($string)
+{
+    if (preg_match( '^[1-9]\d*(,\d+)?$', $string))
+        return true;
+    else
+        return false;
+
+}
+
 ?>

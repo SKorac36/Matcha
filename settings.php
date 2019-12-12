@@ -9,15 +9,17 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $longitude = (float)$info['geoplugin_longitude'];
     if (isset($_POST['submit']))
     {
+        if (!validateText($_POST['latitude']) || !validateText($_POST['longitude']))
+            alert("Incorrect input for coordinates", "user_setup");
         if($_POST['latitude'] != "" || $_POST['longitude'] != ""){
             $latitude = round((float)$_POST['latitude'], 6);
             $longitude = round((float)$_POST['longitude'],6);
         }
-        if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180)
-        {
+        if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180) {
             $latitude = (float)$info['geoplugin_latitude'];
-            $longitude = (float)$info['geoplugin_longitude'];
         }
+        $_POST['latitude'] = $latitude;
+        $_POST['longitude'] = $longitude;
         foreach ($_POST as $value){
             if ($value == ""){
                 alert("One or more values left out, please try again.", 'settings.php');
@@ -77,12 +79,19 @@ else
             echo '<textarea name="bio">Enter a bio!</textarea>'
             ?>
             <br>
-            <div class="reg_input">Latitude<input id="lat" type="number" name="latitude"></div>
-            <div class="reg_input">Longitude<input id="long" type="number" name="longitude"></div><br>
+            <div class="reg_input">Latitude<input id="lat" type="number" onkeyup="checkDec(this)" name="latitude"></div>
+            <div class="reg_input">Longitude<input id="long" type="number" onkeyup="checkDec(this)" name="longitude"></div><br>
             <input type="submit" class="btn" name="submit" value="OK"/>
             <div hidden class="reg_input"><input id="array" type="text" name="array"></div>
     </form>
 </div>
+<script type="text/Javascript">
+    function checkDec(el){
+        var ex = /^[0-9]+\.?[0-9]*$/;
+        if(ex.test(el.value)==false){
+            el.value = el.value.substring(0,el.value.length - 1);
+        }
+    }</script>
 <script>
     function getLocation() {
         if (navigator.geolocation) {

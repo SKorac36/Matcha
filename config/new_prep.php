@@ -27,7 +27,7 @@ try {
         $sql = $conn->prepare('UPDATE Matcha.profiles SET views=?, likes=?, fame_rating=? WHERE (id =?)');
         $sql->execute([$views, $likes, $fr, $i]);
         $sql = $conn->prepare('INSERT INTO Matcha.online(userid,online,last_online) VALUES(?,?,?)');
-        $sql->execute([$i, rand(0,1) ,date("jS F Y", strtotime("last Monday"))]);
+        $sql->execute([$i, rand(0,1) ,mktime(rand(1,23),rand(1,59), rand(1,59), rand(1,11), rand(1,25), 2019)]);
         $i++;
     }
 }
