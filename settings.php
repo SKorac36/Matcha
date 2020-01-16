@@ -17,6 +17,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
         }
         if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180) {
             $latitude = (float)$info['geoplugin_latitude'];
+            $longitude = (float)$info['geoplugin_longitude'];
         }
         $_POST['latitude'] = $latitude;
         $_POST['longitude'] = $longitude;
@@ -40,7 +41,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
         $age = $time['year'] - (int)$_POST['year'];
         $sql = $conn->prepare($query);
         $sql->execute([$age, $gender, $pref, $tags, $latitude ,$longitude, $bio, $_SESSION['uid']]);
-//        alert("Profile successfully updated ", "index.php");
+        alert("Profile successfully updated ", "index.php");
 
     }
 }
@@ -79,8 +80,8 @@ else
             echo '<textarea name="bio">Enter a bio!</textarea>'
             ?>
             <br>
-            <div class="reg_input">Latitude<input id="lat" type="text" onkeyup="checkDec(this)" name="latitude"></div>
-            <div class="reg_input">Longitude<input id="long" type="text" onkeyup="checkDec(this)" name="longitude"></div><br>
+            <div class="reg_input">Latitude<input id="lat" type="text" name="latitude"></div>
+            <div class="reg_input">Longitude<input id="long" type="text" name="longitude"></div><br>
             <input type="submit" class="btn" name="submit" value="OK"/>
             <div hidden class="reg_input"><input id="array" type="text" name="array"></div>
     </form>

@@ -92,11 +92,15 @@
                     echo "<h2></h2>";
                 else {
                     echo '<p>Choose a profile picture</p>';
-                        foreach($images as $row){
-                        $img_loc = $row['path'];
-                        $img_id = $row['id'];
-                        if (file_exists($img_loc) && $_SESSION['uid'] == $uid)
-                            echo '<tr<td><a href="image.php?img_id='.$img_id.'"><img src="'.$img_loc.'" height="100" width="90"/></a></td></tr>';
+                    if (!$images)
+                        echo '<p>No pictures found, upload some</p>';
+                    else{
+                        foreach($images as $row) {
+                            $img_loc = $row['path'];
+                            $img_id = $row['id'];
+                            if (file_exists($img_loc) && $_SESSION['uid'] == $uid)
+                                echo '<tr<td><a href="image.php?img_id=' . $img_id . '"><img src="' . $img_loc . '" height="100" width="90"/></a></td></tr>';
+                        }
                     }
                 }
                 ?>

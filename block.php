@@ -10,6 +10,6 @@
         $query = "INSERT INTO Matcha.blocks (blocker,blockee) VALUES (?,?)";
         $sql = $conn->prepare($query);
         $sql->execute([$blocker, $blockee]);
-        alert("You have successfully blocked the pest, they will be unable to see your profile", "browse_profiles.php");
+        alert("You have successfully blocked the pest, they will be unable to see your profile", "index.php");
  }
 ?>
