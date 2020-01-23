@@ -316,6 +316,8 @@ function validateText($string)
     if (preg_match( '/^-?[1-9]\d*(\.\d+)?$/', $string))
         return true;
     else
+        if (!$string)
+            return true;
         return false;
 }
 

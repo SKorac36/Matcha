@@ -89,7 +89,7 @@
         <table padding="15px">
                 <?php
                 if (!$images || $_SESSION['uid'] != $uid)
-                    echo "<h2></h2>";
+                    echo '<p></p>';
                 else {
                     echo '<p>Choose a profile picture</p>';
                     if (!$images)

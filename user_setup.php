@@ -8,6 +8,7 @@
         $longitude = (float)$info['geoplugin_longitude'];
         if (isset($_POST['submit']))
         {
+            
             if (!validateText($_POST['latitude']) || !validateText($_POST['longitude']))
                 alert("Incorrect input for coordinates", "user_setup.php");
             if($_POST['latitude'] != "" || $_POST['longitude'] != ""){

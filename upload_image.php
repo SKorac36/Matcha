@@ -25,4 +25,3 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     else
         alert("No image selected, please choose one.", "upload_images.php");
 }
-?>
