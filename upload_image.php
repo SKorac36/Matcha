@@ -22,6 +22,6 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
         $query->execute([$_SESSION['uid'], $target]);
         alert("Image uploaded successfully.", "upload_images.php");
     }
-    else
-        alert("No image selected, please choose one.", "upload_images.php");
+    // else
+    //     alert("No image selected, please choose one.", "upload_images.php");
 }

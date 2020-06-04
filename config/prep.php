@@ -2,7 +2,7 @@
 require_once('database.php');
 try {
     $conn = new PDO("mysql:host=$DB_DSN", $DB_USER, $DB_PASSWORD);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
     $conn->query("use `$DB_NAME`");
 }
 catch(PDOException $e){

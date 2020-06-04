@@ -1,6 +1,6 @@
 <?php
 $DB_DSN = "localhost";
-$DB_USER = "new";
-$DB_PASSWORD = "new";
+$DB_USER = "root";
+$DB_PASSWORD = "password";
 $DB_NAME = "Matcha";
 ?>
