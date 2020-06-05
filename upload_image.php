@@ -17,6 +17,8 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     if ($count >= 5)
         alert("You can only have five images", "upload_images.php");
 //        var_dump($count);
+    if (!file_exists("./imgs"))
+        mkdir("./imgs");
     if (move_uploaded_file($_FILES['file']['tmp_name'], $target)) {
         $query = $conn->prepare("INSERT INTO Matcha.images (userid, path) VALUES (?,?)");
         $query->execute([$_SESSION['uid'], $target]);
