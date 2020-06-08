@@ -114,12 +114,6 @@ try{
      (27,"Female","Gay", "Hayley Kiyoko  is an American singer, songwriter and actress.", "-27.54738", "28.575849", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Hayley_Kiyoko_performing_in_Austin%2C_Texas_%282018-05-07%29_%2827249107687%29.jpg/404px-Hayley_Kiyoko_performing_in_Austin%2C_Texas_%282018-05-07%29_%2827249107687%29.jpg",2),
      (23,"Female","Gay", "Eva Dahlgren is a Swedish pop musician", "-26.985843", "28.675858", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Eva_Dahlgren_2016-03-10_004.jpg/320px-Eva_Dahlgren_2016-03-10_004.jpg",3)');
 
-    $conn->query('INSERT INTO `tags` (tag) VALUES
-     ("musician"),
-     ("gamer"),
-     ("coder"),
-     ("cook"),
-     ("nerd")');
 
     }
     catch(PDOException $e){

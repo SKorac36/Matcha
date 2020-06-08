@@ -17,11 +17,12 @@ $index = "index.php";
 <div class="container-fluid w3-pink">
 <?php
   if (isset($_SESSION))
-    echo '<h1><img src=logo.png height="100" width="100">Matcha</h1>';
+    echo '<h1>Matcha</h1>';
 ?>
   <a href="index.php" class="w3-bar-item w3-button">Home</a>
   <a href="upload_images.php" class="w3-bar-item w3-button">Upload Image</a>
   <a href="settings.php" class="w3-bar-item w3-button">Settings</a> 
+  <a href="account_settings.php" class="w3-bar-item w3-button">Account settings</a>
   <a href="search.php" class="w3-bar-item w3-button">Search</a>
   <a href="browse_profiles.php" class="w3-bar-item w3-button">Browse Profiles</a>
   <a href="consultations.php" class="w3-bar=item w3-button">Consultations</a>

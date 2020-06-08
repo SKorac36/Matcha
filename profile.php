@@ -11,6 +11,8 @@
         $profile = $sql->fetch();
         $first_name = $profile['first_name'];
         $last_name = $profile['last_name'];
+        $gender = $profile['gender'];
+        $preference = $profile['preference'];
         $bio = $profile['bio'];
         $age = $profile['age'];
         $path = $profile['profile_pic'];
@@ -68,7 +70,9 @@
     if ($liked == 1)
         echo '<p>You have liked them!</p>';
     echo '<img src="'.$path.'"</img><br><br>';
-    echo '<p>'.$first_name.' '.$last_name.'<br>'.$age.'<br>'.$distance.' kms away<br><p id="bio">'.$bio.'</p><br>Fame rating:'.$fame_rating.'</p> <br>Tags:<br><br>';
+    echo '<p>'.$first_name.' '.$last_name.'<br>'.$age.'<br>'.$preference.' '.$gender.'<br>'.$distance.
+    ' kms away<br><p id="bio">'.$bio.'</p><br>Fame rating:'.$fame_rating.
+    '</p> <br>Tags:<br><br>';
     
     foreach ($tags as $tag)
     {

@@ -46,7 +46,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     }
 }
 else
-    echo "You are not logged in";
+    header("location: " . "create_account.php");
 ?>
 <html>
 <head>

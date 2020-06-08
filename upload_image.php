@@ -16,7 +16,7 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     $target = $img_dir . $new_name . $img_file_type;
     if ($count >= 5)
         alert("You can only have five images", "upload_images.php");
-//        var_dump($count);
+
     if (!file_exists("./imgs"))
         mkdir("./imgs");
     if (move_uploaded_file($_FILES['file']['tmp_name'], $target)) {
@@ -24,6 +24,6 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
         $query->execute([$_SESSION['uid'], $target]);
         alert("Image uploaded successfully.", "upload_images.php");
     }
-    // else
-    //     alert("No image selected, please choose one.", "upload_images.php");
+    else
+        alert("No image selected, please choose one.", "upload_images.php");
 }

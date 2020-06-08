@@ -168,7 +168,7 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
     {
         if ($gender == 'Male')
         {   
-            $query = "SELECT * FROM Matcha.Profiles WHERE (Gender=? AND Preference=? OR Preference=?) OR (Gender=? AND Preference=? OR Preference=?) ORDER BY $option";
+            $query = "SELECT * FROM Matcha.Profiles WHERE (Gender=? AND (Preference=? OR Preference=?)) OR (Gender=? AND (Preference=? OR Preference=?)) ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Male','Gay','Bisexual', 'Female','Bisexual', 'Straight']);
             $users = $sql->fetchAll();
@@ -177,7 +177,7 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
         
         else if ($gender == 'Female')
         {   
-            $query = "SELECT * FROM Matcha.Profiles WHERE (Gender=? AND Preference=? OR Preference=?) OR (Gender=? AND Preference=? OR Preference=?) ORDER BY $option";
+            $query = "SELECT * FROM Matcha.Profiles WHERE (Gender=? AND (Preference=? OR Preference=?)) OR (Gender=? AND (Preference=? OR Preference=?)) ORDER BY $option";
             $sql = $conn->prepare($query);
             $sql->execute(['Male','Straight','Bisexual','Female','Gay','Bisexual']);
             $users = $sql->fetchAll();
@@ -189,6 +189,7 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
     {
         $distance = round(getDistance($latitude, $longitude, $person['latitude'], $person['longitude']));
         $compatibility = compareTags($tags, unserialize($person['tags']), $com_gap);
+
         $fame_rating = $person['fame_rating'];
         $user_id = $person['id'];
         $p_age = (int)($person['age']);
@@ -272,8 +273,8 @@ function picCheck($user, $conn)
 }
 
 function compareTags($user1, $user2, $com_gap)
-{
-    if (sizeof($user2) < $com_gap)
+{   
+    if (sizeof($user2) <= $com_gap)
         return 0;
     else {
         $count = count(array_intersect($user1, $user2));
@@ -321,4 +322,15 @@ function validateText($string)
         return false;
 }
 
+function check_passwd($usr, $pass, $conn)
+{
+    $hash = hash('whirlpool', $pass);
+    $search = $conn->prepare("SELECT * FROM Matcha.Users WHERE username=:user AND passwd=:pwd");
+    $search->execute(['user' => $usr, 'pwd'=> $hash]);
+    $result = $search->fetch();
+    if ($result)
+        return "OK";
+    else
+        return "Password incorrect\n";
+}
 ?>

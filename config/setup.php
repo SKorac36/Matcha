@@ -1,6 +1,7 @@
 <?php
 include_once('database.php');
 include_once('connect.php');
+$delete = "DROP DATABASE IF EXISTS Matcha";
 $db = "CREATE DATABASE IF NOT EXISTS Matcha";
 $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -32,11 +33,7 @@ $images = "CREATE TABLE IF NOT EXISTS Matcha.Images (
     path VARCHAR(1000) NOT NULL,
     profile INT (1) DEFAULT 0
     )";
-$tags = "CREATE TABLE IF NOT EXISTS Matcha.Tags (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    tag VARCHAR(30) NOT NULL,
-    count INT(60) DEFAULT 0
-    )";
+
 $likes = "CREATE TABLE IF NOT EXISTS Matcha.Likes(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     likee INT(6) NOT NULL,
@@ -63,11 +60,11 @@ $search = "CREATE TABLE IF NOT EXISTS Matcha.Searches(
     fame_rating INT(3) NOT NULL DEFAULT 10,
     com_gap INT(1) NOT NULL DEFAULT 2
 )";
+$conn->query($delete);
 $conn->query($db);
 $conn->query($usrs);
 $conn->query($profile);
 $conn->query($images);
-$conn->query($tags);
 $conn->query($likes);
 $conn->query($blocks);
 $conn->query($online);

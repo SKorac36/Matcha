@@ -26,7 +26,7 @@
             alert_info("Profile succesfully updated");
         }
     }
-    var_dump($_POST);
+ 
 ?>
 <html>
 <head>
