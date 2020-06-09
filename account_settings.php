@@ -17,8 +17,9 @@
     <body>
         <form class= "form">
             <h3>What would you like to change?</h3> <br>
+                <a href="modif_birth_name.php" class="w3-bar-item w3-button">Name and Surname</a> <br>
                 <a href="modif_username.php" class="w3-bar-item w3-button">Username</a> <br>
-                <a href="modif_pass.php" class="w3-bar-item w3-button">Password</a> <br>
+                <a href="modif_password.php" class="w3-bar-item w3-button">Password</a> <br>
                 <a href="modif_email.php" class="w3-bar-item w3-button">Email Address</a> <br>
                 <br/>        
        </form>
