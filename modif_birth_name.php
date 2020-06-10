@@ -46,3 +46,6 @@ if (isset($_POST['submit']) && !empty($name) && !empty($password) && !empty($sur
         <a href="settings.php" style="float:right" class="btn">Cancel</a>   
        <br/>        
        </form> 
+       <?php
+    include('footer.php');
+?>

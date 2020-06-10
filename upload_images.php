@@ -2,7 +2,7 @@
 
 require_once('header.php');
 
-if (!isset($_SESSION) && empty($_SESSION['uid']))
+if (!isset($_SESSION) || empty($_SESSION['uid']))
     header("location: " . "create_account.php");
 ?>
 <html>

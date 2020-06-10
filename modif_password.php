@@ -48,3 +48,6 @@ if (!empty($passwd) && !empty($newpasswd) && !empty($newpasswd2) && isset($_POST
         <a href="account_settings.php" style="float:right" class="btn">Cancel</a>   
         <br/>        
        </form> 
+       <?php
+    include('footer.php');
+?>

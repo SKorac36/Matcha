@@ -72,6 +72,7 @@ $conn->query($views);
 $conn->query($search);
 include('prep.php');
 include('new_prep.php');
+session_destroy();
 echo "<script type='text/javascript'>
 	alert('Successfully created database');
 	window.location.href = '../index.php';

@@ -1,11 +1,7 @@
 <?php
     require_once('header.php');
     if (!isset($_SESSION) || empty($_SESSION['uid']))
-    {
-      alert("You need to be logged in to change your settings", "create_new_user.php");
-    }
-    else
-        header("Redirect: settings.php");
+        header("location: " . "create_account.php");
 ?>
 <html>
     <head>
