@@ -107,16 +107,6 @@ textarea {
     background: grey; /* Green background */
     cursor: pointer; /* Cursor on hover */
   }
-  @media screen and (min-width: 1366px) {
-    #gallery-1 img {width:375px;}
-    }
-    @media screen and (min-width: 1440px) {
-    #gallery-1 img {width:428px;}
-    }
-    @media screen and (min-width: 1600px) {
-    #gallery-1 img {width:434px;}
-    }
-    @media screen and (min-width: 1920px) {
-    #gallery-1 img {width:540px;}
-    }
+
+
 

@@ -19,7 +19,7 @@ if (isset($_POST['submit']) && !empty($email) && !empty($password))
         {
             $replace = $conn->prepare("UPDATE Matcha.Users SET email=:email WHERE username=:username");
             $replace->execute(['email'=> $email, 'username'=> $_SESSION['name']]);
-            alert("Email succesfully changed", $index);
+            alert("Email successfully changed", $index);
            
         }
         else

@@ -4,6 +4,11 @@
     {
         if (isset($_GET['id']))
             $uid = $_GET['id'];
+        
+        if (checkBlocks($conn, $_SESSION['uid'], $uid))
+        {
+            alert("You have blocked this person", $index);
+        }
         view($_SESSION['uid'], $uid, $conn);
         $query = "SELECT * FROM Matcha.Profiles JOIN Matcha.users ON Matcha.profiles.id=Matcha.users.id WHERE Matcha.profiles.id=?";
         $sql = $conn->prepare($query);
@@ -60,6 +65,7 @@
 ?>
 <html>
 <div class="container-fluid w3-light-grey">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div align="center"><?php  
     echo '<h1>'.$username.'</h1><br>';
     echo '<p>Last online: </p>';
@@ -69,7 +75,10 @@
         echo '<p>'.date('l jS \of F Y h:i:s A',$time).'</p>';
     if ($liked == 1)
         echo '<p>You have liked them!</p>';
-    echo '<img src="'.$path.'"</img><br><br>';
+    if ($online == 1)
+        echo '<img style="border: 10px solid green;"src="'.$path.'"</img><br><br>';
+    else
+        echo '<img style="border: 10px solid red;"src="'.$path.'"</img><br><br>';
     echo '<p>'.$first_name.' '.$last_name.'<br>'.$age.'<br>'.$preference.' '.$gender.'<br>'.$distance.
     ' kms away<br><p id="bio">'.$bio.'</p><br>Fame rating:'.$fame_rating.
     '</p> <br>Tags:<br><br>';

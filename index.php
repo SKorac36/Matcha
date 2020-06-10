@@ -31,7 +31,12 @@ else
   <input type="submit" class="btn" name="option" value="Location" /> 
   <input type="submit" class="btn" name="option" value="Fame Rating"/> 
   <input type="submit" class="btn" name="option" value="Tags"/>
-  
+  <br>
+  <p>Suggestion params:</p>
+    <p> Age: 30 </p> 
+    <p> Distance: 100km </p>
+    <p> Fame rating: 125  </p>
+    <p>Tags: 0 </p>
 </form>
 
   <table>
