@@ -8,7 +8,7 @@
     <title>Settings</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel= "stylesheet" href="style.css">
+        <link rel= "stylesheet" href="stylesheet.css">
     </head>
     <body>
         <form class= "form">
@@ -19,7 +19,6 @@
                 <a href="modif_email.php" class="w3-bar-item w3-button">Email Address</a> <br>
                 <br/>        
        </form>
-       >
         <?php
         include_once('footer.php');
         ?>

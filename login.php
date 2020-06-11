@@ -3,7 +3,9 @@ require_once('header.php');
 
 
 if (isset($_POST['submit']))
-{
+{      
+    $_POST['username'] = htmlentities($_POST['username']);
+    $_POST['passwd'] = htmlentities($_POST['passwd']);
     if (empty($_POST['username']) || empty($_POST['passwd']))
         alert_info("One or more fields left empty");
     else

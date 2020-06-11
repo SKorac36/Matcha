@@ -36,7 +36,7 @@
             $query = "INSERT INTO Matcha.Profiles(id,age,gender,preference,tags,latitude,longitude, bio) VALUES(?,?,?,?,?,?,?,?)";
             $gender = $_POST['Gender'];
             $pref = $_POST['Pref'];
-            $bio = $_POST['bio'];
+            $bio = htmlentities($_POST['bio']);
             $tags = serialize($matches);
             $time = getdate();
             $age = $time['year'] - (int)$_POST['year'];
