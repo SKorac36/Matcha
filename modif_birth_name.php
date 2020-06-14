@@ -2,8 +2,6 @@
 require_once('header.php');
 
 
-
-var_dump($_SESSION);
 if (isset($_POST['full_name'])){
     $full_name = explode(" ", trim(htmlentities($_POST['full_name'])));
     if (sizeof($full_name) != 2)

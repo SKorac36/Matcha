@@ -1,66 +1,68 @@
 <?php
     require_once('header.php');
-    if (isset($_SESSION) && isset($_SESSION['uid']))
-    {
-        if (isset($_GET['id']))
-            $uid = $_GET['id'];
+    
+    check_logged_in();
+    check_profile($_SESSION['uid'], $conn);
+   
+    if (isset($_GET['id']))
+        $uid = $_GET['id'];
         
-        if (checkBlocks($conn, $_SESSION['uid'], $uid))
-        {
-            alert("You have blocked this person", $index);
-        }
-        view($_SESSION['uid'], $uid, $conn);
-        $query = "SELECT * FROM Matcha.Profiles JOIN Matcha.users ON Matcha.profiles.id=Matcha.users.id WHERE Matcha.profiles.id=?";
-        $sql = $conn->prepare($query);
-        $sql->execute([$uid]);
-        $profile = $sql->fetch();
-        $first_name = $profile['first_name'];
-        $last_name = $profile['last_name'];
-        $gender = $profile['gender'];
-        $preference = $profile['preference'];
-        $bio = $profile['bio'];
-        $age = $profile['age'];
-        $path = $profile['profile_pic'];
-        $tags = array_unique(unserialize($profile['tags']));
-        $username = $profile['username'];
+    if (checkBlocks($conn, $_SESSION['uid'], $uid))
+        alert("You have blocked this person", $index);
+    view($_SESSION['uid'], $uid, $conn);
+    $query = "SELECT * FROM Matcha.Profiles JOIN Matcha.users ON Matcha.profiles.id=Matcha.users.id WHERE Matcha.profiles.id=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$uid]);
+    $profile = $sql->fetch();
 
-        $query = "SELECT * FROM Matcha.Images WHERE userid=?";
-        $sql = $conn->prepare($query);
-        $sql->execute([$uid]);
-        $images = $sql->fetchAll();
+    $first_name = $profile['first_name'];
+    $last_name = $profile['last_name'];
+    $gender = $profile['gender'];
+    $preference = $profile['preference'];
+    $bio = $profile['bio'];
+    $age = $profile['age'];
+    $path = $profile['profile_pic'];
+    $tags = array_unique(unserialize($profile['tags']));
+    $username = $profile['username'];
+
+    $query = "SELECT * FROM Matcha.Images WHERE userid=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$uid]);
+    $images = $sql->fetchAll();
+    
+    $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$_SESSION['uid']]);
+    $user = $sql->fetch();
+    $lat_me = $user['latitude'];
+    $long_me = $user['longitude'];
         
-        $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
-        $sql = $conn->prepare($query);
-        $sql->execute([$_SESSION['uid']]);
-        $user = $sql->fetch();
-        $lat_me = $user['latitude'];
-        $long_me = $user['longitude'];
-        
-        $query  = "SELECT * FROM Matcha.Profiles WHERE id=?";
-        $sql = $conn->prepare($query);
-        $sql->execute([$uid]);
-        $user = $sql->fetch();
-        $fame_rating = fameRating($user['likes'], $user['views']);
-        $lat_you = $user['latitude'];
-        $long_you = $user['longitude'];
-        $distance = round(getDistance($lat_me, $long_me, $lat_you, $long_you));
+    $query  = "SELECT * FROM Matcha.Profiles WHERE id=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$uid]);
+    $user = $sql->fetch();
 
-        $query = "SELECT * FROM Matcha.Online WHERE userid=?";
-        $sql = $conn->prepare($query);
-        $sql->execute([$uid]);
-        $user = $sql->fetch();
-        $online = $user['online'];
-        $time = $user['last_online'];
+    $fame_rating = fameRating($user['likes'], $user['views']);
+    $lat_you = $user['latitude'];
+    $long_you = $user['longitude'];
+    $distance = round(getDistance($lat_me, $long_me, $lat_you, $long_you));
 
-        $query = "SELECT * FROM Matcha.Likes WHERE likee=? AND liker=?";
-        $sql = $conn->prepare($query);
-        $sql->execute([$uid, $_SESSION['uid']]);
-        $user = $sql->fetch();
-        if ($user)
-            $liked = 1;
-        else
-            $liked = 0;
-    }
+    $query = "SELECT * FROM Matcha.Online WHERE userid=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$uid]);
+    $user = $sql->fetch();
+    $online = $user['online'];
+    $time = $user['last_online'];
+
+    $query = "SELECT * FROM Matcha.Likes WHERE likee=? AND liker=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$uid, $_SESSION['uid']]);
+    $user = $sql->fetch();
+    
+    if ($user)
+        $liked = 1;
+    else
+        $liked = 0;
 
 ?>
 <html>

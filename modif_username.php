@@ -1,19 +1,6 @@
 <?php
 require_once('header.php');
-require_once('./config/connect.php');
 
-function check_unique($usr, $conn)
-{
-    $search = $conn->prepare("SELECT * FROM Matcha.Users WHERE username=?");
-    $search->execute([$usr]);
-    $check = $search->fetch();
-    if ($check)
-    {
-        return "Sorry username already in use\n";
-    }
-    else
-        return "OK";
-}
 
 if (isset($_POST['uname']))
     $uname = htmlentities($_POST['uname']);

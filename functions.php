@@ -333,4 +333,47 @@ function check_passwd($usr, $pass, $conn)
     else
         return "Password incorrect\n";
 }
+function check_profile($usr, $conn)
+{
+    $search = $conn->prepare("SELECT * FROM Matcha.Profiles WHERE id=:id");
+    $search->execute(['id'=>$usr]);
+    $result = $search->fetch();
+    if ($result)
+        return $result;
+    alert("You need to complete your profile", "user_setup.php");
+}
+
+function check_logged_in()
+{
+
+    if(isset($_SESSION) && !empty($_SESSION['uid']))
+        return ;
+    
+    header("location: " . "create_account.php");
+}
+
+function check_unique($usr, $conn)
+{
+    $search = $conn->prepare("SELECT * FROM Matcha.Users WHERE username=?");
+    $search->execute([$usr]);
+    $check = $search->fetch();
+    if ($check)
+    {
+        return "Sorry username already in use\n";
+    }
+    else
+        return "OK";
+}
+
+function check_verified($username, $conn)
+{
+    $query = "SELECT * FROM Matcha.Users WHERE username=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$username]);
+    $user = $sql->fetch();
+    if ($user['verified'] == 1)
+        return true;
+    alert("Your account has not been verfied, please check your email for a verification code.", "login.php");
+
+}
 ?>

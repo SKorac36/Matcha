@@ -1,8 +1,7 @@
 <?php
     require_once('header.php');
 
-    if (isset($_SESSION) && !empty($_SESSION['uid']))
-    {
+    check_logged_in();
         $info = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=41.71.114.146'));
         $latitude = (float)$info['geoplugin_latitude'];
         $longitude = (float)$info['geoplugin_longitude'];
@@ -43,11 +42,8 @@
             $sql = $conn->prepare($query);
             $sql->execute([$_SESSION['uid'], $age, $gender, $pref, $tags,round((float)$_POST['latitude'],6),round((float)$_POST['longitude'],6), $bio]);
             alert("Profile successfully created, time to upload some photos", "upload_images.php");
-       
         }
-    }
-    else
-        echo "You are not logged in";
+
 ?>
 <html>
 <head>

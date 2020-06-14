@@ -10,7 +10,9 @@ $usrs = "CREATE TABLE IF NOT EXISTS Matcha.Users (
     passwd VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,
-    regdate TIMESTAMP
+    regdate TIMESTAMP,
+    code VARCHAR(255),
+    verified INT(1) DEFAULT 0
     )";
  $profile = "CREATE TABLE IF NOT EXISTS Matcha.Profiles (
      id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -72,10 +74,10 @@ $conn->query($views);
 $conn->query($search);
 include('prep.php');
 include('new_prep.php');
-session_destroy();
-echo "<script type='text/javascript'>
-	alert('Successfully created database');
-	window.location.href = '../index.php';
-	</script>";
-	die();
+// session_destroy();
+// echo "<script type='text/javascript'>
+// 	alert('Successfully created database');
+// 	window.location.href = '../index.php';
+// 	</script>";
+// 	die();
 ?>

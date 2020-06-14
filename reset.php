@@ -17,7 +17,7 @@
         else if ($_GET['reset'] == 'true')
         {
             $re = hash('whirlpool', uniqid());
-            $new = substr($re, 0, 5);
+            $new = substr($re, 0, 10);
             $hash = hash('whirlpool', $new);
             $query = "UPDATE Matcha.users SET passwd=:new WHERE id=:uid";
             $stmt = $conn->prepare($query);

@@ -1,7 +1,6 @@
 <?php
 require_once("header.php");
 
-
 if (isset($_POST['passwd']))
     $passwd     =     htmlentities($_POST['passwd']);
 if (isset($_POST['newpasswd']))

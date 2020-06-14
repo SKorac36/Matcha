@@ -2,8 +2,9 @@
 
 
 require_once('header.php');
-if (empty($_SESSION['uid']))
-    header("location: " . "create_account.php");
+check_logged_in();
+check_profile($_SESSION['uid'], $conn);
+
 
 ?><html>
 <link rel="stylesheet" href="stylesheet.css">

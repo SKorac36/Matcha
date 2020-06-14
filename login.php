@@ -24,6 +24,7 @@ if (isset($_POST['submit']))
                 $_SESSION['uid'] = $user['id'];
                 $_SESSION['name'] = $user['username'];
                 goOnline($_SESSION['uid'], $conn);
+                check_verified($_POST['username'], $conn);
                 $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
                 $sql = $conn->prepare($query);
                 $sql->execute([$_SESSION['uid']]);

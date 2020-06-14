@@ -1,33 +1,41 @@
 <?php
     require_once('header.php');
 
-    if (empty($_SESSION))
+    if (isset($_POST['submit']))
     {
-        if (isset($_POST['submit']))
+        if (empty($_POST['email']) || empty($_POST['username']) || empty($_POST['first']) || empty($_POST['last']) 
+        || empty($_POST['passwd']) || empty($_POST['conpasswd']))
+            alert_info("One or more fields left empty");
+        else
         {
-            if (empty($_POST['email']) || empty($_POST['username']) || empty($_POST['first']) || empty($_POST['last']) || empty($_POST['passwd']) || empty($_POST['conpasswd']))
-                alert_info("One or more fields left empty");
+            $str = password_check($_POST['passwd'], $_POST['conpasswd']);
+            if ($str != "OK")
+                alert_info($str);
             else
-            {
-                $str = password_check($_POST['passwd'], $_POST['conpasswd']);
-                if ($str != "OK")
-                    alert_info($str);
-                else
-                {
-                    $hash = hash('whirlpool', htmlentities($_POST['passwd']));
-                    $query = "INSERT INTO Matcha.Users(email, username,passwd,last_name, first_name) VALUES(?,?,?,?,?)";
-                    $sql = $conn->prepare($query);
-                    $sql->execute(array(htmlentities($_POST['email']), htmlentities($_POST['username']), $hash, htmlentities($_POST['last']), htmlentities($_POST['first'])));
-                    $query = 'INSERT INTO Matcha.searches(age_gap, distance, fame_rating, com_gap) VALUES(?,?,?,?)';
-                    $sql = $conn->prepare($query);
-                    $sql->execute(array(10, 25, 10, 2));
-                    alert("Successfully created account, please login", "login.php");
-                }
-            }      
-        }
+            {   
+                $code = substr(hash('whirlpool', substr(hash('whirlpool',uniqid()),0 ,10)), 0, 10);
+                $hash = hash('whirlpool', htmlentities($_POST['passwd']));
+
+                $query = "INSERT INTO Matcha.Users(email, username, passwd,last_name, first_name, code) VALUES(?,?,?,?,?,?)";
+                $sql = $conn->prepare($query);
+                $sql->execute(array(htmlentities($_POST['email']), htmlentities($_POST['username']), 
+                $hash, htmlentities($_POST['last']), htmlentities($_POST['first']), $code));
+
+                $query = 'INSERT INTO Matcha.searches(age_gap, distance, fame_rating, com_gap) VALUES(?,?,?,?)';
+                $sql = $conn->prepare($query);
+                $sql->execute(array(10, 25, 10, 2));
+
+                $query = "SELECT * FROM Matcha.Users ORDER BY ID DESC LIMIT 1";
+                $sql = $conn->prepare($query);
+                $sql->execute();
+                $id = $sql->fetch()['id'];
+                var_dump($id);
+    
+                account_verification_email($_POST['email'], $_POST['username'], $id, $code);
+                // alert("Successfully created account, please login", "login.php");
+            }
+        }      
     }
-    else
-        header("location: " . "index.php");
 
 ?>
 <html>

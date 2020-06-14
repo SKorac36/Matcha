@@ -1,52 +1,53 @@
 <?php
 require_once('header.php');
 
-
-if (isset($_SESSION) && !empty($_SESSION['uid']))
+check_logged_in();  
+check_profile($_SESSION['uid'], $conn);
+$info = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=41.71.114.146'));
+$latitude = (float)$info['geoplugin_latitude'];
+$longitude = (float)$info['geoplugin_longitude'];
+if (isset($_POST['submit']))
 {
-    $info = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=41.71.114.146'));
-    $latitude = (float)$info['geoplugin_latitude'];
-    $longitude = (float)$info['geoplugin_longitude'];
-    if (isset($_POST['submit']))
-    {
-        if (!validateText($_POST['latitude']) || !validateText($_POST['longitude']))
-            alert("Incorrect input for coordinates", "settings.php");
-        if($_POST['latitude'] != "" || $_POST['longitude'] != ""){
-            $latitude = round((float)$_POST['latitude'], 6);
-            $longitude = round((float)$_POST['longitude'],6);
-        }
-        if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180) {
-            $latitude = (float)$info['geoplugin_latitude'];
-            $longitude = (float)$info['geoplugin_longitude'];
-        }
-        $_POST['latitude'] = $latitude;
-        $_POST['longitude'] = $longitude;
-        foreach ($_POST as $value){
-            if ($value == ""){
-                alert("One or more values left out, please try again.", 'settings.php');
-            }
-        }
-        if (!$_POST['bio'] || $_POST['bio'] == "Enter a bio!")
-            alert("Come on enter a bio!", 'settings.php');
-        if (($_POST['array']) != "")
-            $matches = get_tags($_POST['array']);
-        else
-            alert("You need at least one tag!", 'settings.php');
-        $query = "UPDATE Matcha.Profiles SET age=?, gender=?, preference=?, tags=?, latitude=?, longitude=?, bio=? WHERE id=?";
-        $gender = $_POST['Gender'];
-        $pref = $_POST['Pref'];
-        $bio = $_POST['bio'];
-        $tags = serialize($matches);
-        $time = getdate();
-        $age = $time['year'] - (int)$_POST['year'];
-        $sql = $conn->prepare($query);
-        $sql->execute([$age, $gender, $pref, $tags, $latitude ,$longitude, $bio, $_SESSION['uid']]);
-        alert("Profile successfully updated ", "index.php");
-
+    if (!validateText($_POST['latitude']) || !validateText($_POST['longitude']))
+        alert("Incorrect input for coordinates", "settings.php");
+    if($_POST['latitude'] != "" || $_POST['longitude'] != ""){
+         $latitude = round((float)$_POST['latitude'], 6);
+         $longitude = round((float)$_POST['longitude'],6);
     }
+if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180) {
+        $latitude = (float)$info['geoplugin_latitude'];
+        $longitude = (float)$info['geoplugin_longitude'];
+    }
+    $_POST['latitude'] = $latitude;
+    $_POST['longitude'] = $longitude;
+    foreach ($_POST as $value){
+        if ($value == ""){
+            alert("One or more values left out, please try again.", 'settings.php');
+        }
+    }
+    if (!$_POST['bio'] || $_POST['bio'] == "Enter a bio!")
+        alert("Come on enter a bio!", 'settings.php');
+    if (($_POST['array']) != "")
+        $matches = get_tags($_POST['array']);
+    else
+        alert("You need at least one tag!", 'settings.php');
+    $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$_SESSION['uid']]);
+    $profile = $sql->fetch();
+    if (!$profile)
+        alert("You need to setup your account", "user_setup.php");
+    $query = "UPDATE Matcha.Profiles SET age=?, gender=?, preference=?, tags=?, latitude=?, longitude=?, bio=? WHERE id=?";
+    $gender = $_POST['Gender'];
+    $pref = $_POST['Pref'];
+    $bio = $_POST['bio'];
+    $tags = serialize($matches);
+    $time = getdate();
+    $age = $time['year'] - (int)$_POST['year'];
+    $sql = $conn->prepare($query);
+    $sql->execute([$age, $gender, $pref, $tags, $latitude ,$longitude, $bio, $_SESSION['uid']]);
+    alert("Profile successfully updated ", "index.php");
 }
-else
-    header("location: " . "create_account.php");
 ?>
 <html>
 <head>

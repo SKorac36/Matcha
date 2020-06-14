@@ -3,12 +3,8 @@
 require_once('header.php');
 
 
-if (isset($_SESSION) && !empty($_SESSION['uid']))
-{
-    $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
-    $sql = $conn->prepare($query);
-    $sql->execute([$_SESSION['uid']]);
-    $user = $sql->fetch();
+    check_logged_in();
+    $user = check_profile($_SESSION['uid'], $conn);
     $pref = $user['preference'];
     $gender = $user['gender'];
     $latitude = $user['latitude'];
@@ -20,9 +16,6 @@ if (isset($_SESSION) && !empty($_SESSION['uid']))
     if (isset($_POST['option']))
         $option = $_POST['option'];
     $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr,$option, 30, 100, 0, 125);
-}
-else
-    header("location: " . "create_account.php");
 ?>
 <div id="main"><br>
 <form class="form" action="index.php" method="post">

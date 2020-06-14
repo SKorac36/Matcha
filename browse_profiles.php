@@ -3,36 +3,33 @@
 require_once('header.php');
 
 
-if (isset($_SESSION) && !empty($_SESSION['uid']))
-{
-    $query = "SELECT * FROM Matcha.Profiles WHERE id=?";
-    $sql = $conn->prepare($query);
-    $sql->execute([$_SESSION['uid']]);
-    $user = $sql->fetch();
-    $pref = $user['preference'];
-    $gender = $user['gender'];
-    $latitude = $user['latitude'];
-    $longitude = $user['longitude'];
-    $fr = $user['fame_rating'];
-    $tags = unserialize($user['tags']);
-    $age = $user['age'];
-    $query = "SELECT * FROM Matcha.Searches WHERE id=?";
-    $sql = $conn->prepare($query);
-    $sql->execute([$_SESSION['uid']]);
-    $search = $sql->fetch();
+check_logged_in();
+$user =  check_profile($_SESSION['uid'], $conn);
+
+$pref = $user['preference'];
+$gender = $user['gender'];
+$latitude = $user['latitude'];
+$longitude = $user['longitude'];
+$fr = $user['fame_rating'];
+$age = $user['age'];
+$tags = unserialize($user['tags']);
+
+$query = "SELECT * FROM Matcha.Searches WHERE id=?";
+$sql = $conn->prepare($query);
+$sql->execute([$_SESSION['uid']]);
+$search = $sql->fetch();
 
 $option = 'id';
 if (isset($_POST['option']))
         $option = $_POST['option'];
+        
 $age_gap = $search['age_gap'];
 $dis_gap = $search['distance'];
 $com_gap = $search['com_gap'];
 $fr_gap = $search['fame_rating'];
 
 $matches = suggestions($pref, $gender,$latitude,$longitude, $tags, $age,$conn, $fr, $option, $age_gap ,$dis_gap, $com_gap, $fr_gap);
-}
-else
-    header("location: " . "create_account.php");
+
 ?><div id="main">
 <form class="form" action="browse_profiles.php" method="post">
     Sort by <br>

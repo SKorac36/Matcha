@@ -1,28 +1,26 @@
 <?php
 require_once('header.php');
 
-if (isset($_SESSION) && !empty($_SESSION['uid']))
+check_logged_in();
+check_profile($_SESSION['uid'], $conn);
+$query = "SELECT tags FROM Matcha.Profiles WHERE id=?";
+$sql = $conn->prepare($query);
+$sql->execute([$_SESSION['uid']]);
+$tags = $sql->fetch();
+$max = count($tags) + 1;
+if (isset($_POST['submit']))
 {
-    $query = "SELECT tags FROM Matcha.Profiles WHERE id=?";
+    $userid = $_SESSION['uid'];
+    $age_gap = $_POST['age'];
+    $distance = $_POST['distance'];
+    $fame_rating = $_POST['fame_rating'];
+    $com_gap = $_POST['com_gap'];
+    $query = "UPDATE Matcha.Searches SET age_gap=?, distance=?, fame_rating=?, com_gap=? WHERE id=?";
     $sql = $conn->prepare($query);
-    $sql->execute([$_SESSION['uid']]);
-    $tags = $sql->fetch();
-    $max = count($tags) + 1;
-    if (isset($_POST['submit']))
-    {
-        $userid = $_SESSION['uid'];
-        $age_gap = $_POST['age'];
-        $distance = $_POST['distance'];
-        $fame_rating = $_POST['fame_rating'];
-        $com_gap = $_POST['com_gap'];
-        $query = "UPDATE Matcha.Searches SET age_gap=?, distance=?, fame_rating=?, com_gap=? WHERE id=?";
-        $sql = $conn->prepare($query);
-        $sql->execute([$age_gap, $distance, $fame_rating, $com_gap, $userid]);
-        alert('Redirecting you to your searches', 'browse_profiles.php');
-    }
+    $sql->execute([$age_gap, $distance, $fame_rating, $com_gap, $userid]);
+    alert('Redirecting you to your searches', 'browse_profiles.php');
 }
-else
-    header("location: " . "create_account.php");
+
 ?>
 <div id="main">
 <form class="form" method="post" action="search.php">

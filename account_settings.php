@@ -1,7 +1,7 @@
 <?php
     require_once('header.php');
-    if (!isset($_SESSION) || empty($_SESSION['uid']))
-        header("location: " . "create_account.php");
+    check_logged_in();
+    check_profile($_SESSION['uid'], $conn);
 ?>
 <html>
     <head>

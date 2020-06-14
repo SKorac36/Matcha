@@ -1,9 +1,6 @@
 <?php
 require_once('header.php');
 
-
-
-
 if (isset($_POST['email']))
     $email = htmlentities($_POST['email']);
 if (isset($_POST['passwd']))
