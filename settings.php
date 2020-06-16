@@ -55,6 +55,7 @@ if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180) 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel= "stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
+<div id="main">
 <div align="center">
     <p>Click the button to get your coordinates.</p>
 
@@ -77,9 +78,8 @@ if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180) 
             <option value="Straight">Straight</option>
             <option value="Gay">Gay</option>
             <option value="Bisexual">Bisexual</option>
-            <?php
-            echo '<textarea name="bio">Enter a bio!</textarea>'
-            ?>
+            <textarea name="bio">Enter a bio!</textarea>
+
             <br>
             <div class="reg_input">Latitude<input id="lat" type="text" name="latitude"></div>
             <div class="reg_input">Longitude<input id="long" type="text" name="longitude"></div><br>
@@ -136,6 +136,7 @@ if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180) 
     }
 
 </script>
+</div>
 <?php
 include('footer.php');
 ?>

@@ -27,7 +27,6 @@ if (isset($_POST['submit']) && !empty($email) && !empty($password))
 <head>
     <title>Change Username</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel= "stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 

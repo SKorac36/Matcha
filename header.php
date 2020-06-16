@@ -29,13 +29,11 @@ $index = "index.php";
  
   <a href="logout.php" style= "float:right" class="w3-bar-item w3-button">Logout</a>
   <?php
-      if(!isset($_SESSION) || empty($_SESSION['uid']))
-        echo '<p style="float:right">Guest</p>';
-      else if (isset($_SESSION['name']))
+     if (isset($_SESSION['name']))
       {
         $name = $_SESSION['name'];
         $uid = $_SESSION['uid'];
-        echo '<a href="profile.php?id='.$uid.'" style="float:right" class="btn">'.$name.'</a>';
+        echo '<a href="profile.php?id='.$uid.'" style="float:right" class="w3-bar=item w3-button">'.$name.'</a>';
       }
     ?>
   </div>

@@ -10,11 +10,8 @@ if (isset($_POST['submit']))
         alert_info("One or more fields left empty");
     else
     {
-        $hash = hash('whirlpool',$_POST['passwd']);
-        $query = "SELECT * FROM Matcha.Users WHERE username=?";
-        $sql = $conn->prepare($query);
-        $sql->execute([$_POST['username']]);
-        $user = $sql->fetch();
+        $user = find_username($_POST['username'], $conn);
+        $hash = hash('whirlpool', $_POST['passwd']);
         if ($user)
         {
             if ($user['passwd'] != $hash)
@@ -45,10 +42,7 @@ if (isset($_POST['reset']))
             alert("At least enter your username, pleb","login.php");
         else if (isset($_POST['username']))
         {
-            $query = "SELECT * FROM Matcha.Users WHERE username=?";
-            $sql = $conn->prepare($query);
-            $sql->execute([$_POST['username']]);
-            $user = $sql->fetch();
+            $user = find_username($_POST['username'], $conn);
             if (!$user)
                 alert_info("Username not found");
             else {
@@ -56,6 +50,19 @@ if (isset($_POST['reset']))
                 reset_password_email($user['email'], $user['username'], $user['id']);
             }
         }
+}
+if (isset($_POST{'resend'}))
+{
+    if (empty($_POST['username']) || !isset($_POST['username']))
+        alert("At least enter your username, pleb","login.php");
+    else if (isset($_POST['username']))
+        $user = find_username($_POST['username'], $conn);
+    if (!$user)
+        alert_info("Username not found");
+    else {
+        resend_code($user['username'], $conn);
+        alert_info("Verification email resent, check your inbox");
+    }
 }
 
 ?>
@@ -70,6 +77,7 @@ if (isset($_POST['reset']))
         <div class="reg_input">Enter password: <input type="password" name="passwd"/><br/></div>
         <input type="submit" class="btn" name="submit" value="OK"/>
         <input type="submit" class="btn" name="reset" value="Forgotten Password"/>
+        <input type="submit" class="btn" name="resen" value="Resend Code"/>
 </form>
 <?php
     include('footer.php');

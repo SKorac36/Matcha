@@ -22,6 +22,11 @@ if (isset($_POST['submit']))
 }
 
 ?>
+<head>
+    <title>User Setup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
 <div id="main">
 <form class="form" method="post" action="search.php">
 <div class="slidecontainer">

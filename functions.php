@@ -193,7 +193,9 @@ function suggestions($pref, $gender, $latitude, $longitude, $tags, $age, $conn, 
         $fame_rating = $person['fame_rating'];
         $user_id = $person['id'];
         $p_age = (int)($person['age']);
-        if (($user_id != $_SESSION['uid']) && ($distance <= $dis_gap && $compatibility >= $com_gap) && ($fame_rating <= $fr + $fr_gap && $fame_rating >= $fr - $fr_gap) && ($p_age <= ($age + $age_gap)) && ($p_age >= ($age - $age_gap)))
+        if (($user_id != $_SESSION['uid']) && ($distance <= $dis_gap && $compatibility >= $com_gap) && 
+        ($fame_rating <= $fr + $fr_gap && $fame_rating >= $fr - $fr_gap) && ($p_age <= ($age + $age_gap)) && 
+        ($p_age >= ($age - $age_gap)))
             {
                 $person['distance'] = $distance;
                 $person['compatibility'] = $compatibility;
@@ -376,4 +378,35 @@ function check_verified($username, $conn)
     alert("Your account has not been verfied, please check your email for a verification code.", "login.php");
 
 }
+
+function resend_code($username, $conn)
+{
+    $code = substr(hash('whirlpool', substr(hash('whirlpool',uniqid()),0 ,10)), 0, 10);
+    
+    $query = "SELECT * FROM Matcha.Users WHERE username=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$username]);
+    $user = $sql->fetch();
+
+    $query = "UPDATE Matcha.Users SET code=? WHERE username=?";
+    $sql= $conn->prepare($query);
+    $sql->execute([$code, $username]);
+
+    account_verification_email($user['email'], $username, $user['id'], $code);
+}
+
+function find_username($username, $conn)
+{
+    $query = "SELECT * FROM Matcha.Users WHERE username=?";
+    $sql = $conn->prepare($query);
+    $sql->execute([$username]);
+    $user = $sql->fetch();
+
+    if ($user)
+        return $user;
+    alert_info("Username not found");
+}
+
+
+
 ?>

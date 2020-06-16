@@ -62,6 +62,7 @@ $search = "CREATE TABLE IF NOT EXISTS Matcha.Searches(
     fame_rating INT(3) NOT NULL DEFAULT 10,
     com_gap INT(1) NOT NULL DEFAULT 2
 )";
+
 $conn->query($delete);
 $conn->query($db);
 $conn->query($usrs);
@@ -74,10 +75,10 @@ $conn->query($views);
 $conn->query($search);
 include('prep.php');
 include('new_prep.php');
-// session_destroy();
-// echo "<script type='text/javascript'>
-// 	alert('Successfully created database');
-// 	window.location.href = '../index.php';
-// 	</script>";
-// 	die();
+session_destroy();
+echo "<script type='text/javascript'>
+	alert('Successfully created database');
+	window.location.href = '../index.php';
+	</script>";
+	die();
 ?>
