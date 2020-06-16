@@ -82,7 +82,7 @@ textarea {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
     width: 100%; /* Full-width */
-    height: 25%; /* Specified height */
+    height: 25px; /* Specified height */
     background:white; /* Grey background */
     outline: none; /* Remove outline */
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
@@ -99,8 +99,8 @@ textarea {
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    width: 25%; /* Set a specific slider handle width */
-    height: 25%; /* Slider handle height */
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
     background: grey; /* Green background */
     cursor: pointer; /* Cursor on hover */
   }
