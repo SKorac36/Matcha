@@ -69,11 +69,11 @@ if ($latitude > 90 || $latitude < -90 || $longitude > 180 || $longitude < -180) 
     <button onclick="addTags('cook')">Cook</button>
     <button onclick="addTags('nerd')">Nerd</button>
     <form class= "form" method="post" action="settings.php" align="center">
-        <div class="reg_input">Date of birth<input type="date" name="year"></div>
+        <div class="reg_input">Date of birth<input type="date" name="year"></div><br>
         <select name="Gender">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
-        </select>
+        </select><br>
         <select name="Pref">
             <option value="Straight">Straight</option>
             <option value="Gay">Gay</option>

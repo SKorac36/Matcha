@@ -404,7 +404,6 @@ function find_username($username, $conn)
 
     if ($user)
         return $user;
-    alert_info("Username not found");
 }
 
 

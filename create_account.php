@@ -12,7 +12,10 @@
             if ($str != "OK")
                 alert_info($str);
             else
-            {   
+            {   $unique = check_unique($_POST['username'], $conn);
+                if ($unique != "OK")
+                    alert(check_unique($usr, $conn), "create_account.php");
+                    
                 $code = substr(hash('whirlpool', substr(hash('whirlpool',uniqid()),0 ,10)), 0, 10);
                 $hash = hash('whirlpool', htmlentities($_POST['passwd']));
 
@@ -29,10 +32,9 @@
                 $sql = $conn->prepare($query);
                 $sql->execute();
                 $id = $sql->fetch()['id'];
-                var_dump($id);
     
                 account_verification_email($_POST['email'], $_POST['username'], $id, $code);
-                // alert("Successfully created account, please login", "login.php");
+                alert("Successfully created account, a verification email has been sent to you", "login.php");
             }
         }      
     }

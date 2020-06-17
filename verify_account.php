@@ -1,5 +1,6 @@
 <?php
-
+require_once('functions.php');
+require_once('config/connect.php');
 if(isset($_GET['id']) && isset($_GET['code']))
 {
     $query = "SELECT * FROM Matcha.Users WHERE id=?";
@@ -12,6 +13,6 @@ if(isset($_GET['id']) && isset($_GET['code']))
         $sql->execute([$_GET['id']]);
         alert("You have succesfully verified your account", "login.php");
     }
-    alert("Youre verifcation code if faulty, please reset it. ", $index);
+    alert("Your verifcation code if faulty, please reset it. ", $index);
 }
 ?>

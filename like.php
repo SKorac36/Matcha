@@ -12,6 +12,6 @@ if (isset($_GET['id1']) && isset($_GET['id2']))
         alert('Nice you like them', 'profile.php?id='.$likee);
     }
     else
-        alert('You need to upload an image','upload_images.php');
+        alert('You need to set a profile picture','upload_images.php');
 }
 ?>

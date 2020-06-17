@@ -15,10 +15,18 @@ $index = "index.php";
 <link rel="stylesheet" href="stylesheet.css">
 <body>
 <div class="container-fluid w3-pink">
+  <div>
+  <h1 id="matcha">Matcha</h1>
+</div>
 <?php
-  if (isset($_SESSION))
-    echo '<h1>Matcha</h1>';
+    if (isset($_SESSION['name']))
+    {
+      $name = $_SESSION['name'];
+      $uid = $_SESSION['uid'];
+      echo '<a href="profile.php?id='.$uid.'" class="w3-bar=item w3-button">'.$name.'</a>';
+    }
 ?>
+
   <a href="index.php" class="w3-bar-item w3-button">Home</a>
   <a href="upload_images.php" class="w3-bar-item w3-button">Upload Image</a>
   <a href="settings.php" class="w3-bar-item w3-button">Settings</a> 
@@ -27,15 +35,7 @@ $index = "index.php";
   <a href="browse_profiles.php" class="w3-bar-item w3-button">Browse Profiles</a>
   <a href="consultations.php" class="w3-bar=item w3-button">Consultations</a>
  
-  <a href="logout.php" style= "float:right" class="w3-bar-item w3-button">Logout</a>
-  <?php
-     if (isset($_SESSION['name']))
-      {
-        $name = $_SESSION['name'];
-        $uid = $_SESSION['uid'];
-        echo '<a href="profile.php?id='.$uid.'" style="float:right" class="w3-bar=item w3-button">'.$name.'</a>';
-      }
-    ?>
+  <a href="logout.php" class="w3-bar-item w3-button">Logout</a>
   </div>
 </div>
 </body>

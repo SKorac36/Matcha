@@ -55,14 +55,15 @@ if (isset($_POST{'resend'}))
 {
     if (empty($_POST['username']) || !isset($_POST['username']))
         alert("At least enter your username, pleb","login.php");
-    else if (isset($_POST['username']))
-        $user = find_username($_POST['username'], $conn);
-    if (!$user)
-        alert_info("Username not found");
     else {
+
+        $user = find_username($_POST['username'], $conn);
+        if (!$user)
+            alert("Username not found", "login.php");
         resend_code($user['username'], $conn);
-        alert_info("Verification email resent, check your inbox");
+        alert_info("New verification code sent, check your inbox");
     }
+
 }
 
 ?>
@@ -71,13 +72,14 @@ if (isset($_POST{'resend'}))
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel= "stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
+</head><div id="main">
         <form class= "form" method="post" action="login.php" align="center">
         <div class="reg_input">Username: <input type="text" name="username"/><br/></div>
         <div class="reg_input">Enter password: <input type="password" name="passwd"/><br/></div>
         <input type="submit" class="btn" name="submit" value="OK"/>
-        <input type="submit" class="btn" name="reset" value="Forgotten Password"/>
-        <input type="submit" class="btn" name="resen" value="Resend Code"/>
+        <input type="submit" class="btn" name="reset" value="Forgotten Password"/><br>
+        <input type="submit" class="btn" name="resend" value="Resend Code"/>
+</div>
 </form>
 <?php
     include('footer.php');

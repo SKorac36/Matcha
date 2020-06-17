@@ -24,7 +24,7 @@ require_once('header.php');
   <input type="submit" class="btn" name="option" value="Location" /> 
   <input type="submit" class="btn" name="option" value="Fame Rating"/> 
   <input type="submit" class="btn" name="option" value="Tags"/>
-  <br>
+  <br><br>
   <p>Suggestion params:</p>
     <p> Age: 30 </p> 
     <p> Distance: 100km </p>
