@@ -10,7 +10,6 @@ if (isset($_POST['full_name'])){
         }
     $name = trim($full_name[0]);
     $surname = trim($full_name[1]);
-    var_dump($name." ".$surname);
     
 }
 if (isset($_POST['passwd']))

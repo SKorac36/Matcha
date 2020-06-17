@@ -51,20 +51,7 @@ if (isset($_POST['reset']))
             }
         }
 }
-if (isset($_POST{'resend'}))
-{
-    if (empty($_POST['username']) || !isset($_POST['username']))
-        alert("At least enter your username, pleb","login.php");
-    else {
 
-        $user = find_username($_POST['username'], $conn);
-        if (!$user)
-            alert("Username not found", "login.php");
-        resend_code($user['username'], $conn);
-        alert_info("New verification code sent, check your inbox");
-    }
-
-}
 
 ?>
 <html>
@@ -78,7 +65,6 @@ if (isset($_POST{'resend'}))
         <div class="reg_input">Enter password: <input type="password" name="passwd"/><br/></div>
         <input type="submit" class="btn" name="submit" value="OK"/>
         <input type="submit" class="btn" name="reset" value="Forgotten Password"/><br>
-        <input type="submit" class="btn" name="resend" value="Resend Code"/>
 </div>
 </form>
 <?php
