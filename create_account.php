@@ -14,8 +14,8 @@
             else
             {   $unique = check_unique($_POST['username'], $conn);
                 if ($unique != "OK")
-                    alert(check_unique($usr, $conn), "create_account.php");
-                    
+                    alert($unique, "create_account.php");
+
                 $code = substr(hash('whirlpool', substr(hash('whirlpool',uniqid()),0 ,10)), 0, 10);
                 $hash = hash('whirlpool', htmlentities($_POST['passwd']));
 
